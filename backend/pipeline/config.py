@@ -39,13 +39,6 @@ AS_OF_DATE = date(2026, 12, 31)
 # simulation setting, not a business rule.
 REQUEST_HORIZON = date(2026, 11, 30)
 
-# Injected BUDGET_EXCEEDED requests are dated in the few days right after
-# the last normal decision of the whole simulation, so they are the last
-# approvals in their department and never change how a normal row is
-# judged (6). At full scale that is early December; at starter scale the
-# enrollment target is reached sooner, so it is earlier.
-BUDGET_INJECTION_WINDOW_DAYS = 5
-
 # Baseline assessments happen in the last quarter before the year starts.
 BASELINE_ASSESSMENT_FROM = date(2025, 10, 1)
 BASELINE_ASSESSMENT_TO = date(2025, 12, 31)
@@ -195,13 +188,13 @@ ADVANCED_EXTRA_FOUNDATION_SHARE = 0.30  # on top of its 1 INTERMEDIATE one
 # Offerings (5.1 s05)
 # ---------------------------------------------------------------------------
 
-OFFERINGS_PER_COURSE = (3, 6)
+OFFERINGS_PER_COURSE = (4, 7)
 FIRST_OFFERING_START = date(2026, 1, 12)  # a Monday
 LAST_OFFERING_START = date(2026, 12, 21)  # a Monday
 
 # Share of ACTIVE courses that only run in 2027, so they are unavailable
 # in the planning period (BR-04).
-NEXT_YEAR_ONLY_SHARE = 0.06
+NEXT_YEAR_ONLY_SHARE = 0.10
 NEXT_YEAR_OFFERINGS = (1, 2)
 NEXT_YEAR_FIRST_START = date(2027, 1, 11)  # a Monday
 NEXT_YEAR_LAST_START = date(2027, 6, 28)  # a Monday
@@ -216,24 +209,31 @@ SCHEDULE_GAP_DAYS = 14  # BR-08: planning date -> step 1, and between steps
 # BR-09(a): the most one employee's plan may cost in a year.
 LEARNING_ALLOWANCE_PER_EMPLOYEE = 60_000
 
-# Budget limit per department = FUNDING_RATIO x the department's planned
-# demand (sum of RECOMMENDED estimated costs), rounded up to
-# BUDGET_ROUNDING. Below 1 on purpose: a department funds less than its
-# people plan, and requests are funded first come, first served (BR-11).
-# That documented gap is where budget rejections come from.
+# Budgets work in two steps (ARCHITECTURE.md 4, "Proposed and funded"):
 #
-# A ratio rather than a fixed amount per head, because demand per head
-# differs a lot between departments (their ladders differ), and a ratio
-# puts every department under the same pressure at every scale.
-# Calibration knob, tuned once and then fixed.
-FUNDING_RATIO = 0.62
+# 1. The January run produces a PROPOSED plan: every path is feasible on
+#    dates, seats, prerequisites and the employee's allowance.
+# 2. Each department's limit is set to FUNDING_RATIO x its proposed
+#    demand, rounded up to BUDGET_ROUNDING, and the limit is then
+#    allocated to individual proposed steps, everyone's first step first. Steps
+#    that get money are FUNDED; the rest are NOT_FUNDED. That is the
+#    FUNDED plan, and only funded steps can be approved (BR-11).
+#
+# Below 1 on purpose: a department funds less than its people propose.
+# A ratio rather than a fixed amount per head, because proposed demand
+# per head differs a lot between departments, and a ratio puts every
+# department under the same pressure at every scale.
+FUNDING_RATIO = 0.85
 BUDGET_ROUNDING = 10_000
 
 # ---------------------------------------------------------------------------
 # Simulation (5.3)
 # ---------------------------------------------------------------------------
 
-REQUEST_PROBABILITY = 0.90
+REQUEST_PROBABILITY = 0.95  # for a FUNDED step
+# Some employees ask for a step the budget did not fund. HR rejects it
+# (BUDGET_EXHAUSTED); that is the normal budget exception path.
+UNFUNDED_REQUEST_PROBABILITY = 0.50
 REQUEST_LEAD_DAYS = (7, 21)  # requested_on = planned_start - U{7..21}
 MIN_REQUEST_LEAD_DAYS = 7  # requested_on <= start - 7 always
 DECISION_DELAY_DAYS = (1, 5)

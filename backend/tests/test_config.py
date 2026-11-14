@@ -139,6 +139,7 @@ def test_departments_fund_less_than_they_plan():
     # Departments fund less than everyone plans. That gap is where budget
     # rejections come from (ARCHITECTURE.md 4).
     assert 0 < config.FUNDING_RATIO < 1
+    assert 0 < config.UNFUNDED_REQUEST_PROBABILITY < config.REQUEST_PROBABILITY <= 1
 
 
 def test_delivery_mode_settings_match_the_enum():
@@ -193,15 +194,6 @@ def test_dates_are_in_a_sensible_order():
     assert config.BASELINE_ASSESSMENT_TO < config.PERIOD_START
     assert config.PERIOD_START <= config.FIRST_OFFERING_START <= config.LAST_OFFERING_START <= config.PERIOD_END
     assert config.NEXT_YEAR_FIRST_START > config.PERIOD_END
-
-
-def test_budget_injection_window_fits_before_the_last_offering():
-    # Worst case: the last normal request is on the horizon and decided as
-    # late as possible. The injected requests follow, and still need an
-    # offering starting at least 7 days later.
-    last_normal_decision = config.REQUEST_HORIZON + timedelta(days=config.DECISION_DELAY_DAYS[1])
-    latest_request = last_normal_decision + timedelta(days=config.BUDGET_INJECTION_WINDOW_DAYS)
-    assert latest_request + timedelta(days=config.MIN_REQUEST_LEAD_DAYS) <= config.LAST_OFFERING_START
 
 
 def test_request_lead_respects_the_minimum():
