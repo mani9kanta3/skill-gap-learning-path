@@ -13,12 +13,12 @@
     {
       "path": "csv/budget.csv",
       "rows": 8,
-      "sha256": "399be05d179638ad0fdbd9c21d2d4e3d4949fa61d1871387c1f7d4cbfe52597f"
+      "sha256": "c2a710005f1f48f01f40d51ffe1252ca7c8da64f70eb3dd162b181cdc4075a6e"
     },
     {
       "path": "csv/completion.csv",
-      "rows": 879,
-      "sha256": "bc6b6cee6a1e959c26f2a4883bd277086891416e438af6a86d1145decebfcef2"
+      "rows": 933,
+      "sha256": "1c699754f423658f7caa5e67de25e2b9ac8ed756aa90b701016958f45da246dd"
     },
     {
       "path": "csv/course.csv",
@@ -27,8 +27,8 @@
     },
     {
       "path": "csv/course_offering.csv",
-      "rows": 390,
-      "sha256": "a4aa0bd78c5e418d5d8d59a990ecba8fa9d4692256ca0e147d6e91930be747d5"
+      "rows": 448,
+      "sha256": "ca4230dbf60bd03cf540d1c2dd554c53ccba78a1241a7616e507c1b66681fe78"
     },
     {
       "path": "csv/course_prerequisite.csv",
@@ -53,17 +53,17 @@
     {
       "path": "csv/employee_skill.csv",
       "rows": 3706,
-      "sha256": "348ef4d3380f779b58cf4e97984e8a451c05a55cdbb47eed840570851a245fd9"
+      "sha256": "e27d1e1c74fee9f29a1b40e998f65783cf8b44f2b2b9f4f813fe2352800be64b"
     },
     {
       "path": "csv/enrollment.csv",
       "rows": 1000,
-      "sha256": "e58999c902fd4c0f5a82d745ede6c072a66436275592352546ee978f4a1d14e5"
+      "sha256": "49e96b0ad4765586649b628d187c746e6c682c3e873d4b5bf68f7b7f54255417"
     },
     {
       "path": "csv/enrollment_event.csv",
-      "rows": 3817,
-      "sha256": "0184fded397f2a32430b27a1854638ad9d1fffb1ac7ed14955807e5da65e8d58"
+      "rows": 3926,
+      "sha256": "af8c93761c504e4b7a54caaa15e249175d224b2b30950c271569cffdf781c5a8"
     },
     {
       "path": "csv/job_role.csv",
@@ -72,13 +72,13 @@
     },
     {
       "path": "csv/proficiency_assessment.csv",
-      "rows": 4246,
-      "sha256": "6ad2295a1edda40ea2d3c996a352a308bb6c7db8b40b5a74855a432d4503c5d7"
+      "rows": 4226,
+      "sha256": "5d5efce12c07be08cc2ab5e6c434a4ab5464c23354e8e4f20219ac706e06e7c2"
     },
     {
       "path": "csv/recommendation.csv",
-      "rows": 2153,
-      "sha256": "9fdc6cf0cc892f64ad41cf857baa1ab89f52a86de52f872b14b09e0649fe548b"
+      "rows": 2160,
+      "sha256": "f1b3c5a95c31ee9e8042196ef33f44c620ef86c901dba5757bfe8ee7711a9c12"
     },
     {
       "path": "csv/role_skill_target.csv",
@@ -93,27 +93,27 @@
     {
       "path": "csv/skill_gap.csv",
       "rows": 3706,
-      "sha256": "e8b130c9784ce80ab95b911b98818324e80f5047df9095a6dcaf824dcc9ed1fd"
+      "sha256": "64ba0ab4a8bc69fdb8579b2bc8e78fa19658532cc9a4709f301579a043a8c35a"
     },
     {
       "path": "ground_truth/ground_truth.csv",
       "rows": 25,
-      "sha256": "711ad48ae6d64b3cd84f69dc0940d87985d15fce7c877c8c3a44006a9c3a60cc"
+      "sha256": "bdc9ba4e009b4b53f523d125c9021663f90fd85f89f48d4e518b0832c0f9596a"
     },
     {
       "path": "ground_truth/ground_truth.json",
       "rows": 25,
-      "sha256": "4973a2dfdc19ef8cc15a08c9cb1fd45db7c59911a557c92631da2010bcd8125a"
+      "sha256": "bb3a8caf08f78a74c7a70a1ef9333c4da2ad33dbe611743970eb2589f60f4483"
     },
     {
       "path": "json/budget.json",
       "rows": 8,
-      "sha256": "14b2c4f13a87d1ace302b67a23e459126a533f9b7a2c169e6c2ffc448d6bf847"
+      "sha256": "f8ee8f911851c149a94e3579438df45c4250609144afcd53c1f4b7d3393226e4"
     },
     {
       "path": "json/completion.json",
-      "rows": 879,
-      "sha256": "900ed24af767c26e840abbe79bf444e0ebd4f90b8aeb31a8ffe2c8df749d0990"
+      "rows": 933,
+      "sha256": "5746b3a97c6b4623b18f7631c2f934257a4e7569e03930eb8f72274ce5ed3b1c"
     },
     {
       "path": "json/course.json",
@@ -122,8 +122,8 @@
     },
     {
       "path": "json/course_offering.json",
-      "rows": 390,
-      "sha256": "fdefd4350b81b55e704d6b2915b0582bbaec4f30015c95fc82cc6694ef4613ea"
+      "rows": 448,
+      "sha256": "103951ca33725cb6303d462b613d7b556f2a992e67505b241c1debfec6d3615a"
     },
     {
       "path": "json/course_prerequisite.json",
@@ -148,17 +148,17 @@
     {
       "path": "json/employee_skill.json",
       "rows": 3706,
-      "sha256": "c5eb7f8bc9357f5d82fba79927aa8ef74c5458c99e690d09e3aa7474802be268"
+      "sha256": "fb263f0052d3a56cdfd68bab333332a7bbac44b7bcb1f5cdfce5ca4dfc0e57cc"
     },
     {
       "path": "json/enrollment.json",
       "rows": 1000,
-      "sha256": "2def959269417a592fbb4b4ae67ee4975e344934eba6a0513b33b7bf7bffb9d9"
+      "sha256": "ba6b142202ec33018450c1caf79a47b885b9db94642ba24b1e7337ac79d1d1a0"
     },
     {
       "path": "json/enrollment_event.json",
-      "rows": 3817,
-      "sha256": "f661f973a52de066bf7b712d4509bec5be13e9276a1693eaf8e90a3996d54ecb"
+      "rows": 3926,
+      "sha256": "d4c5372dc83d0e168b2d7d3af469f7fed5ce8e95200e8827483983a00dea23f9"
     },
     {
       "path": "json/job_role.json",
@@ -167,13 +167,13 @@
     },
     {
       "path": "json/proficiency_assessment.json",
-      "rows": 4246,
-      "sha256": "edc507b43f3be0efaff8f1bb6480f4056ddec007c7a3b1829f7cee3cd7e97e2c"
+      "rows": 4226,
+      "sha256": "46c644c868fec1d4b361d1c6be687d05fd64cdc33a46e0b4e4dbec53dab8e2d0"
     },
     {
       "path": "json/recommendation.json",
-      "rows": 2153,
-      "sha256": "e2cccb7fe588941fed776685554342bc443e9fc9da68cb925cf34613a569246d"
+      "rows": 2160,
+      "sha256": "6ef0ca9b7d98111b115d49ba2e691b4a060dae6ba5dbce35c27e1b56508709a8"
     },
     {
       "path": "json/role_skill_target.json",
@@ -188,52 +188,52 @@
     {
       "path": "json/skill_gap.json",
       "rows": 3706,
-      "sha256": "2377a3b06c0e9472a4751e1156b022c94c2cc819ba361ba6ee04d09d4a17ec45"
+      "sha256": "5007ae5465a2469091d9d13a6353f538dd965a6f542bdbe498331b758390752a"
     },
     {
       "path": "reports/detected_issues.csv",
       "rows": 25,
-      "sha256": "e5a3cce7e73a914b8521cdf2299c3272cc3801a33b5e450e75b8b4d18e82e06d"
+      "sha256": "94e3faa157ae4fe19b1a5037a4060f400d8add620ac4034b340ef12bb065d256"
     },
     {
       "path": "reports/evaluation.md",
-      "rows": 57,
-      "sha256": "7d3692515ce656ec980cc1f267dee5d558f2ef8f6ee8bb326d12f7811fffbbb6"
+      "rows": 59,
+      "sha256": "af11ce8e5cd044019441634733f7a9d73bbf2666993c7d6b5ee186916f4fb8ee"
     },
     {
       "path": "reports/metric.csv",
-      "rows": 130,
-      "sha256": "7ae315ae1f8185dfbb0d4dc08d60fe85d5714e45418c8b218a082c835de62786"
+      "rows": 147,
+      "sha256": "d2e05c2f51b4c5293ef7f596ca2d30f2f908067f21903a83dcd77294787ca74a"
     },
     {
       "path": "reports/metrics.json",
-      "rows": 130,
-      "sha256": "73d321ae34f956fb389fc71c4333f1b68328db21fc78cbd9f90a2b1a441d3238"
+      "rows": 147,
+      "sha256": "79f5e588789234d7bd4496dff615c649bffaf5c9c2919357e1c1f7ac84a1e6aa"
     },
     {
       "path": "reports/validation_result.csv",
-      "rows": 149,
-      "sha256": "12af400225733f3565d1d7ceaebab9f9930f7af6a206fc37474000be4e85b44b"
+      "rows": 150,
+      "sha256": "941bbc70a2f3768f21ccede4b3834f1bd0c4d4159886323b7d8b88b5856009af"
     },
     {
       "path": "reports/validation_summary.json",
       "rows": null,
-      "sha256": "f7b1edc4e7616d075d199a58021324a6637bfa253cbe2aabc33cad650e319109"
+      "sha256": "c1b460f661b27c23e2cd731917e3933526b912424f073c113d91f005c40a3938"
     },
     {
       "path": "reports/validation_summary.md",
-      "rows": 161,
-      "sha256": "ebe537266802736a9b899f10f1c9a50f4a12455de40b50f0cbe2262f60e470c1"
+      "rows": 162,
+      "sha256": "a842a2043cffd2c9591d3d9adc22c14a715d6089730185c8aa83683dc5667672"
     },
     {
       "path": "sql/schema.sql",
-      "rows": 432,
-      "sha256": "b0b10c8c47f2fb9b2d625e7b65c30bff0f2309f51c92eeca9cd0cc21fc896615"
+      "rows": 436,
+      "sha256": "a3f7cf854568acc2d47f7be2ac7a45c71cb38c7c7ef85fb2d89917d68ec2a1a7"
     },
     {
       "path": "sql/seed.sql",
-      "rows": 21585,
-      "sha256": "e53cba502947b73ccdaad846d74a4a88a1e4684de29f2f664df6037304710707"
+      "rows": 21811,
+      "sha256": "3534c02fbf4af15062b18a030b6cf766b57733f472b54859356607cdb05efa56"
     }
   ],
   "generator": "skill-gap-learning-path",
@@ -259,7 +259,6 @@
       2,
       3
     ],
-    "BUDGET_INJECTION_WINDOW_DAYS": 5,
     "BUDGET_ROUNDING": 10000,
     "CAPACITY": {
       "BLENDED": 40,
@@ -408,7 +407,7 @@
       "name": "full",
       "skills": 500
     },
-    "FUNDING_RATIO": 0.62,
+    "FUNDING_RATIO": 0.85,
     "HIRE_DATE_FROM": "2010-01-01",
     "HIRE_DATE_TO": "2025-09-30",
     "HOURLY_RATE": {
@@ -431,10 +430,10 @@
       1,
       2
     ],
-    "NEXT_YEAR_ONLY_SHARE": 0.06,
+    "NEXT_YEAR_ONLY_SHARE": 0.1,
     "OFFERINGS_PER_COURSE": [
-      3,
-      6
+      4,
+      7
     ],
     "ON_LEAVE_SHARE": 0.05,
     "PASS_MIN_ATTENDANCE": 75.0,
@@ -465,7 +464,7 @@
       7,
       21
     ],
-    "REQUEST_PROBABILITY": 0.9,
+    "REQUEST_PROBABILITY": 0.95,
     "RETIRED_COURSE_SHARE": 0.04,
     "ROLES_PER_DEPARTMENT": 5,
     "SCALES": {
@@ -540,6 +539,7 @@
       1,
       2
     ],
+    "UNFUNDED_REQUEST_PROBABILITY": 0.5,
     "UPLIFT_FAILED": 0.3,
     "UPLIFT_FLOOR": 40,
     "UPLIFT_PASSED": 0.8,

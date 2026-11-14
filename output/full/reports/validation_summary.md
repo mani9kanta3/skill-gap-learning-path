@@ -2,7 +2,7 @@
 
 Seed 20261022. Edge cases injected: yes.
 
-**149 of 149 checks passed.**
+**150 of 150 checks passed.**
 
 STRUCTURAL checks must fail on nothing. RULE checks must fail on exactly the
 ground-truth records of their issue type, matched by ID (unexpected = failing but
@@ -150,6 +150,7 @@ not labelled, missed = labelled but not failing).
 | derived.offering_seats |  | course_offering | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
 | derived.recommendation_costs_and_dates |  | recommendation | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
 | derived.enrollment_status_and_cost |  | enrollment | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| funding.allocation_reconciles | BR-21 | recommendation | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
 | derived.budget_totals |  | budget | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
 | derived.employee_skill_current |  | employee_skill | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
 | derived.skill_gap | BR-01 | skill_gap | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |

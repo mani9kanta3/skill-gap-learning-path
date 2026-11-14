@@ -3,241 +3,289 @@
     "dimension": "DAT",
     "metric_group": "budget",
     "metric_name": "budget_rejections",
-    "value": 48.0
+    "value": 65.0
   },
   {
     "dimension": "ENG",
     "metric_group": "budget",
     "metric_name": "budget_rejections",
-    "value": 280.0
+    "value": 5.0
   },
   {
     "dimension": "FIN",
     "metric_group": "budget",
     "metric_name": "budget_rejections",
-    "value": 29.0
+    "value": 8.0
   },
   {
     "dimension": "HRM",
     "metric_group": "budget",
     "metric_name": "budget_rejections",
-    "value": 54.0
+    "value": 24.0
   },
   {
     "dimension": "ITS",
+    "metric_group": "budget",
+    "metric_name": "budget_rejections",
+    "value": 57.0
+  },
+  {
+    "dimension": "MKT",
+    "metric_group": "budget",
+    "metric_name": "budget_rejections",
+    "value": 27.0
+  },
+  {
+    "dimension": "OPS",
     "metric_group": "budget",
     "metric_name": "budget_rejections",
     "value": 45.0
   },
   {
-    "dimension": "MKT",
-    "metric_group": "budget",
-    "metric_name": "budget_rejections",
-    "value": 26.0
-  },
-  {
-    "dimension": "OPS",
-    "metric_group": "budget",
-    "metric_name": "budget_rejections",
-    "value": 307.0
-  },
-  {
     "dimension": "SAL",
     "metric_group": "budget",
     "metric_name": "budget_rejections",
-    "value": 172.0
+    "value": 0.0
   },
   {
     "dimension": "DAT",
     "metric_group": "budget",
     "metric_name": "committed",
-    "value": 9581200.0
+    "value": 11815200.0
   },
   {
     "dimension": "ENG",
     "metric_group": "budget",
     "metric_name": "committed",
-    "value": 12210800.0
+    "value": 16490400.0
   },
   {
     "dimension": "FIN",
     "metric_group": "budget",
     "metric_name": "committed",
-    "value": 9018800.0
+    "value": 7747200.0
   },
   {
     "dimension": "HRM",
     "metric_group": "budget",
     "metric_name": "committed",
-    "value": 5630000.0
+    "value": 4846400.0
   },
   {
     "dimension": "ITS",
     "metric_group": "budget",
     "metric_name": "committed",
-    "value": 12612800.0
+    "value": 11025200.0
   },
   {
     "dimension": "MKT",
     "metric_group": "budget",
     "metric_name": "committed",
-    "value": 6610400.0
+    "value": 7598400.0
   },
   {
     "dimension": "OPS",
     "metric_group": "budget",
     "metric_name": "committed",
-    "value": 11942000.0
+    "value": 16444800.0
   },
   {
     "dimension": "SAL",
     "metric_group": "budget",
     "metric_name": "committed",
-    "value": 9627200.0
+    "value": 9615200.0
+  },
+  {
+    "dimension": "DAT",
+    "metric_group": "budget",
+    "metric_name": "funded",
+    "value": 17368000.0
+  },
+  {
+    "dimension": "ENG",
+    "metric_group": "budget",
+    "metric_name": "funded",
+    "value": 23888800.0
+  },
+  {
+    "dimension": "FIN",
+    "metric_group": "budget",
+    "metric_name": "funded",
+    "value": 10136800.0
+  },
+  {
+    "dimension": "HRM",
+    "metric_group": "budget",
+    "metric_name": "funded",
+    "value": 7956800.0
+  },
+  {
+    "dimension": "ITS",
+    "metric_group": "budget",
+    "metric_name": "funded",
+    "value": 14360000.0
+  },
+  {
+    "dimension": "MKT",
+    "metric_group": "budget",
+    "metric_name": "funded",
+    "value": 9428800.0
+  },
+  {
+    "dimension": "OPS",
+    "metric_group": "budget",
+    "metric_name": "funded",
+    "value": 21008000.0
+  },
+  {
+    "dimension": "SAL",
+    "metric_group": "budget",
+    "metric_name": "funded",
+    "value": 13588000.0
   },
   {
     "dimension": "DAT",
     "metric_group": "budget",
     "metric_name": "limit",
-    "value": 9520000.0
+    "value": 17370000.0
   },
   {
     "dimension": "ENG",
     "metric_group": "budget",
     "metric_name": "limit",
-    "value": 12160000.0
+    "value": 23890000.0
   },
   {
     "dimension": "FIN",
     "metric_group": "budget",
     "metric_name": "limit",
-    "value": 8910000.0
+    "value": 10140000.0
   },
   {
     "dimension": "HRM",
     "metric_group": "budget",
     "metric_name": "limit",
-    "value": 5560000.0
+    "value": 7960000.0
   },
   {
     "dimension": "ITS",
     "metric_group": "budget",
     "metric_name": "limit",
-    "value": 12520000.0
+    "value": 14360000.0
   },
   {
     "dimension": "MKT",
     "metric_group": "budget",
     "metric_name": "limit",
-    "value": 6580000.0
+    "value": 9430000.0
   },
   {
     "dimension": "OPS",
     "metric_group": "budget",
     "metric_name": "limit",
-    "value": 11880000.0
+    "value": 21010000.0
   },
   {
     "dimension": "SAL",
     "metric_group": "budget",
     "metric_name": "limit",
-    "value": 9560000.0
+    "value": 13590000.0
   },
   {
     "dimension": "DAT",
     "metric_group": "budget",
     "metric_name": "planned",
-    "value": 15456000.0
+    "value": 20556800.0
   },
   {
     "dimension": "ENG",
     "metric_group": "budget",
     "metric_name": "planned",
-    "value": 20148400.0
+    "value": 28542800.0
   },
   {
     "dimension": "FIN",
     "metric_group": "budget",
     "metric_name": "planned",
-    "value": 14388000.0
+    "value": 12017200.0
   },
   {
     "dimension": "HRM",
     "metric_group": "budget",
     "metric_name": "planned",
-    "value": 8978400.0
+    "value": 9396800.0
   },
   {
     "dimension": "ITS",
     "metric_group": "budget",
     "metric_name": "planned",
-    "value": 20314000.0
+    "value": 17080000.0
   },
   {
     "dimension": "MKT",
     "metric_group": "budget",
     "metric_name": "planned",
-    "value": 11392800.0
+    "value": 11186400.0
   },
   {
     "dimension": "OPS",
     "metric_group": "budget",
     "metric_name": "planned",
-    "value": 19300800.0
+    "value": 24792400.0
   },
   {
     "dimension": "SAL",
     "metric_group": "budget",
     "metric_name": "planned",
-    "value": 15425600.0
+    "value": 16231200.0
   },
   {
     "dimension": "DAT",
     "metric_group": "budget",
     "metric_name": "utilization_pct",
-    "value": 100.64
+    "value": 68.02
   },
   {
     "dimension": "ENG",
     "metric_group": "budget",
     "metric_name": "utilization_pct",
-    "value": 100.42
+    "value": 69.03
   },
   {
     "dimension": "FIN",
     "metric_group": "budget",
     "metric_name": "utilization_pct",
-    "value": 101.22
+    "value": 76.4
   },
   {
     "dimension": "HRM",
     "metric_group": "budget",
     "metric_name": "utilization_pct",
-    "value": 101.26
+    "value": 60.88
   },
   {
     "dimension": "ITS",
     "metric_group": "budget",
     "metric_name": "utilization_pct",
-    "value": 100.74
+    "value": 76.78
   },
   {
     "dimension": "MKT",
     "metric_group": "budget",
     "metric_name": "utilization_pct",
-    "value": 100.46
+    "value": 80.58
   },
   {
     "dimension": "OPS",
     "metric_group": "budget",
     "metric_name": "utilization_pct",
-    "value": 100.52
+    "value": 78.27
   },
   {
     "dimension": "SAL",
     "metric_group": "budget",
     "metric_name": "utilization_pct",
-    "value": 100.7
+    "value": 70.75
   },
   {
     "dimension": "ALL",
@@ -495,31 +543,31 @@
     "dimension": "ALL",
     "metric_group": "distribution",
     "metric_name": "average_seat_utilization_of_used_offerings",
-    "value": 0.3272
+    "value": 0.345
   },
   {
     "dimension": "1",
     "metric_group": "distribution",
     "metric_name": "employees_with_n_enrollments",
-    "value": 1115.0
+    "value": 964.0
   },
   {
     "dimension": "2",
     "metric_group": "distribution",
     "metric_name": "employees_with_n_enrollments",
-    "value": 1735.0
+    "value": 1633.0
   },
   {
     "dimension": "3",
     "metric_group": "distribution",
     "metric_name": "employees_with_n_enrollments",
-    "value": 1197.0
+    "value": 1462.0
   },
   {
     "dimension": "4",
     "metric_group": "distribution",
     "metric_name": "employees_with_n_enrollments",
-    "value": 456.0
+    "value": 346.0
   },
   {
     "dimension": "1",
@@ -555,103 +603,163 @@
     "dimension": "ALL",
     "metric_group": "duplicates",
     "metric_name": "completion_rows",
-    "value": 8584.0
+    "value": 9332.0
   },
   {
     "dimension": "ALL",
     "metric_group": "duplicates",
     "metric_name": "distinct_completed_enrollments",
-    "value": 8534.0
+    "value": 9282.0
   },
   {
     "dimension": "COURSE_UNAVAILABLE",
     "metric_group": "feasibility",
     "metric_name": "not_recommended_rows",
-    "value": 196.0
+    "value": 426.0
   },
   {
     "dimension": "NO_SCHEDULE",
     "metric_group": "feasibility",
     "metric_name": "not_recommended_rows",
-    "value": 5079.0
+    "value": 3088.0
   },
   {
     "dimension": "OVER_BUDGET",
     "metric_group": "feasibility",
     "metric_name": "not_recommended_rows",
-    "value": 353.0
+    "value": 209.0
   },
   {
     "dimension": "PATH_LIMIT",
     "metric_group": "feasibility",
     "metric_name": "not_recommended_rows",
-    "value": 3254.0
+    "value": 4186.0
   },
   {
     "dimension": "PREREQUISITE_UNAVAILABLE",
     "metric_group": "feasibility",
     "metric_name": "not_recommended_rows",
-    "value": 1111.0
+    "value": 951.0
   },
   {
     "dimension": "ALL",
     "metric_group": "feasibility",
     "metric_name": "recommended_rows",
-    "value": 13421.0
+    "value": 14610.0
   },
   {
     "dimension": "CLOSES_GAP",
     "metric_group": "feasibility",
     "metric_name": "recommended_rows",
-    "value": 10109.0
+    "value": 11114.0
   },
   {
     "dimension": "PREREQUISITE_FOR",
     "metric_group": "feasibility",
     "metric_name": "recommended_rows",
-    "value": 3312.0
+    "value": 3496.0
   },
   {
     "dimension": "ALL",
     "metric_group": "feasibility",
-    "metric_name": "share_feasible",
-    "value": 0.9925
+    "metric_name": "share_feasible_all_checks",
+    "value": 0.9932
+  },
+  {
+    "dimension": "BR-04",
+    "metric_group": "feasibility",
+    "metric_name": "steps_failing",
+    "value": 50.0
+  },
+  {
+    "dimension": "BR-05",
+    "metric_group": "feasibility",
+    "metric_name": "steps_failing",
+    "value": 50.0
+  },
+  {
+    "dimension": "BR-07",
+    "metric_group": "feasibility",
+    "metric_name": "steps_failing",
+    "value": 0.0
+  },
+  {
+    "dimension": "BR-08",
+    "metric_group": "feasibility",
+    "metric_name": "steps_failing",
+    "value": 0.0
+  },
+  {
+    "dimension": "BR-09",
+    "metric_group": "feasibility",
+    "metric_name": "steps_failing",
+    "value": 0.0
+  },
+  {
+    "dimension": "ALL",
+    "metric_group": "funding",
+    "metric_name": "share_feasible_and_funded",
+    "value": 0.8693
+  },
+  {
+    "dimension": "ALL",
+    "metric_group": "funding",
+    "metric_name": "share_funded",
+    "value": 0.8693
+  },
+  {
+    "dimension": "FUNDED",
+    "metric_group": "funding",
+    "metric_name": "steps",
+    "value": 12701.0
+  },
+  {
+    "dimension": "NOT_FUNDED_BUDGET",
+    "metric_group": "funding",
+    "metric_name": "steps",
+    "value": 1885.0
+  },
+  {
+    "dimension": "NOT_FUNDED_PREREQUISITE",
+    "metric_group": "funding",
+    "metric_name": "steps",
+    "value": 24.0
   },
   {
     "dimension": "ALL",
     "metric_group": "funnel",
     "metric_name": "approved",
-    "value": 9039.0
+    "value": 9769.0
   },
   {
     "dimension": "ALL",
     "metric_group": "funnel",
     "metric_name": "completed",
-    "value": 8534.0
+    "value": 9282.0
   },
   {
     "dimension": "ALL",
     "metric_group": "funnel",
     "metric_name": "passed",
-    "value": 5773.0
+    "value": 6308.0
   },
   {
     "dimension": "ALL",
     "metric_group": "funnel",
     "metric_name": "reassessed",
-    "value": 5744.0
+    "value": 6316.0
   },
   {
     "dimension": "ALL",
     "metric_group": "funnel",
     "metric_name": "recommended",
-    "value": 13421.0
+    "value": 14610.0
   },
   {
     "dimension": "ALL",
     "metric_group": "funnel",
     "metric_name": "rejected",
-    "value": 961.0
+    "value": 231.0
   },
   {
     "dimension": "ALL",
@@ -663,13 +771,13 @@
     "dimension": "ALL",
     "metric_group": "funnel",
     "metric_name": "started",
-    "value": 8884.0
+    "value": 9594.0
   },
   {
     "dimension": "ALL",
     "metric_group": "funnel",
     "metric_name": "withdrawn",
-    "value": 461.0
+    "value": 476.0
   },
   {
     "dimension": "ALL",
@@ -687,7 +795,7 @@
     "dimension": "COURSE_UNAVAILABLE",
     "metric_group": "gap_coverage",
     "metric_name": "share_of_planning_gaps",
-    "value": 0.0088
+    "value": 0.0192
   },
   {
     "dimension": "EMPLOYEE_ON_LEAVE",
@@ -705,78 +813,78 @@
     "dimension": "NO_SCHEDULE",
     "metric_group": "gap_coverage",
     "metric_name": "share_of_planning_gaps",
-    "value": 0.2253
+    "value": 0.1378
   },
   {
     "dimension": "OVER_BUDGET",
     "metric_group": "gap_coverage",
     "metric_name": "share_of_planning_gaps",
-    "value": 0.0159
+    "value": 0.0094
   },
   {
     "dimension": "PATH_LIMIT",
     "metric_group": "gap_coverage",
     "metric_name": "share_of_planning_gaps",
-    "value": 0.1471
+    "value": 0.1881
   },
   {
     "dimension": "PLANNED",
     "metric_group": "gap_coverage",
     "metric_name": "share_of_planning_gaps",
-    "value": 0.4653
+    "value": 0.5145
   },
   {
     "dimension": "PREREQUISITE_UNAVAILABLE",
     "metric_group": "gap_coverage",
     "metric_name": "share_of_planning_gaps",
-    "value": 0.0489
+    "value": 0.0422
   },
   {
     "dimension": "FAILED",
     "metric_group": "outcomes",
     "metric_name": "average_level_uplift",
-    "value": 0.236
+    "value": 0.2276
   },
   {
     "dimension": "PASSED",
     "metric_group": "outcomes",
     "metric_name": "average_level_uplift",
-    "value": 1.2222
+    "value": 1.2348
   },
   {
     "dimension": "ALL",
     "metric_group": "outcomes",
     "metric_name": "completion_rate_of_started",
-    "value": 0.9606
+    "value": 0.9675
   },
   {
     "dimension": "ALL",
     "metric_group": "outcomes",
     "metric_name": "gap_closed_rate_of_reassessed",
-    "value": 0.5284
+    "value": 0.5215
   },
   {
     "dimension": "ALL",
     "metric_group": "outcomes",
     "metric_name": "gaps_closed_by_as_of",
-    "value": 3035.0
+    "value": 3294.0
   },
   {
     "dimension": "ALL",
     "metric_group": "outcomes",
     "metric_name": "gaps_still_open",
-    "value": 19146.0
+    "value": 18887.0
   },
   {
     "dimension": "ALL",
     "metric_group": "outcomes",
     "metric_name": "pass_rate_of_completed",
-    "value": 0.6765
+    "value": 0.6796
   },
   {
     "dimension": "ALL",
     "metric_group": "outcomes",
     "metric_name": "reassessment_coverage_of_due",
-    "value": 0.9913
+    "value": 0.9921
   }
 ]

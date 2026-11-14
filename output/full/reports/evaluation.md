@@ -18,40 +18,42 @@ used only for the detection scores. The full list is in `metrics.json`.
 
 | Step | Count |
 |---|---|
-| recommended | 13421 |
+| recommended | 14610 |
 | requested | 10000 |
-| approved | 9039 |
-| rejected | 961 |
-| started | 8884 |
-| withdrawn | 461 |
-| completed | 8534 |
-| passed | 5773 |
-| reassessed | 5744 |
+| approved | 9769 |
+| rejected | 231 |
+| started | 9594 |
+| withdrawn | 476 |
+| completed | 9282 |
+| passed | 6308 |
+| reassessed | 6316 |
 
 ## Attendance, passing and learning are different numbers
 
-- Completed, of started: 96.1%
-- Passed, of completed: 67.7%
-- Gap closed, of reassessed gap-closing courses: 52.8%
-- Average level uplift after a PASSED course: 1.22
-- Average level uplift after a FAILED course: 0.24
-- Reassessment coverage of due completions: 99.1%
+- Completed, of started: 96.8%
+- Passed, of completed: 68.0%
+- Gap closed, of reassessed gap-closing courses: 52.1%
+- Average level uplift after a PASSED course: 1.23
+- Average level uplift after a FAILED course: 0.23
+- Reassessment coverage of due completions: 99.2%
 
 ## Recommendations
 
-- RECOMMENDED rows: 13421
-- Feasible (BR-04 and BR-05 hold): 99.2%
-- Planning gaps: 22181, of which PLANNED: 46.5%
+- Proposed steps (RECOMMENDED rows): 14610
+- Feasible on every planning check (BR-04, 05, 07, 08, 09): 99.3%
+- Funded by the department budget (BR-21): 86.9%
+- Feasible and funded: 86.9%
+- Planning gaps: 22181, of which PLANNED: 51.4%
 
 ## Budgets
 
-| Department | Limit | Planned | Committed | Utilization | Budget rejections |
-|---|---|---|---|---|---|
-| ENG | 12,160,000 | 20,148,400 | 12,210,800 | 100.42% | 280 |
-| DAT | 9,520,000 | 15,456,000 | 9,581,200 | 100.64% | 48 |
-| ITS | 12,520,000 | 20,314,000 | 12,612,800 | 100.74% | 45 |
-| SAL | 9,560,000 | 15,425,600 | 9,627,200 | 100.70% | 172 |
-| MKT | 6,580,000 | 11,392,800 | 6,610,400 | 100.46% | 26 |
-| FIN | 8,910,000 | 14,388,000 | 9,018,800 | 101.22% | 29 |
-| HRM | 5,560,000 | 8,978,400 | 5,630,000 | 101.26% | 54 |
-| OPS | 11,880,000 | 19,300,800 | 11,942,000 | 100.52% | 307 |
+| Department | Limit | Proposed | Funded | Committed | Utilization | Budget rejections |
+|---|---|---|---|---|---|---|
+| ENG | 23,890,000 | 28,542,800 | 23,888,800 | 16,490,400 | 69.03% | 5 |
+| DAT | 17,370,000 | 20,556,800 | 17,368,000 | 11,815,200 | 68.02% | 65 |
+| ITS | 14,360,000 | 17,080,000 | 14,360,000 | 11,025,200 | 76.78% | 57 |
+| SAL | 13,590,000 | 16,231,200 | 13,588,000 | 9,615,200 | 70.75% | 0 |
+| MKT | 9,430,000 | 11,186,400 | 9,428,800 | 7,598,400 | 80.58% | 27 |
+| FIN | 10,140,000 | 12,017,200 | 10,136,800 | 7,747,200 | 76.40% | 8 |
+| HRM | 7,960,000 | 9,396,800 | 7,956,800 | 4,846,400 | 60.88% | 24 |
+| OPS | 21,010,000 | 24,792,400 | 21,008,000 | 16,444,800 | 78.27% | 45 |

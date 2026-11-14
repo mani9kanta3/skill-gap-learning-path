@@ -5,16 +5,16 @@
       "path": "csv/budget.csv",
       "rows_a": 8,
       "rows_b": 8,
-      "sha256_a": "399be05d179638ad0fdbd9c21d2d4e3d4949fa61d1871387c1f7d4cbfe52597f",
-      "sha256_b": "399be05d179638ad0fdbd9c21d2d4e3d4949fa61d1871387c1f7d4cbfe52597f"
+      "sha256_a": "c2a710005f1f48f01f40d51ffe1252ca7c8da64f70eb3dd162b181cdc4075a6e",
+      "sha256_b": "c2a710005f1f48f01f40d51ffe1252ca7c8da64f70eb3dd162b181cdc4075a6e"
     },
     {
       "identical": true,
       "path": "csv/completion.csv",
-      "rows_a": 879,
-      "rows_b": 879,
-      "sha256_a": "bc6b6cee6a1e959c26f2a4883bd277086891416e438af6a86d1145decebfcef2",
-      "sha256_b": "bc6b6cee6a1e959c26f2a4883bd277086891416e438af6a86d1145decebfcef2"
+      "rows_a": 933,
+      "rows_b": 933,
+      "sha256_a": "1c699754f423658f7caa5e67de25e2b9ac8ed756aa90b701016958f45da246dd",
+      "sha256_b": "1c699754f423658f7caa5e67de25e2b9ac8ed756aa90b701016958f45da246dd"
     },
     {
       "identical": true,
@@ -27,10 +27,10 @@
     {
       "identical": true,
       "path": "csv/course_offering.csv",
-      "rows_a": 390,
-      "rows_b": 390,
-      "sha256_a": "a4aa0bd78c5e418d5d8d59a990ecba8fa9d4692256ca0e147d6e91930be747d5",
-      "sha256_b": "a4aa0bd78c5e418d5d8d59a990ecba8fa9d4692256ca0e147d6e91930be747d5"
+      "rows_a": 448,
+      "rows_b": 448,
+      "sha256_a": "ca4230dbf60bd03cf540d1c2dd554c53ccba78a1241a7616e507c1b66681fe78",
+      "sha256_b": "ca4230dbf60bd03cf540d1c2dd554c53ccba78a1241a7616e507c1b66681fe78"
     },
     {
       "identical": true,
@@ -69,24 +69,24 @@
       "path": "csv/employee_skill.csv",
       "rows_a": 3706,
       "rows_b": 3706,
-      "sha256_a": "348ef4d3380f779b58cf4e97984e8a451c05a55cdbb47eed840570851a245fd9",
-      "sha256_b": "348ef4d3380f779b58cf4e97984e8a451c05a55cdbb47eed840570851a245fd9"
+      "sha256_a": "e27d1e1c74fee9f29a1b40e998f65783cf8b44f2b2b9f4f813fe2352800be64b",
+      "sha256_b": "e27d1e1c74fee9f29a1b40e998f65783cf8b44f2b2b9f4f813fe2352800be64b"
     },
     {
       "identical": true,
       "path": "csv/enrollment.csv",
       "rows_a": 1000,
       "rows_b": 1000,
-      "sha256_a": "e58999c902fd4c0f5a82d745ede6c072a66436275592352546ee978f4a1d14e5",
-      "sha256_b": "e58999c902fd4c0f5a82d745ede6c072a66436275592352546ee978f4a1d14e5"
+      "sha256_a": "49e96b0ad4765586649b628d187c746e6c682c3e873d4b5bf68f7b7f54255417",
+      "sha256_b": "49e96b0ad4765586649b628d187c746e6c682c3e873d4b5bf68f7b7f54255417"
     },
     {
       "identical": true,
       "path": "csv/enrollment_event.csv",
-      "rows_a": 3817,
-      "rows_b": 3817,
-      "sha256_a": "0184fded397f2a32430b27a1854638ad9d1fffb1ac7ed14955807e5da65e8d58",
-      "sha256_b": "0184fded397f2a32430b27a1854638ad9d1fffb1ac7ed14955807e5da65e8d58"
+      "rows_a": 3926,
+      "rows_b": 3926,
+      "sha256_a": "af8c93761c504e4b7a54caaa15e249175d224b2b30950c271569cffdf781c5a8",
+      "sha256_b": "af8c93761c504e4b7a54caaa15e249175d224b2b30950c271569cffdf781c5a8"
     },
     {
       "identical": true,
@@ -99,18 +99,18 @@
     {
       "identical": true,
       "path": "csv/proficiency_assessment.csv",
-      "rows_a": 4246,
-      "rows_b": 4246,
-      "sha256_a": "6ad2295a1edda40ea2d3c996a352a308bb6c7db8b40b5a74855a432d4503c5d7",
-      "sha256_b": "6ad2295a1edda40ea2d3c996a352a308bb6c7db8b40b5a74855a432d4503c5d7"
+      "rows_a": 4226,
+      "rows_b": 4226,
+      "sha256_a": "5d5efce12c07be08cc2ab5e6c434a4ab5464c23354e8e4f20219ac706e06e7c2",
+      "sha256_b": "5d5efce12c07be08cc2ab5e6c434a4ab5464c23354e8e4f20219ac706e06e7c2"
     },
     {
       "identical": true,
       "path": "csv/recommendation.csv",
-      "rows_a": 2153,
-      "rows_b": 2153,
-      "sha256_a": "9fdc6cf0cc892f64ad41cf857baa1ab89f52a86de52f872b14b09e0649fe548b",
-      "sha256_b": "9fdc6cf0cc892f64ad41cf857baa1ab89f52a86de52f872b14b09e0649fe548b"
+      "rows_a": 2160,
+      "rows_b": 2160,
+      "sha256_a": "f1b3c5a95c31ee9e8042196ef33f44c620ef86c901dba5757bfe8ee7711a9c12",
+      "sha256_b": "f1b3c5a95c31ee9e8042196ef33f44c620ef86c901dba5757bfe8ee7711a9c12"
     },
     {
       "identical": true,
@@ -133,40 +133,40 @@
       "path": "csv/skill_gap.csv",
       "rows_a": 3706,
       "rows_b": 3706,
-      "sha256_a": "e8b130c9784ce80ab95b911b98818324e80f5047df9095a6dcaf824dcc9ed1fd",
-      "sha256_b": "e8b130c9784ce80ab95b911b98818324e80f5047df9095a6dcaf824dcc9ed1fd"
+      "sha256_a": "64ba0ab4a8bc69fdb8579b2bc8e78fa19658532cc9a4709f301579a043a8c35a",
+      "sha256_b": "64ba0ab4a8bc69fdb8579b2bc8e78fa19658532cc9a4709f301579a043a8c35a"
     },
     {
       "identical": true,
       "path": "ground_truth/ground_truth.csv",
       "rows_a": 25,
       "rows_b": 25,
-      "sha256_a": "711ad48ae6d64b3cd84f69dc0940d87985d15fce7c877c8c3a44006a9c3a60cc",
-      "sha256_b": "711ad48ae6d64b3cd84f69dc0940d87985d15fce7c877c8c3a44006a9c3a60cc"
+      "sha256_a": "bdc9ba4e009b4b53f523d125c9021663f90fd85f89f48d4e518b0832c0f9596a",
+      "sha256_b": "bdc9ba4e009b4b53f523d125c9021663f90fd85f89f48d4e518b0832c0f9596a"
     },
     {
       "identical": true,
       "path": "ground_truth/ground_truth.json",
       "rows_a": 25,
       "rows_b": 25,
-      "sha256_a": "4973a2dfdc19ef8cc15a08c9cb1fd45db7c59911a557c92631da2010bcd8125a",
-      "sha256_b": "4973a2dfdc19ef8cc15a08c9cb1fd45db7c59911a557c92631da2010bcd8125a"
+      "sha256_a": "bb3a8caf08f78a74c7a70a1ef9333c4da2ad33dbe611743970eb2589f60f4483",
+      "sha256_b": "bb3a8caf08f78a74c7a70a1ef9333c4da2ad33dbe611743970eb2589f60f4483"
     },
     {
       "identical": true,
       "path": "json/budget.json",
       "rows_a": 8,
       "rows_b": 8,
-      "sha256_a": "14b2c4f13a87d1ace302b67a23e459126a533f9b7a2c169e6c2ffc448d6bf847",
-      "sha256_b": "14b2c4f13a87d1ace302b67a23e459126a533f9b7a2c169e6c2ffc448d6bf847"
+      "sha256_a": "f8ee8f911851c149a94e3579438df45c4250609144afcd53c1f4b7d3393226e4",
+      "sha256_b": "f8ee8f911851c149a94e3579438df45c4250609144afcd53c1f4b7d3393226e4"
     },
     {
       "identical": true,
       "path": "json/completion.json",
-      "rows_a": 879,
-      "rows_b": 879,
-      "sha256_a": "900ed24af767c26e840abbe79bf444e0ebd4f90b8aeb31a8ffe2c8df749d0990",
-      "sha256_b": "900ed24af767c26e840abbe79bf444e0ebd4f90b8aeb31a8ffe2c8df749d0990"
+      "rows_a": 933,
+      "rows_b": 933,
+      "sha256_a": "5746b3a97c6b4623b18f7631c2f934257a4e7569e03930eb8f72274ce5ed3b1c",
+      "sha256_b": "5746b3a97c6b4623b18f7631c2f934257a4e7569e03930eb8f72274ce5ed3b1c"
     },
     {
       "identical": true,
@@ -179,10 +179,10 @@
     {
       "identical": true,
       "path": "json/course_offering.json",
-      "rows_a": 390,
-      "rows_b": 390,
-      "sha256_a": "fdefd4350b81b55e704d6b2915b0582bbaec4f30015c95fc82cc6694ef4613ea",
-      "sha256_b": "fdefd4350b81b55e704d6b2915b0582bbaec4f30015c95fc82cc6694ef4613ea"
+      "rows_a": 448,
+      "rows_b": 448,
+      "sha256_a": "103951ca33725cb6303d462b613d7b556f2a992e67505b241c1debfec6d3615a",
+      "sha256_b": "103951ca33725cb6303d462b613d7b556f2a992e67505b241c1debfec6d3615a"
     },
     {
       "identical": true,
@@ -221,24 +221,24 @@
       "path": "json/employee_skill.json",
       "rows_a": 3706,
       "rows_b": 3706,
-      "sha256_a": "c5eb7f8bc9357f5d82fba79927aa8ef74c5458c99e690d09e3aa7474802be268",
-      "sha256_b": "c5eb7f8bc9357f5d82fba79927aa8ef74c5458c99e690d09e3aa7474802be268"
+      "sha256_a": "fb263f0052d3a56cdfd68bab333332a7bbac44b7bcb1f5cdfce5ca4dfc0e57cc",
+      "sha256_b": "fb263f0052d3a56cdfd68bab333332a7bbac44b7bcb1f5cdfce5ca4dfc0e57cc"
     },
     {
       "identical": true,
       "path": "json/enrollment.json",
       "rows_a": 1000,
       "rows_b": 1000,
-      "sha256_a": "2def959269417a592fbb4b4ae67ee4975e344934eba6a0513b33b7bf7bffb9d9",
-      "sha256_b": "2def959269417a592fbb4b4ae67ee4975e344934eba6a0513b33b7bf7bffb9d9"
+      "sha256_a": "ba6b142202ec33018450c1caf79a47b885b9db94642ba24b1e7337ac79d1d1a0",
+      "sha256_b": "ba6b142202ec33018450c1caf79a47b885b9db94642ba24b1e7337ac79d1d1a0"
     },
     {
       "identical": true,
       "path": "json/enrollment_event.json",
-      "rows_a": 3817,
-      "rows_b": 3817,
-      "sha256_a": "f661f973a52de066bf7b712d4509bec5be13e9276a1693eaf8e90a3996d54ecb",
-      "sha256_b": "f661f973a52de066bf7b712d4509bec5be13e9276a1693eaf8e90a3996d54ecb"
+      "rows_a": 3926,
+      "rows_b": 3926,
+      "sha256_a": "d4c5372dc83d0e168b2d7d3af469f7fed5ce8e95200e8827483983a00dea23f9",
+      "sha256_b": "d4c5372dc83d0e168b2d7d3af469f7fed5ce8e95200e8827483983a00dea23f9"
     },
     {
       "identical": true,
@@ -251,18 +251,18 @@
     {
       "identical": true,
       "path": "json/proficiency_assessment.json",
-      "rows_a": 4246,
-      "rows_b": 4246,
-      "sha256_a": "edc507b43f3be0efaff8f1bb6480f4056ddec007c7a3b1829f7cee3cd7e97e2c",
-      "sha256_b": "edc507b43f3be0efaff8f1bb6480f4056ddec007c7a3b1829f7cee3cd7e97e2c"
+      "rows_a": 4226,
+      "rows_b": 4226,
+      "sha256_a": "46c644c868fec1d4b361d1c6be687d05fd64cdc33a46e0b4e4dbec53dab8e2d0",
+      "sha256_b": "46c644c868fec1d4b361d1c6be687d05fd64cdc33a46e0b4e4dbec53dab8e2d0"
     },
     {
       "identical": true,
       "path": "json/recommendation.json",
-      "rows_a": 2153,
-      "rows_b": 2153,
-      "sha256_a": "e2cccb7fe588941fed776685554342bc443e9fc9da68cb925cf34613a569246d",
-      "sha256_b": "e2cccb7fe588941fed776685554342bc443e9fc9da68cb925cf34613a569246d"
+      "rows_a": 2160,
+      "rows_b": 2160,
+      "sha256_a": "6ef0ca9b7d98111b115d49ba2e691b4a060dae6ba5dbce35c27e1b56508709a8",
+      "sha256_b": "6ef0ca9b7d98111b115d49ba2e691b4a060dae6ba5dbce35c27e1b56508709a8"
     },
     {
       "identical": true,
@@ -285,88 +285,88 @@
       "path": "json/skill_gap.json",
       "rows_a": 3706,
       "rows_b": 3706,
-      "sha256_a": "2377a3b06c0e9472a4751e1156b022c94c2cc819ba361ba6ee04d09d4a17ec45",
-      "sha256_b": "2377a3b06c0e9472a4751e1156b022c94c2cc819ba361ba6ee04d09d4a17ec45"
+      "sha256_a": "5007ae5465a2469091d9d13a6353f538dd965a6f542bdbe498331b758390752a",
+      "sha256_b": "5007ae5465a2469091d9d13a6353f538dd965a6f542bdbe498331b758390752a"
     },
     {
       "identical": true,
       "path": "manifest.json",
       "rows_a": null,
       "rows_b": null,
-      "sha256_a": "412a802483f525f7b7d6c8c67ec6815c96c675a9f2be7b1c7970303508fb4609",
-      "sha256_b": "412a802483f525f7b7d6c8c67ec6815c96c675a9f2be7b1c7970303508fb4609"
+      "sha256_a": "61a5a7f3096cc596ecd6ed38afee307f2d4919e91b591820b2534e024513ca2a",
+      "sha256_b": "61a5a7f3096cc596ecd6ed38afee307f2d4919e91b591820b2534e024513ca2a"
     },
     {
       "identical": true,
       "path": "reports/detected_issues.csv",
       "rows_a": 25,
       "rows_b": 25,
-      "sha256_a": "e5a3cce7e73a914b8521cdf2299c3272cc3801a33b5e450e75b8b4d18e82e06d",
-      "sha256_b": "e5a3cce7e73a914b8521cdf2299c3272cc3801a33b5e450e75b8b4d18e82e06d"
+      "sha256_a": "94e3faa157ae4fe19b1a5037a4060f400d8add620ac4034b340ef12bb065d256",
+      "sha256_b": "94e3faa157ae4fe19b1a5037a4060f400d8add620ac4034b340ef12bb065d256"
     },
     {
       "identical": true,
       "path": "reports/evaluation.md",
-      "rows_a": 57,
-      "rows_b": 57,
-      "sha256_a": "7d3692515ce656ec980cc1f267dee5d558f2ef8f6ee8bb326d12f7811fffbbb6",
-      "sha256_b": "7d3692515ce656ec980cc1f267dee5d558f2ef8f6ee8bb326d12f7811fffbbb6"
+      "rows_a": 59,
+      "rows_b": 59,
+      "sha256_a": "af11ce8e5cd044019441634733f7a9d73bbf2666993c7d6b5ee186916f4fb8ee",
+      "sha256_b": "af11ce8e5cd044019441634733f7a9d73bbf2666993c7d6b5ee186916f4fb8ee"
     },
     {
       "identical": true,
       "path": "reports/metric.csv",
-      "rows_a": 130,
-      "rows_b": 130,
-      "sha256_a": "7ae315ae1f8185dfbb0d4dc08d60fe85d5714e45418c8b218a082c835de62786",
-      "sha256_b": "7ae315ae1f8185dfbb0d4dc08d60fe85d5714e45418c8b218a082c835de62786"
+      "rows_a": 147,
+      "rows_b": 147,
+      "sha256_a": "d2e05c2f51b4c5293ef7f596ca2d30f2f908067f21903a83dcd77294787ca74a",
+      "sha256_b": "d2e05c2f51b4c5293ef7f596ca2d30f2f908067f21903a83dcd77294787ca74a"
     },
     {
       "identical": true,
       "path": "reports/metrics.json",
-      "rows_a": 130,
-      "rows_b": 130,
-      "sha256_a": "73d321ae34f956fb389fc71c4333f1b68328db21fc78cbd9f90a2b1a441d3238",
-      "sha256_b": "73d321ae34f956fb389fc71c4333f1b68328db21fc78cbd9f90a2b1a441d3238"
+      "rows_a": 147,
+      "rows_b": 147,
+      "sha256_a": "79f5e588789234d7bd4496dff615c649bffaf5c9c2919357e1c1f7ac84a1e6aa",
+      "sha256_b": "79f5e588789234d7bd4496dff615c649bffaf5c9c2919357e1c1f7ac84a1e6aa"
     },
     {
       "identical": true,
       "path": "reports/validation_result.csv",
-      "rows_a": 149,
-      "rows_b": 149,
-      "sha256_a": "12af400225733f3565d1d7ceaebab9f9930f7af6a206fc37474000be4e85b44b",
-      "sha256_b": "12af400225733f3565d1d7ceaebab9f9930f7af6a206fc37474000be4e85b44b"
+      "rows_a": 150,
+      "rows_b": 150,
+      "sha256_a": "941bbc70a2f3768f21ccede4b3834f1bd0c4d4159886323b7d8b88b5856009af",
+      "sha256_b": "941bbc70a2f3768f21ccede4b3834f1bd0c4d4159886323b7d8b88b5856009af"
     },
     {
       "identical": true,
       "path": "reports/validation_summary.json",
       "rows_a": null,
       "rows_b": null,
-      "sha256_a": "f7b1edc4e7616d075d199a58021324a6637bfa253cbe2aabc33cad650e319109",
-      "sha256_b": "f7b1edc4e7616d075d199a58021324a6637bfa253cbe2aabc33cad650e319109"
+      "sha256_a": "c1b460f661b27c23e2cd731917e3933526b912424f073c113d91f005c40a3938",
+      "sha256_b": "c1b460f661b27c23e2cd731917e3933526b912424f073c113d91f005c40a3938"
     },
     {
       "identical": true,
       "path": "reports/validation_summary.md",
-      "rows_a": 161,
-      "rows_b": 161,
-      "sha256_a": "ebe537266802736a9b899f10f1c9a50f4a12455de40b50f0cbe2262f60e470c1",
-      "sha256_b": "ebe537266802736a9b899f10f1c9a50f4a12455de40b50f0cbe2262f60e470c1"
+      "rows_a": 162,
+      "rows_b": 162,
+      "sha256_a": "a842a2043cffd2c9591d3d9adc22c14a715d6089730185c8aa83683dc5667672",
+      "sha256_b": "a842a2043cffd2c9591d3d9adc22c14a715d6089730185c8aa83683dc5667672"
     },
     {
       "identical": true,
       "path": "sql/schema.sql",
-      "rows_a": 432,
-      "rows_b": 432,
-      "sha256_a": "b0b10c8c47f2fb9b2d625e7b65c30bff0f2309f51c92eeca9cd0cc21fc896615",
-      "sha256_b": "b0b10c8c47f2fb9b2d625e7b65c30bff0f2309f51c92eeca9cd0cc21fc896615"
+      "rows_a": 436,
+      "rows_b": 436,
+      "sha256_a": "a3f7cf854568acc2d47f7be2ac7a45c71cb38c7c7ef85fb2d89917d68ec2a1a7",
+      "sha256_b": "a3f7cf854568acc2d47f7be2ac7a45c71cb38c7c7ef85fb2d89917d68ec2a1a7"
     },
     {
       "identical": true,
       "path": "sql/seed.sql",
-      "rows_a": 21585,
-      "rows_b": 21585,
-      "sha256_a": "e53cba502947b73ccdaad846d74a4a88a1e4684de29f2f664df6037304710707",
-      "sha256_b": "e53cba502947b73ccdaad846d74a4a88a1e4684de29f2f664df6037304710707"
+      "rows_a": 21811,
+      "rows_b": 21811,
+      "sha256_a": "3534c02fbf4af15062b18a030b6cf766b57733f472b54859356607cdb05efa56",
+      "sha256_b": "3534c02fbf4af15062b18a030b6cf766b57733f472b54859356607cdb05efa56"
     }
   ],
   "identical": true,

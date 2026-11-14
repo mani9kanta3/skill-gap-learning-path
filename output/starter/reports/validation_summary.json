@@ -1,7 +1,7 @@
 {
-  "checks": 149,
+  "checks": 150,
   "failed": 0,
-  "passed": 149,
+  "passed": 150,
   "results": [
     {
       "check_id": "primary_key.department",
@@ -1544,16 +1544,16 @@
       "expected_count": 10,
       "failing_count": 10,
       "failing_ids": [
-        "REC-EMP-000034-CRS-000008",
-        "REC-EMP-000075-CRS-000010",
-        "REC-EMP-000092-CRS-000083",
-        "REC-EMP-000125-CRS-000089",
-        "REC-EMP-000195-CRS-000093",
-        "REC-EMP-000297-CRS-000093",
-        "REC-EMP-000331-CRS-000093",
-        "REC-EMP-000377-CRS-000093",
-        "REC-EMP-000411-CRS-000082",
-        "REC-EMP-000453-CRS-000080"
+        "REC-EMP-000025-CRS-000092",
+        "REC-EMP-000141-CRS-000019",
+        "REC-EMP-000143-CRS-000097",
+        "REC-EMP-000190-CRS-000026",
+        "REC-EMP-000193-CRS-000026",
+        "REC-EMP-000304-CRS-000044",
+        "REC-EMP-000352-CRS-000053",
+        "REC-EMP-000361-CRS-000090",
+        "REC-EMP-000443-CRS-000078",
+        "REC-EMP-000451-CRS-000078"
       ],
       "kind": "RULE",
       "missed_ids": [],
@@ -1695,6 +1695,18 @@
       "unexpected_ids": []
     },
     {
+      "check_id": "funding.allocation_reconciles",
+      "expected_count": 0,
+      "failing_count": 0,
+      "failing_ids": [],
+      "kind": "STRUCTURAL",
+      "missed_ids": [],
+      "rule_code": "BR-21",
+      "status": "PASS",
+      "table": "recommendation",
+      "unexpected_ids": []
+    },
+    {
       "check_id": "derived.budget_totals",
       "expected_count": 0,
       "failing_count": 0,
@@ -1735,11 +1747,11 @@
       "expected_count": 5,
       "failing_count": 5,
       "failing_ids": [
-        "REC-EMP-000034-CRS-000008",
-        "REC-EMP-000075-CRS-000010",
-        "REC-EMP-000092-CRS-000083",
-        "REC-EMP-000125-CRS-000089",
-        "REC-EMP-000453-CRS-000080"
+        "REC-EMP-000143-CRS-000097",
+        "REC-EMP-000352-CRS-000053",
+        "REC-EMP-000361-CRS-000090",
+        "REC-EMP-000443-CRS-000078",
+        "REC-EMP-000451-CRS-000078"
       ],
       "kind": "RULE",
       "missed_ids": [],
@@ -1753,11 +1765,11 @@
       "expected_count": 5,
       "failing_count": 5,
       "failing_ids": [
-        "REC-EMP-000195-CRS-000093",
-        "REC-EMP-000297-CRS-000093",
-        "REC-EMP-000331-CRS-000093",
-        "REC-EMP-000377-CRS-000093",
-        "REC-EMP-000411-CRS-000082"
+        "REC-EMP-000025-CRS-000092",
+        "REC-EMP-000141-CRS-000019",
+        "REC-EMP-000190-CRS-000026",
+        "REC-EMP-000193-CRS-000026",
+        "REC-EMP-000304-CRS-000044"
       ],
       "kind": "RULE",
       "missed_ids": [],
@@ -1771,11 +1783,11 @@
       "expected_count": 5,
       "failing_count": 5,
       "failing_ids": [
-        "ENR-EMP-000154-CRS-000015",
-        "ENR-EMP-000186-CRS-000094",
-        "ENR-EMP-000242-CRS-000098",
-        "ENR-EMP-000359-CRS-000098",
-        "ENR-EMP-000436-CRS-000076"
+        "ENR-EMP-000080-CRS-000086",
+        "ENR-EMP-000162-CRS-000020",
+        "ENR-EMP-000222-CRS-000029",
+        "ENR-EMP-000343-CRS-000086",
+        "ENR-EMP-000390-CRS-000086"
       ],
       "kind": "RULE",
       "missed_ids": [],
@@ -1789,11 +1801,11 @@
       "expected_count": 5,
       "failing_count": 5,
       "failing_ids": [
-        "CMP-2026-000875",
-        "CMP-2026-000876",
-        "CMP-2026-000877",
-        "CMP-2026-000878",
-        "CMP-2026-000879"
+        "CMP-2026-000929",
+        "CMP-2026-000930",
+        "CMP-2026-000931",
+        "CMP-2026-000932",
+        "CMP-2026-000933"
       ],
       "kind": "RULE",
       "missed_ids": [],
@@ -1807,11 +1819,11 @@
       "expected_count": 5,
       "failing_count": 5,
       "failing_ids": [
-        "CMP-2026-000105",
-        "CMP-2026-000230",
-        "CMP-2026-000292",
-        "CMP-2026-000310",
-        "CMP-2026-000571"
+        "CMP-2026-000146",
+        "CMP-2026-000249",
+        "CMP-2026-000293",
+        "CMP-2026-000317",
+        "CMP-2026-000610"
       ],
       "kind": "RULE",
       "missed_ids": [],

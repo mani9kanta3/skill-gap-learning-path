@@ -162,6 +162,7 @@ CREATE TABLE IF NOT EXISTS public.budget (
     fiscal_year SMALLINT NOT NULL,
     limit_amount NUMERIC(12,2) NOT NULL,
     planned_amount NUMERIC(12,2) NOT NULL,
+    funded_amount NUMERIC(12,2) NOT NULL,
     committed_amount NUMERIC(12,2) NOT NULL,
     remaining_amount NUMERIC(12,2) NOT NULL,
     utilization_pct NUMERIC(6,2) NOT NULL,
@@ -175,6 +176,7 @@ CREATE TABLE IF NOT EXISTS public.budget (
     CHECK (fiscal_year <= 2026),
     CHECK (limit_amount >= 0),
     CHECK (planned_amount >= 0),
+    CHECK (funded_amount >= 0),
     CHECK (committed_amount >= 0),
     CHECK (utilization_pct >= 0),
     CHECK (budget_status IN ('WITHIN_LIMIT', 'EXCEEDED')),
@@ -197,6 +199,7 @@ CREATE TABLE IF NOT EXISTS public.recommendation (
     planned_end_date DATE,
     estimated_cost NUMERIC(12,2) NOT NULL,
     cumulative_cost NUMERIC(12,2),
+    funding_status VARCHAR(24),
     planning_date DATE NOT NULL,
     period_start DATE NOT NULL,
     period_end DATE NOT NULL,
@@ -214,13 +217,14 @@ CREATE TABLE IF NOT EXISTS public.recommendation (
     CHECK (planned_offering_id ~ '^OFF-[0-9]{6}$'),
     CHECK (estimated_cost >= 0),
     CHECK (cumulative_cost >= 0),
+    CHECK (funding_status IN ('FUNDED', 'NOT_FUNDED_BUDGET', 'NOT_FUNDED_PREREQUISITE')),
     FOREIGN KEY (employee_id) REFERENCES public.employee (employee_id) DEFERRABLE INITIALLY DEFERRED,
     FOREIGN KEY (course_id) REFERENCES public.course (course_id) DEFERRABLE INITIALLY DEFERRED,
     FOREIGN KEY (target_skill_id) REFERENCES public.skill (skill_id) DEFERRABLE INITIALLY DEFERRED,
     FOREIGN KEY (required_for_course_id) REFERENCES public.course (course_id) DEFERRABLE INITIALLY DEFERRED,
     FOREIGN KEY (planned_offering_id) REFERENCES public.course_offering (offering_id) DEFERRABLE INITIALLY DEFERRED
 );
-COMMENT ON TABLE public.recommendation IS 'The January planning run: the learning path and every rejected candidate, with reasons.';
+COMMENT ON TABLE public.recommendation IS 'The January planning run: the proposed learning path, every rejected candidate with its reason, and which proposed steps the budget funded.';
 
 CREATE TABLE IF NOT EXISTS public.enrollment (
     enrollment_id VARCHAR(30) NOT NULL,
@@ -389,7 +393,7 @@ CREATE TABLE IF NOT EXISTS eval.ground_truth (
     CHECK (case_id ~ '^GT-[0-9]{6}$'),
     CHECK (issue_type IN ('PREREQUISITE_VIOLATION', 'COURSE_UNAVAILABLE', 'BUDGET_EXCEEDED', 'DUPLICATE_COMPLETION', 'GAP_NOT_REASSESSED')),
     CHECK (employee_id ~ '^EMP-[0-9]{6}$'),
-    CHECK (rule_code IN ('BR-01', 'BR-02', 'BR-03', 'BR-04', 'BR-05', 'BR-06', 'BR-07', 'BR-08', 'BR-09', 'BR-10', 'BR-11', 'BR-12', 'BR-13', 'BR-14', 'BR-15', 'BR-16', 'BR-17', 'BR-18', 'BR-19', 'BR-20'))
+    CHECK (rule_code IN ('BR-01', 'BR-02', 'BR-03', 'BR-04', 'BR-05', 'BR-06', 'BR-07', 'BR-08', 'BR-09', 'BR-10', 'BR-11', 'BR-12', 'BR-13', 'BR-14', 'BR-15', 'BR-16', 'BR-17', 'BR-18', 'BR-19', 'BR-20', 'BR-21'))
 );
 COMMENT ON TABLE eval.ground_truth IS 'The labelled edge cases. Never read by the detector.';
 
@@ -400,7 +404,7 @@ CREATE TABLE IF NOT EXISTS eval.detected_issue (
     evidence TEXT NOT NULL,
     PRIMARY KEY (issue_type, record_id),
     CHECK (issue_type IN ('PREREQUISITE_VIOLATION', 'COURSE_UNAVAILABLE', 'BUDGET_EXCEEDED', 'DUPLICATE_COMPLETION', 'GAP_NOT_REASSESSED')),
-    CHECK (rule_code IN ('BR-01', 'BR-02', 'BR-03', 'BR-04', 'BR-05', 'BR-06', 'BR-07', 'BR-08', 'BR-09', 'BR-10', 'BR-11', 'BR-12', 'BR-13', 'BR-14', 'BR-15', 'BR-16', 'BR-17', 'BR-18', 'BR-19', 'BR-20'))
+    CHECK (rule_code IN ('BR-01', 'BR-02', 'BR-03', 'BR-04', 'BR-05', 'BR-06', 'BR-07', 'BR-08', 'BR-09', 'BR-10', 'BR-11', 'BR-12', 'BR-13', 'BR-14', 'BR-15', 'BR-16', 'BR-17', 'BR-18', 'BR-19', 'BR-20', 'BR-21'))
 );
 COMMENT ON TABLE eval.detected_issue IS 'What the detector found, using input tables only.';
 
@@ -414,7 +418,7 @@ CREATE TABLE IF NOT EXISTS eval.validation_result (
     status VARCHAR(4) NOT NULL,
     sample_ids TEXT,
     PRIMARY KEY (check_id),
-    CHECK (rule_code IN ('BR-01', 'BR-02', 'BR-03', 'BR-04', 'BR-05', 'BR-06', 'BR-07', 'BR-08', 'BR-09', 'BR-10', 'BR-11', 'BR-12', 'BR-13', 'BR-14', 'BR-15', 'BR-16', 'BR-17', 'BR-18', 'BR-19', 'BR-20')),
+    CHECK (rule_code IN ('BR-01', 'BR-02', 'BR-03', 'BR-04', 'BR-05', 'BR-06', 'BR-07', 'BR-08', 'BR-09', 'BR-10', 'BR-11', 'BR-12', 'BR-13', 'BR-14', 'BR-15', 'BR-16', 'BR-17', 'BR-18', 'BR-19', 'BR-20', 'BR-21')),
     CHECK (kind IN ('STRUCTURAL', 'RULE')),
     CHECK (failing_count >= 0),
     CHECK (expected_count >= 0),
