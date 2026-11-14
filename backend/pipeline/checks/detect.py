@@ -47,17 +47,29 @@ def unavailable_courses(ctx):
 
 
 def budget_overruns(ctx):
-    """BR-11 replayed per department in (event_on, event_id) order."""
+    """
+    BR-11 replayed per department in (event_on, event_id) order: an approval
+    breaks the rule if its step was not FUNDED, or if it took committed
+    spend past the limit.
+    """
     limits = {b["department_code"]: b["limit_amount"] for b in ctx.t["budget"]}
-    flagged = budget.over_limit_approvals(ctx.approvals, limits)
+    funded = {code: 0.0 for code in limits}
+    for row in ctx.t["recommendation"]:
+        if row["funding_status"] == "FUNDED":
+            funded[ctx.employees[row["employee_id"]]["department_code"]] += row["estimated_cost"]
+
+    committed = {code: 0.0 for code in limits}
     found = {}
-    for enrollment_id, before in flagged.items():
-        enrollment = ctx.enrollments[enrollment_id]
-        department = ctx.budgets[enrollment["budget_id"]]["department_code"]
-        found[enrollment_id] = (
-            f"approved {enrollment['cost_amount']:,.2f} with {before:,.2f} already committed "
-            f"against a {department} limit of {limits[department]:,.2f}"
-        )
+    for row in sorted(ctx.approvals, key=lambda r: (r["event_on"], r["event_id"])):
+        enrollment = ctx.enrollments[row["enrollment_id"]]
+        funding = ctx.recommendations[enrollment["recommendation_id"]]["funding_status"]
+        code = row["department_code"]
+        if not budget.can_approve(funding, committed[code], row["cost"], limits[code]):
+            found[row["enrollment_id"]] = (
+                f"approved {row['cost']:,.2f} for a step with funding {funding}; "
+                f"{code} had {limits[code] - funded[code]:,.2f} of its {limits[code]:,.2f} limit unallocated"
+            )
+        committed[code] += row["cost"]
     return found
 
 

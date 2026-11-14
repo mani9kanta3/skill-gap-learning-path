@@ -326,8 +326,8 @@ class Validator:
             if r["decision"] == "RECOMMENDED":
                 if r["reason_code"] not in dictionary.RECOMMENDED_REASONS:
                     shape.append(f"{rid}:reason")
-                if r["path_sequence"] is None or r["planned_offering_id"] is None:
-                    shape.append(f"{rid}:missing path fields")
+                if r["path_sequence"] is None or r["planned_offering_id"] is None or r["funding_status"] is None:
+                    shape.append(f"{rid}:missing path or funding fields")
                 elif ctx.offerings[r["planned_offering_id"]]["course_id"] != r["course_id"]:
                     shape.append(f"{rid}:planned offering is another course")
                 if (r["reason_code"] == "PREREQUISITE_FOR") != (r["required_for_course_id"] is not None):
@@ -337,7 +337,7 @@ class Validator:
             else:
                 if r["reason_code"] not in dictionary.NOT_RECOMMENDED_REASONS:
                     shape.append(f"{rid}:reason")
-                if any(r[c] is not None for c in ("path_sequence", "planned_offering_id", "required_for_course_id", "cumulative_cost")):
+                if any(r[c] is not None for c in ("path_sequence", "planned_offering_id", "required_for_course_id", "cumulative_cost", "funding_status")):
                     shape.append(f"{rid}:path fields set on NOT_RECOMMENDED")
         self.structural("recommendation.row_shape", "recommendation", shape)
 
@@ -387,7 +387,10 @@ class Validator:
         catalog = snapshot.build_catalog(self.t)
         settings = recommend.Settings(config.PLANNING_DATE, config.PERIOD_START, config.PERIOD_END)
         planner = recommend.Planner(catalog, settings)
-        snap = snapshot.build_snapshot(self.t, catalog, config.PLANNING_DATE, config.PERIOD_START, config.PERIOD_END)
+        # Everything the January run could see, minus the January plan itself:
+        # its funding was decided after it, so it cannot hold money back from it.
+        before_plan = {name: rows for name, rows in self.t.items() if name != "recommendation"}
+        snap = snapshot.build_snapshot(before_plan, catalog, config.PLANNING_DATE, config.PERIOD_START, config.PERIOD_END)
         ledger = schedule.SeatLedger(snapshot.free_seats(catalog, snap))
 
         fields = ("decision", "reason_code", "target_skill_id", "required_for_course_id", "path_sequence", "planned_offering_id")
@@ -571,37 +574,58 @@ class Validator:
                 enr_bad.append(f"{e['enrollment_id']}:status")
         self.structural("derived.enrollment_status_and_cost", "enrollment", enr_bad)
 
-        # Budgets.
+        # Budgets and the funded plan.
         employees = ctx.employees
         planned_cost = defaultdict(float)
+        funded_cost = defaultdict(float)
         for r in self.t["recommendation"]:
             if r["decision"] == "RECOMMENDED":
-                planned_cost[employees[r["employee_id"]]["department_code"]] += r["estimated_cost"]
-        engine_cost = defaultdict(float)
+                code = employees[r["employee_id"]]["department_code"]
+                planned_cost[code] += r["estimated_cost"]
+                if r["funding_status"] == "FUNDED":
+                    funded_cost[code] += r["estimated_cost"]
+        engine_rows = defaultdict(list)
         for rid in self.engine_ids:
             r = ctx.recommendations[rid]
             if r["decision"] == "RECOMMENDED":
-                engine_cost[employees[r["employee_id"]]["department_code"]] += r["estimated_cost"]
+                engine_rows[employees[r["employee_id"]]["department_code"]].append(r)
         committed = defaultdict(float)
+        outside_plan = defaultdict(float)
         for a in ctx.approvals:
             committed[a["department_code"]] += a["cost"]
-        budget_bad = []
+            rec = ctx.recommendations[ctx.enrollments[a["enrollment_id"]]["recommendation_id"]]
+            if rec["funding_status"] != "FUNDED":
+                outside_plan[a["department_code"]] += a["cost"]
+
+        budget_bad, funding_bad = [], []
         for b in self.t["budget"]:
             code = b["department_code"]
-            expected_status = "EXCEEDED" if committed[code] > b["limit_amount"] else "WITHIN_LIMIT"
+            # The limit is set from the proposed plan the engine produces (s07).
+            demand = sum(r["estimated_cost"] for r in engine_rows[code])
+            expected_limit = budget.department_limit(demand, config.FUNDING_RATIO)
+            owed = budget.obligations(funded_cost[code], outside_plan[code])
             checks = [
+                b["limit_amount"] == expected_limit,
                 abs(b["planned_amount"] - planned_cost[code]) < 0.005,
+                abs(b["funded_amount"] - funded_cost[code]) < 0.005,
                 abs(b["committed_amount"] - committed[code]) < 0.005,
                 abs(b["remaining_amount"] - (b["limit_amount"] - committed[code])) < 0.005,
                 abs(b["utilization_pct"] - round(100 * committed[code] / b["limit_amount"], 2)) < 0.005,
-                b["budget_status"] == expected_status,
+                b["budget_status"] == ("EXCEEDED" if owed > b["limit_amount"] else "WITHIN_LIMIT"),
                 b["budget_id"] == ids.budget_id(code),
-                # The limit is set from the January plan itself (s07), so
-                # it is recomputed from the rows the engine produces.
-                b["limit_amount"] == budget.department_limit(engine_cost[code], config.FUNDING_RATIO),
             ]
             if not all(checks):
                 budget_bad.append(b["budget_id"])
+
+            # BR-21: re-run the allocation on the engine's proposed steps. It
+            # must give exactly the stored funding, and never more than the limit.
+            status, allocated = budget.allocate(engine_rows[code], b["limit_amount"], ctx.prerequisites)
+            if allocated > b["limit_amount"]:
+                funding_bad.append(f"{b['budget_id']}:allocated above the limit")
+            for rid, want in status.items():
+                if ctx.recommendations[rid]["funding_status"] != want:
+                    funding_bad.append(rid)
+        self.structural("funding.allocation_reconciles", "recommendation", funding_bad, "BR-21")
         self.structural("derived.budget_totals", "budget", budget_bad)
 
         # Employee skills.
