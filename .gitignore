@@ -1,0 +1,26 @@
+# Python
+backend/venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Secrets - never commit this
+.env
+
+# Scratch runs. The reproducibility check generates the same scale twice in
+# here and compares them, and the no-injection baseline run goes here too.
+# Only output/starter, output/full and output/reproducibility are committed.
+output/_repro/
+output/_baseline/
+
+# Node
+node_modules/
+dist/
+
+# Editors
+.vscode/
+.idea/
+.DS_Store
+
+# Local editor/agent settings
+.claude/

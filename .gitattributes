@@ -1,0 +1,5 @@
+# Generated data is compared byte for byte by SHA-256. If git turned "\n"
+# into "\r\n" on checkout (the Windows default), every checksum in the
+# manifest would stop matching even though nothing changed. So git must
+# leave these files exactly as written.
+output/** -text
