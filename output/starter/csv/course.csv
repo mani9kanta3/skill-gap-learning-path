@@ -1,0 +1,101 @@
+course_id,course_title,skill_category,course_level,delivery_mode,duration_hours,cost_amount,currency,course_status
+CRS-000001,Code Review Design Foundations,Software Engineering,FOUNDATION,ONLINE,4,2400.00,INR,ACTIVE
+CRS-000002,Code Review Design Applied Lab,Software Engineering,INTERMEDIATE,ONLINE,8,4800.00,INR,ACTIVE
+CRS-000003,Frontend Design Workshop,Software Engineering,INTERMEDIATE,ONLINE,12,7200.00,INR,RETIRED
+CRS-000004,Microservice Automation Workshop,Software Engineering,INTERMEDIATE,ONLINE,8,4800.00,INR,ACTIVE
+CRS-000005,Testing Troubleshooting Workshop,Software Engineering,INTERMEDIATE,CLASSROOM,24,36000.00,INR,ACTIVE
+CRS-000006,Version Control Strategy Workshop,Software Engineering,INTERMEDIATE,BLENDED,12,12000.00,INR,ACTIVE
+CRS-000007,Frontend Design Masterclass,Software Engineering,ADVANCED,CLASSROOM,20,30000.00,INR,ACTIVE
+CRS-000008,Microservice Automation Masterclass,Software Engineering,ADVANCED,ONLINE,40,24000.00,INR,ACTIVE
+CRS-000009,Testing Troubleshooting Masterclass,Software Engineering,ADVANCED,CLASSROOM,28,42000.00,INR,ACTIVE
+CRS-000010,Version Control Strategy Masterclass,Software Engineering,ADVANCED,ONLINE,28,16800.00,INR,ACTIVE
+CRS-000011,Forecasting Troubleshooting Foundations,Data & AI,FOUNDATION,ONLINE,8,4800.00,INR,ACTIVE
+CRS-000012,SQL Automation Foundations,Data & AI,FOUNDATION,BLENDED,4,4000.00,INR,ACTIVE
+CRS-000013,Data Quality Strategy Workshop,Data & AI,INTERMEDIATE,ONLINE,12,7200.00,INR,ACTIVE
+CRS-000014,Data Visualisation Fundamentals Workshop,Data & AI,INTERMEDIATE,BLENDED,20,20000.00,INR,ACTIVE
+CRS-000015,Machine Learning Troubleshooting Workshop,Data & AI,INTERMEDIATE,ONLINE,12,7200.00,INR,ACTIVE
+CRS-000016,Data Quality Strategy Masterclass,Data & AI,ADVANCED,BLENDED,20,20000.00,INR,ACTIVE
+CRS-000017,Data Visualisation Fundamentals Masterclass,Data & AI,ADVANCED,ONLINE,32,19200.00,INR,ACTIVE
+CRS-000018,Forecasting Troubleshooting Masterclass,Data & AI,ADVANCED,BLENDED,24,24000.00,INR,ACTIVE
+CRS-000019,Machine Learning Troubleshooting Masterclass,Data & AI,ADVANCED,ONLINE,20,12000.00,INR,ACTIVE
+CRS-000020,SQL Automation Masterclass,Data & AI,ADVANCED,ONLINE,24,14400.00,INR,ACTIVE
+CRS-000021,Containers Automation Foundations,Infrastructure & Cloud,FOUNDATION,ONLINE,4,2400.00,INR,ACTIVE
+CRS-000022,Incident Response Fundamentals Foundations,Infrastructure & Cloud,FOUNDATION,ONLINE,8,4800.00,INR,ACTIVE
+CRS-000023,Infrastructure as Code Fundamentals Foundations,Infrastructure & Cloud,FOUNDATION,CLASSROOM,12,18000.00,INR,ACTIVE
+CRS-000024,Monitoring Design Foundations,Infrastructure & Cloud,FOUNDATION,CLASSROOM,8,12000.00,INR,ACTIVE
+CRS-000025,Monitoring Troubleshooting Foundations,Infrastructure & Cloud,FOUNDATION,BLENDED,8,8000.00,INR,RETIRED
+CRS-000026,Incident Response Fundamentals Applied Lab,Infrastructure & Cloud,INTERMEDIATE,ONLINE,24,14400.00,INR,ACTIVE
+CRS-000027,Monitoring Troubleshooting Applied Lab,Infrastructure & Cloud,INTERMEDIATE,ONLINE,24,14400.00,INR,ACTIVE
+CRS-000028,Containers Automation Masterclass,Infrastructure & Cloud,ADVANCED,BLENDED,16,16000.00,INR,RETIRED
+CRS-000029,Infrastructure as Code Fundamentals Masterclass,Infrastructure & Cloud,ADVANCED,BLENDED,32,32000.00,INR,ACTIVE
+CRS-000030,Monitoring Design Masterclass,Infrastructure & Cloud,ADVANCED,BLENDED,40,40000.00,INR,RETIRED
+CRS-000031,CRM Automation Foundations,Sales,FOUNDATION,ONLINE,12,7200.00,INR,ACTIVE
+CRS-000032,Contract Design Foundations,Sales,FOUNDATION,BLENDED,8,8000.00,INR,RETIRED
+CRS-000033,Prospecting Strategy Foundations,Sales,FOUNDATION,ONLINE,12,7200.00,INR,ACTIVE
+CRS-000034,Territory Troubleshooting Foundations,Sales,FOUNDATION,ONLINE,4,2400.00,INR,ACTIVE
+CRS-000035,Contract Strategy Workshop,Sales,INTERMEDIATE,BLENDED,16,16000.00,INR,ACTIVE
+CRS-000036,Prospecting Strategy Applied Lab,Sales,INTERMEDIATE,ONLINE,16,9600.00,INR,ACTIVE
+CRS-000037,Territory Troubleshooting Applied Lab,Sales,INTERMEDIATE,ONLINE,12,7200.00,INR,ACTIVE
+CRS-000038,CRM Automation Masterclass,Sales,ADVANCED,ONLINE,28,16800.00,INR,ACTIVE
+CRS-000039,Contract Design Masterclass,Sales,ADVANCED,BLENDED,16,16000.00,INR,ACTIVE
+CRS-000040,Contract Strategy Masterclass,Sales,ADVANCED,BLENDED,40,40000.00,INR,ACTIVE
+CRS-000041,Event Design Foundations,Marketing,FOUNDATION,BLENDED,12,12000.00,INR,ACTIVE
+CRS-000042,Campaign Troubleshooting Workshop,Marketing,INTERMEDIATE,BLENDED,24,24000.00,INR,ACTIVE
+CRS-000043,Event Design Applied Lab,Marketing,INTERMEDIATE,CLASSROOM,12,18000.00,INR,ACTIVE
+CRS-000044,Event Troubleshooting Workshop,Marketing,INTERMEDIATE,ONLINE,16,9600.00,INR,ACTIVE
+CRS-000045,Market Research Strategy Workshop,Marketing,INTERMEDIATE,ONLINE,20,12000.00,INR,ACTIVE
+CRS-000046,Product Marketing Strategy Workshop,Marketing,INTERMEDIATE,ONLINE,24,14400.00,INR,ACTIVE
+CRS-000047,Campaign Troubleshooting Masterclass,Marketing,ADVANCED,CLASSROOM,24,36000.00,INR,ACTIVE
+CRS-000048,Event Troubleshooting Masterclass,Marketing,ADVANCED,BLENDED,28,28000.00,INR,ACTIVE
+CRS-000049,Market Research Strategy Masterclass,Marketing,ADVANCED,CLASSROOM,24,36000.00,INR,ACTIVE
+CRS-000050,Product Marketing Strategy Masterclass,Marketing,ADVANCED,BLENDED,16,16000.00,INR,ACTIVE
+CRS-000051,Cost Accounting Design Foundations,Finance,FOUNDATION,BLENDED,8,8000.00,INR,RETIRED
+CRS-000052,Procurement Automation Foundations,Finance,FOUNDATION,BLENDED,12,12000.00,INR,ACTIVE
+CRS-000053,Cost Accounting Automation Applied Lab,Finance,INTERMEDIATE,ONLINE,24,14400.00,INR,ACTIVE
+CRS-000054,Cost Accounting Automation Workshop,Finance,INTERMEDIATE,BLENDED,8,8000.00,INR,ACTIVE
+CRS-000055,Risk Control Troubleshooting Applied Lab,Finance,INTERMEDIATE,BLENDED,16,16000.00,INR,ACTIVE
+CRS-000056,Risk Control Troubleshooting Workshop,Finance,INTERMEDIATE,BLENDED,20,20000.00,INR,ACTIVE
+CRS-000057,Tax Strategy Applied Lab,Finance,INTERMEDIATE,CLASSROOM,24,36000.00,INR,ACTIVE
+CRS-000058,Tax Strategy Workshop,Finance,INTERMEDIATE,ONLINE,16,9600.00,INR,ACTIVE
+CRS-000059,Cost Accounting Design Masterclass,Finance,ADVANCED,BLENDED,40,40000.00,INR,ACTIVE
+CRS-000060,Procurement Automation Masterclass,Finance,ADVANCED,ONLINE,20,12000.00,INR,RETIRED
+CRS-000061,Compensation Fundamentals Foundations,People & HR,FOUNDATION,CLASSROOM,8,12000.00,INR,ACTIVE
+CRS-000062,Compensation Strategy Foundations,People & HR,FOUNDATION,ONLINE,8,4800.00,INR,ACTIVE
+CRS-000063,Onboarding Automation Foundations,People & HR,FOUNDATION,CLASSROOM,4,6000.00,INR,ACTIVE
+CRS-000064,Performance Review Fundamentals Foundations,People & HR,FOUNDATION,ONLINE,12,7200.00,INR,ACTIVE
+CRS-000065,Compensation Fundamentals Applied Lab,People & HR,INTERMEDIATE,BLENDED,12,12000.00,INR,ACTIVE
+CRS-000066,Performance Review Fundamentals Applied Lab,People & HR,INTERMEDIATE,BLENDED,8,8000.00,INR,ACTIVE
+CRS-000067,Wellbeing Troubleshooting Applied Lab,People & HR,INTERMEDIATE,ONLINE,8,4800.00,INR,ACTIVE
+CRS-000068,Wellbeing Troubleshooting Workshop,People & HR,INTERMEDIATE,BLENDED,20,20000.00,INR,ACTIVE
+CRS-000069,Compensation Strategy Masterclass,People & HR,ADVANCED,CLASSROOM,28,42000.00,INR,ACTIVE
+CRS-000070,Onboarding Automation Masterclass,People & HR,ADVANCED,ONLINE,16,9600.00,INR,ACTIVE
+CRS-000071,Demand Planning Fundamentals Foundations,Operations & Supply Chain,FOUNDATION,ONLINE,4,2400.00,INR,RETIRED
+CRS-000072,Capacity Planning Troubleshooting Workshop,Operations & Supply Chain,INTERMEDIATE,ONLINE,24,14400.00,INR,ACTIVE
+CRS-000073,Demand Planning Fundamentals Applied Lab,Operations & Supply Chain,INTERMEDIATE,ONLINE,20,12000.00,INR,ACTIVE
+CRS-000074,Logistics Automation Applied Lab,Operations & Supply Chain,INTERMEDIATE,BLENDED,24,24000.00,INR,ACTIVE
+CRS-000075,Logistics Automation Workshop,Operations & Supply Chain,INTERMEDIATE,ONLINE,24,14400.00,INR,ACTIVE
+CRS-000076,Quality Control Fundamentals Applied Lab,Operations & Supply Chain,INTERMEDIATE,CLASSROOM,16,24000.00,INR,ACTIVE
+CRS-000077,Quality Control Fundamentals Workshop,Operations & Supply Chain,INTERMEDIATE,ONLINE,24,14400.00,INR,ACTIVE
+CRS-000078,Quality Control Troubleshooting Workshop,Operations & Supply Chain,INTERMEDIATE,ONLINE,12,7200.00,INR,ACTIVE
+CRS-000079,Capacity Planning Troubleshooting Masterclass,Operations & Supply Chain,ADVANCED,CLASSROOM,36,54000.00,INR,ACTIVE
+CRS-000080,Quality Control Troubleshooting Masterclass,Operations & Supply Chain,ADVANCED,BLENDED,16,16000.00,INR,ACTIVE
+CRS-000081,Business Writing Automation Foundations,Leadership & Communication,FOUNDATION,CLASSROOM,12,18000.00,INR,ACTIVE
+CRS-000082,Stakeholder Design Foundations,Leadership & Communication,FOUNDATION,BLENDED,8,8000.00,INR,ACTIVE
+CRS-000083,Business Writing Automation Applied Lab,Leadership & Communication,INTERMEDIATE,ONLINE,12,7200.00,INR,ACTIVE
+CRS-000084,Business Writing Strategy Workshop,Leadership & Communication,INTERMEDIATE,BLENDED,16,16000.00,INR,ACTIVE
+CRS-000085,Coaching Design Workshop,Leadership & Communication,INTERMEDIATE,ONLINE,12,7200.00,INR,ACTIVE
+CRS-000086,Facilitation Strategy Workshop,Leadership & Communication,INTERMEDIATE,ONLINE,24,14400.00,INR,ACTIVE
+CRS-000087,Stakeholder Design Applied Lab,Leadership & Communication,INTERMEDIATE,ONLINE,8,4800.00,INR,ACTIVE
+CRS-000088,Business Writing Strategy Masterclass,Leadership & Communication,ADVANCED,CLASSROOM,36,54000.00,INR,RETIRED
+CRS-000089,Coaching Design Masterclass,Leadership & Communication,ADVANCED,ONLINE,32,19200.00,INR,ACTIVE
+CRS-000090,Facilitation Strategy Masterclass,Leadership & Communication,ADVANCED,ONLINE,36,21600.00,INR,ACTIVE
+CRS-000091,Collaboration Tools Design Foundations,Digital Productivity,FOUNDATION,ONLINE,12,7200.00,INR,ACTIVE
+CRS-000092,Collaboration Tools Fundamentals Foundations,Digital Productivity,FOUNDATION,BLENDED,12,12000.00,INR,ACTIVE
+CRS-000093,Spreadsheet Design Foundations,Digital Productivity,FOUNDATION,ONLINE,4,2400.00,INR,ACTIVE
+CRS-000094,Workflow Fundamentals Foundations,Digital Productivity,FOUNDATION,BLENDED,12,12000.00,INR,ACTIVE
+CRS-000095,Collaboration Tools Automation Applied Lab,Digital Productivity,INTERMEDIATE,ONLINE,16,9600.00,INR,ACTIVE
+CRS-000096,Collaboration Tools Automation Workshop,Digital Productivity,INTERMEDIATE,BLENDED,12,12000.00,INR,ACTIVE
+CRS-000097,Collaboration Tools Design Applied Lab,Digital Productivity,INTERMEDIATE,ONLINE,24,14400.00,INR,ACTIVE
+CRS-000098,Spreadsheet Design Applied Lab,Digital Productivity,INTERMEDIATE,BLENDED,20,20000.00,INR,ACTIVE
+CRS-000099,Collaboration Tools Fundamentals Masterclass,Digital Productivity,ADVANCED,ONLINE,28,16800.00,INR,ACTIVE
+CRS-000100,Workflow Fundamentals Masterclass,Digital Productivity,ADVANCED,ONLINE,40,24000.00,INR,ACTIVE

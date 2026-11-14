@@ -1,0 +1,567 @@
+{
+  "as_of_date": "2026-12-31",
+  "command": "python -m pipeline.run --scale starter",
+  "derived_scale": {
+    "baseline_enrollments": 995,
+    "home_ladder_skills": 5,
+    "injected_enrollments": 5,
+    "shared_ladder_skills": 5,
+    "skills_per_category": 5
+  },
+  "edge_cases_injected": true,
+  "files": [
+    {
+      "path": "csv/budget.csv",
+      "rows": 8,
+      "sha256": "399be05d179638ad0fdbd9c21d2d4e3d4949fa61d1871387c1f7d4cbfe52597f"
+    },
+    {
+      "path": "csv/completion.csv",
+      "rows": 879,
+      "sha256": "bc6b6cee6a1e959c26f2a4883bd277086891416e438af6a86d1145decebfcef2"
+    },
+    {
+      "path": "csv/course.csv",
+      "rows": 100,
+      "sha256": "c264b1275802bb22cec3d222d0ca92bec0af9b9d6e7816a85822de5e89e489d8"
+    },
+    {
+      "path": "csv/course_offering.csv",
+      "rows": 390,
+      "sha256": "a4aa0bd78c5e418d5d8d59a990ecba8fa9d4692256ca0e147d6e91930be747d5"
+    },
+    {
+      "path": "csv/course_prerequisite.csv",
+      "rows": 68,
+      "sha256": "71238fc4a0b9b9da3aa11a53f0eb49fe975cbb95c8af47c84782f3f97eae932e"
+    },
+    {
+      "path": "csv/course_skill.csv",
+      "rows": 203,
+      "sha256": "94a4a33d483d7b9957f9b069fc4ef30f3f076b7bd215958b5bf333ed897d051d"
+    },
+    {
+      "path": "csv/department.csv",
+      "rows": 8,
+      "sha256": "1bdbe83d6f7966ae841cd81b15d5e23f841e6c5a8d33e01ef94eca8956554f0c"
+    },
+    {
+      "path": "csv/employee.csv",
+      "rows": 500,
+      "sha256": "75696a1648189635ad90e46aa7c2a3e710108d076a9d8950ea7ceefd865fe4ba"
+    },
+    {
+      "path": "csv/employee_skill.csv",
+      "rows": 3706,
+      "sha256": "348ef4d3380f779b58cf4e97984e8a451c05a55cdbb47eed840570851a245fd9"
+    },
+    {
+      "path": "csv/enrollment.csv",
+      "rows": 1000,
+      "sha256": "e58999c902fd4c0f5a82d745ede6c072a66436275592352546ee978f4a1d14e5"
+    },
+    {
+      "path": "csv/enrollment_event.csv",
+      "rows": 3817,
+      "sha256": "0184fded397f2a32430b27a1854638ad9d1fffb1ac7ed14955807e5da65e8d58"
+    },
+    {
+      "path": "csv/job_role.csv",
+      "rows": 40,
+      "sha256": "d598960f454154f8b0e666c785a42b22072bb0e13fa136678ebb46ee1dec50e4"
+    },
+    {
+      "path": "csv/proficiency_assessment.csv",
+      "rows": 4246,
+      "sha256": "6ad2295a1edda40ea2d3c996a352a308bb6c7db8b40b5a74855a432d4503c5d7"
+    },
+    {
+      "path": "csv/recommendation.csv",
+      "rows": 2153,
+      "sha256": "9fdc6cf0cc892f64ad41cf857baa1ab89f52a86de52f872b14b09e0649fe548b"
+    },
+    {
+      "path": "csv/role_skill_target.csv",
+      "rows": 320,
+      "sha256": "e4e4dbd61f11fb71122a95811d7b50ef489d22359e6f814edc5d5bcd7e29840e"
+    },
+    {
+      "path": "csv/skill.csv",
+      "rows": 50,
+      "sha256": "2e88f899746b836745f3c9be5c018f12abdb958cbbb5be7c2171f1c4059ff1d3"
+    },
+    {
+      "path": "csv/skill_gap.csv",
+      "rows": 3706,
+      "sha256": "e8b130c9784ce80ab95b911b98818324e80f5047df9095a6dcaf824dcc9ed1fd"
+    },
+    {
+      "path": "ground_truth/ground_truth.csv",
+      "rows": 25,
+      "sha256": "711ad48ae6d64b3cd84f69dc0940d87985d15fce7c877c8c3a44006a9c3a60cc"
+    },
+    {
+      "path": "ground_truth/ground_truth.json",
+      "rows": 25,
+      "sha256": "4973a2dfdc19ef8cc15a08c9cb1fd45db7c59911a557c92631da2010bcd8125a"
+    },
+    {
+      "path": "json/budget.json",
+      "rows": 8,
+      "sha256": "14b2c4f13a87d1ace302b67a23e459126a533f9b7a2c169e6c2ffc448d6bf847"
+    },
+    {
+      "path": "json/completion.json",
+      "rows": 879,
+      "sha256": "900ed24af767c26e840abbe79bf444e0ebd4f90b8aeb31a8ffe2c8df749d0990"
+    },
+    {
+      "path": "json/course.json",
+      "rows": 100,
+      "sha256": "d4de46db48b63890b58fbf44e227e26ba158faf7281757ec5d037168e7162ea7"
+    },
+    {
+      "path": "json/course_offering.json",
+      "rows": 390,
+      "sha256": "fdefd4350b81b55e704d6b2915b0582bbaec4f30015c95fc82cc6694ef4613ea"
+    },
+    {
+      "path": "json/course_prerequisite.json",
+      "rows": 68,
+      "sha256": "21b9d5a07dabe4799887b4e8efd3778ac795780626d72906afff45d5fed27563"
+    },
+    {
+      "path": "json/course_skill.json",
+      "rows": 203,
+      "sha256": "13bb64758cc31978b43afbb1fdfb8e9424091db632531870fe193c67fcd67aec"
+    },
+    {
+      "path": "json/department.json",
+      "rows": 8,
+      "sha256": "8d16bf011f20f4fc66173428d24a7f62ad3fed84be11b7f26fe7de5bf5250fbb"
+    },
+    {
+      "path": "json/employee.json",
+      "rows": 500,
+      "sha256": "fe50ef80ed23ffeaf33c7355fd015a1be808875d1e280bfd585c1caba55c5fb2"
+    },
+    {
+      "path": "json/employee_skill.json",
+      "rows": 3706,
+      "sha256": "c5eb7f8bc9357f5d82fba79927aa8ef74c5458c99e690d09e3aa7474802be268"
+    },
+    {
+      "path": "json/enrollment.json",
+      "rows": 1000,
+      "sha256": "2def959269417a592fbb4b4ae67ee4975e344934eba6a0513b33b7bf7bffb9d9"
+    },
+    {
+      "path": "json/enrollment_event.json",
+      "rows": 3817,
+      "sha256": "f661f973a52de066bf7b712d4509bec5be13e9276a1693eaf8e90a3996d54ecb"
+    },
+    {
+      "path": "json/job_role.json",
+      "rows": 40,
+      "sha256": "8b0ac9bf743e23d2b4c66fe025f25ddebd8c00fb4c504c8149133f97637c23c5"
+    },
+    {
+      "path": "json/proficiency_assessment.json",
+      "rows": 4246,
+      "sha256": "edc507b43f3be0efaff8f1bb6480f4056ddec007c7a3b1829f7cee3cd7e97e2c"
+    },
+    {
+      "path": "json/recommendation.json",
+      "rows": 2153,
+      "sha256": "e2cccb7fe588941fed776685554342bc443e9fc9da68cb925cf34613a569246d"
+    },
+    {
+      "path": "json/role_skill_target.json",
+      "rows": 320,
+      "sha256": "ec6e677406677189ca9f474c84cbec6c6122eb0320d53a2e25070cc94a646bb6"
+    },
+    {
+      "path": "json/skill.json",
+      "rows": 50,
+      "sha256": "f4a9d11bb2c9bcb4fe21f62cf697f6fef86472d7be4385411d79f9f03319dfa5"
+    },
+    {
+      "path": "json/skill_gap.json",
+      "rows": 3706,
+      "sha256": "2377a3b06c0e9472a4751e1156b022c94c2cc819ba361ba6ee04d09d4a17ec45"
+    },
+    {
+      "path": "reports/detected_issues.csv",
+      "rows": 25,
+      "sha256": "e5a3cce7e73a914b8521cdf2299c3272cc3801a33b5e450e75b8b4d18e82e06d"
+    },
+    {
+      "path": "reports/evaluation.md",
+      "rows": 57,
+      "sha256": "7d3692515ce656ec980cc1f267dee5d558f2ef8f6ee8bb326d12f7811fffbbb6"
+    },
+    {
+      "path": "reports/metric.csv",
+      "rows": 130,
+      "sha256": "7ae315ae1f8185dfbb0d4dc08d60fe85d5714e45418c8b218a082c835de62786"
+    },
+    {
+      "path": "reports/metrics.json",
+      "rows": 130,
+      "sha256": "73d321ae34f956fb389fc71c4333f1b68328db21fc78cbd9f90a2b1a441d3238"
+    },
+    {
+      "path": "reports/validation_result.csv",
+      "rows": 149,
+      "sha256": "12af400225733f3565d1d7ceaebab9f9930f7af6a206fc37474000be4e85b44b"
+    },
+    {
+      "path": "reports/validation_summary.json",
+      "rows": null,
+      "sha256": "f7b1edc4e7616d075d199a58021324a6637bfa253cbe2aabc33cad650e319109"
+    },
+    {
+      "path": "reports/validation_summary.md",
+      "rows": 161,
+      "sha256": "ebe537266802736a9b899f10f1c9a50f4a12455de40b50f0cbe2262f60e470c1"
+    },
+    {
+      "path": "sql/schema.sql",
+      "rows": 432,
+      "sha256": "b0b10c8c47f2fb9b2d625e7b65c30bff0f2309f51c92eeca9cd0cc21fc896615"
+    },
+    {
+      "path": "sql/seed.sql",
+      "rows": 21585,
+      "sha256": "e53cba502947b73ccdaad846d74a4a88a1e4684de29f2f664df6037304710707"
+    }
+  ],
+  "generator": "skill-gap-learning-path",
+  "generator_version": "1.0.0",
+  "parameters": {
+    "ADVANCED_EXTRA_FOUNDATION_SHARE": 0.3,
+    "AS_OF_DATE": "2026-12-31",
+    "ATTENDANCE_BETA": [
+      10.0,
+      1.0
+    ],
+    "BASELINE_ASSESSMENT_FROM": "2025-10-01",
+    "BASELINE_ASSESSMENT_TO": "2025-12-31",
+    "BASELINE_GAP_SHARE": {
+      "0": 0.45,
+      "1": 0.3,
+      "2": 0.17,
+      "3": 0.08
+    },
+    "BASELINE_MANAGER_SHARE": 0.4,
+    "BASE_TARGET_LEVELS": [
+      1,
+      2,
+      3
+    ],
+    "BUDGET_INJECTION_WINDOW_DAYS": 5,
+    "BUDGET_ROUNDING": 10000,
+    "CAPACITY": {
+      "BLENDED": 40,
+      "CLASSROOM": 25,
+      "ONLINE": 100
+    },
+    "CAREER_LEVELS": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "CAREER_LEVEL_SHARE": {
+      "1": 0.35,
+      "2": 0.3,
+      "3": 0.2,
+      "4": 0.1,
+      "5": 0.05
+    },
+    "CAREER_PATH_SHARE": 0.25,
+    "CATEGORIES": [
+      "Software Engineering",
+      "Data & AI",
+      "Infrastructure & Cloud",
+      "Sales",
+      "Marketing",
+      "Finance",
+      "People & HR",
+      "Operations & Supply Chain",
+      "Leadership & Communication",
+      "Digital Productivity"
+    ],
+    "CORE_SKILL_COUNT": 4,
+    "CURRENCY": "INR",
+    "DECISION_DELAY_DAYS": [
+      1,
+      5
+    ],
+    "DELIVERY_MODE_SHARE": {
+      "BLENDED": 0.3,
+      "CLASSROOM": 0.2,
+      "ONLINE": 0.5
+    },
+    "DEPARTMENTS": [
+      [
+        "ENG",
+        "Engineering",
+        "Software Engineering"
+      ],
+      [
+        "DAT",
+        "Data & Analytics",
+        "Data & AI"
+      ],
+      [
+        "ITS",
+        "IT Services",
+        "Infrastructure & Cloud"
+      ],
+      [
+        "SAL",
+        "Sales",
+        "Sales"
+      ],
+      [
+        "MKT",
+        "Marketing",
+        "Marketing"
+      ],
+      [
+        "FIN",
+        "Finance",
+        "Finance"
+      ],
+      [
+        "HRM",
+        "Human Resources",
+        "People & HR"
+      ],
+      [
+        "OPS",
+        "Operations",
+        "Operations & Supply Chain"
+      ]
+    ],
+    "DEPARTMENT_CODES": [
+      "ENG",
+      "DAT",
+      "ITS",
+      "SAL",
+      "MKT",
+      "FIN",
+      "HRM",
+      "OPS"
+    ],
+    "DEPARTMENT_SHARE": {
+      "DAT": 0.12,
+      "ENG": 0.22,
+      "FIN": 0.09,
+      "HRM": 0.07,
+      "ITS": 0.11,
+      "MKT": 0.09,
+      "OPS": 0.16,
+      "SAL": 0.14
+    },
+    "DURATION_RANGE": {
+      "ADVANCED": [
+        16,
+        40
+      ],
+      "FOUNDATION": [
+        4,
+        12
+      ],
+      "INTERMEDIATE": [
+        8,
+        24
+      ]
+    },
+    "EDGE_CASE_TYPES": [
+      "PREREQUISITE_VIOLATION",
+      "COURSE_UNAVAILABLE",
+      "BUDGET_EXCEEDED",
+      "DUPLICATE_COMPLETION",
+      "GAP_NOT_REASSESSED"
+    ],
+    "FINAL_SCORE_BASE_MEAN": 70,
+    "FINAL_SCORE_MEAN_RANGE": [
+      50,
+      85
+    ],
+    "FINAL_SCORE_SD": 12,
+    "FINAL_SCORE_STEP": 6,
+    "FIRST_COURSE_LEVEL_SHARE": {
+      "FOUNDATION": 0.5,
+      "INTERMEDIATE": 0.5
+    },
+    "FIRST_OFFERING_START": "2026-01-12",
+    "FISCAL_YEAR": 2026,
+    "FULL": {
+      "courses": 1000,
+      "edge_cases_per_type": 50,
+      "employees": 5000,
+      "enrollments": 10000,
+      "name": "full",
+      "skills": 500
+    },
+    "FUNDING_RATIO": 0.62,
+    "HIRE_DATE_FROM": "2010-01-01",
+    "HIRE_DATE_TO": "2025-09-30",
+    "HOURLY_RATE": {
+      "BLENDED": 1000,
+      "CLASSROOM": 1500,
+      "ONLINE": 600
+    },
+    "HOURS_PER_WEEK": 4,
+    "INTERMEDIATE_PREREQ_SHARE": 0.6,
+    "LADDER_BASE_SKILLS": 5,
+    "LADDER_SIZE": 10,
+    "LAST_OFFERING_START": "2026-12-21",
+    "LEARNING_ALLOWANCE_PER_EMPLOYEE": 60000,
+    "MAX_HOME_LADDER_SKILLS": 6,
+    "MAX_PATH_COURSES": 4,
+    "MIN_REQUEST_LEAD_DAYS": 7,
+    "NEXT_YEAR_FIRST_START": "2027-01-11",
+    "NEXT_YEAR_LAST_START": "2027-06-28",
+    "NEXT_YEAR_OFFERINGS": [
+      1,
+      2
+    ],
+    "NEXT_YEAR_ONLY_SHARE": 0.06,
+    "OFFERINGS_PER_COURSE": [
+      3,
+      6
+    ],
+    "ON_LEAVE_SHARE": 0.05,
+    "PASS_MIN_ATTENDANCE": 75.0,
+    "PASS_MIN_SCORE": 60,
+    "PERIOD_END": "2026-12-31",
+    "PERIOD_START": "2026-01-01",
+    "PLANNING_DATE": "2026-01-05",
+    "POST_SCORE_NOISE_SD": 5,
+    "PRIMARY_COURSES_PER_SKILL": 2,
+    "PRIMARY_TARGET_LEVELS": {
+      "ADVANCED": [
+        5
+      ],
+      "FOUNDATION": [
+        2
+      ],
+      "INTERMEDIATE": [
+        3,
+        4
+      ]
+    },
+    "REASSESSMENT_DELAY_DAYS": [
+      3,
+      14
+    ],
+    "REQUEST_HORIZON": "2026-11-30",
+    "REQUEST_LEAD_DAYS": [
+      7,
+      21
+    ],
+    "REQUEST_PROBABILITY": 0.9,
+    "RETIRED_COURSE_SHARE": 0.04,
+    "ROLES_PER_DEPARTMENT": 5,
+    "SCALES": {
+      "full": {
+        "courses": 1000,
+        "edge_cases_per_type": 50,
+        "employees": 5000,
+        "enrollments": 10000,
+        "name": "full",
+        "skills": 500
+      },
+      "starter": {
+        "courses": 100,
+        "edge_cases_per_type": 5,
+        "employees": 500,
+        "enrollments": 1000,
+        "name": "starter",
+        "skills": 50
+      }
+    },
+    "SCHEDULE_GAP_DAYS": 14,
+    "SCORE_BANDS": {
+      "0": [
+        0,
+        19
+      ],
+      "1": [
+        20,
+        39
+      ],
+      "2": [
+        40,
+        54
+      ],
+      "3": [
+        55,
+        69
+      ],
+      "4": [
+        70,
+        84
+      ],
+      "5": [
+        85,
+        100
+      ]
+    },
+    "SECONDARY_SKILLS_RANGE": [
+      0,
+      2
+    ],
+    "SECOND_COURSE_LEVEL_SHARE": {
+      "ADVANCED": 0.6,
+      "INTERMEDIATE": 0.4
+    },
+    "SEED": 20261022,
+    "SHARED_CATEGORIES": [
+      "Leadership & Communication",
+      "Digital Productivity"
+    ],
+    "STARTER": {
+      "courses": 100,
+      "edge_cases_per_type": 5,
+      "employees": 500,
+      "enrollments": 1000,
+      "name": "starter",
+      "skills": 50
+    },
+    "STARTER_FRACTION": 0.1,
+    "TARGET_ONLY_SKILL_LEVELS": [
+      0,
+      1,
+      2
+    ],
+    "UPLIFT_FAILED": 0.3,
+    "UPLIFT_FLOOR": 40,
+    "UPLIFT_PASSED": 0.8,
+    "WITHDRAW_PROBABILITY": 0.05
+  },
+  "planning_date": "2026-01-05",
+  "planning_period": [
+    "2026-01-01",
+    "2026-12-31"
+  ],
+  "provenance": {
+    "data": "Fully synthetic. No external dataset was used.",
+    "license": "Generated data may be shared freely with this repository.",
+    "names": "Word lists written for this project (pipeline/vocab.py). No real people."
+  },
+  "scale": {
+    "courses": 100,
+    "edge_cases_per_type": 5,
+    "employees": 500,
+    "enrollments": 1000,
+    "name": "starter",
+    "skills": 50
+  },
+  "seed": 20261022
+}

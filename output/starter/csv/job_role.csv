@@ -1,0 +1,41 @@
+role_id,role_title,department_code,career_level,next_role_id
+ROL-000001,Engineering Associate,ENG,1,ROL-000002
+ROL-000002,Engineering Specialist,ENG,2,ROL-000003
+ROL-000003,Engineering Senior Specialist,ENG,3,ROL-000004
+ROL-000004,Engineering Lead,ENG,4,ROL-000005
+ROL-000005,Engineering Principal,ENG,5,
+ROL-000006,Data & Analytics Associate,DAT,1,ROL-000007
+ROL-000007,Data & Analytics Specialist,DAT,2,ROL-000008
+ROL-000008,Data & Analytics Senior Specialist,DAT,3,ROL-000009
+ROL-000009,Data & Analytics Lead,DAT,4,ROL-000010
+ROL-000010,Data & Analytics Principal,DAT,5,
+ROL-000011,IT Services Associate,ITS,1,ROL-000012
+ROL-000012,IT Services Specialist,ITS,2,ROL-000013
+ROL-000013,IT Services Senior Specialist,ITS,3,ROL-000014
+ROL-000014,IT Services Lead,ITS,4,ROL-000015
+ROL-000015,IT Services Principal,ITS,5,
+ROL-000016,Sales Associate,SAL,1,ROL-000017
+ROL-000017,Sales Specialist,SAL,2,ROL-000018
+ROL-000018,Sales Senior Specialist,SAL,3,ROL-000019
+ROL-000019,Sales Lead,SAL,4,ROL-000020
+ROL-000020,Sales Principal,SAL,5,
+ROL-000021,Marketing Associate,MKT,1,ROL-000022
+ROL-000022,Marketing Specialist,MKT,2,ROL-000023
+ROL-000023,Marketing Senior Specialist,MKT,3,ROL-000024
+ROL-000024,Marketing Lead,MKT,4,ROL-000025
+ROL-000025,Marketing Principal,MKT,5,
+ROL-000026,Finance Associate,FIN,1,ROL-000027
+ROL-000027,Finance Specialist,FIN,2,ROL-000028
+ROL-000028,Finance Senior Specialist,FIN,3,ROL-000029
+ROL-000029,Finance Lead,FIN,4,ROL-000030
+ROL-000030,Finance Principal,FIN,5,
+ROL-000031,Human Resources Associate,HRM,1,ROL-000032
+ROL-000032,Human Resources Specialist,HRM,2,ROL-000033
+ROL-000033,Human Resources Senior Specialist,HRM,3,ROL-000034
+ROL-000034,Human Resources Lead,HRM,4,ROL-000035
+ROL-000035,Human Resources Principal,HRM,5,
+ROL-000036,Operations Associate,OPS,1,ROL-000037
+ROL-000037,Operations Specialist,OPS,2,ROL-000038
+ROL-000038,Operations Senior Specialist,OPS,3,ROL-000039
+ROL-000039,Operations Lead,OPS,4,ROL-000040
+ROL-000040,Operations Principal,OPS,5,

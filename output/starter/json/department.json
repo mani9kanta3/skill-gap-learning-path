@@ -1,0 +1,10 @@
+[
+{"department_code": "DAT", "department_name": "Data & Analytics", "home_category": "Data & AI"},
+{"department_code": "ENG", "department_name": "Engineering", "home_category": "Software Engineering"},
+{"department_code": "FIN", "department_name": "Finance", "home_category": "Finance"},
+{"department_code": "HRM", "department_name": "Human Resources", "home_category": "People & HR"},
+{"department_code": "ITS", "department_name": "IT Services", "home_category": "Infrastructure & Cloud"},
+{"department_code": "MKT", "department_name": "Marketing", "home_category": "Marketing"},
+{"department_code": "OPS", "department_name": "Operations", "home_category": "Operations & Supply Chain"},
+{"department_code": "SAL", "department_name": "Sales", "home_category": "Sales"}
+]

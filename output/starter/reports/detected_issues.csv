@@ -1,0 +1,26 @@
+issue_type,record_id,rule_code,evidence
+BUDGET_EXCEEDED,ENR-EMP-000154-CRS-000015,BR-11,"approved 7,200.00 with 1,384,800.00 already committed against a DAT limit of 1,390,000.00"
+BUDGET_EXCEEDED,ENR-EMP-000186-CRS-000094,BR-11,"approved 12,000.00 with 1,005,600.00 already committed against a ITS limit of 1,010,000.00"
+BUDGET_EXCEEDED,ENR-EMP-000242-CRS-000098,BR-11,"approved 20,000.00 with 1,292,400.00 already committed against a SAL limit of 1,310,000.00"
+BUDGET_EXCEEDED,ENR-EMP-000359-CRS-000098,BR-11,"approved 20,000.00 with 1,069,600.00 already committed against a FIN limit of 1,070,000.00"
+BUDGET_EXCEEDED,ENR-EMP-000436-CRS-000076,BR-11,"approved 24,000.00 with 1,669,200.00 already committed against a OPS limit of 1,670,000.00"
+COURSE_UNAVAILABLE,REC-EMP-000195-CRS-000093,BR-04,CRS-000093 has no offering starting in the planning period; planned start 2027-05-31
+COURSE_UNAVAILABLE,REC-EMP-000297-CRS-000093,BR-04,CRS-000093 has no offering starting in the planning period; planned start 2027-05-31
+COURSE_UNAVAILABLE,REC-EMP-000331-CRS-000093,BR-04,CRS-000093 has no offering starting in the planning period; planned start 2027-05-31
+COURSE_UNAVAILABLE,REC-EMP-000377-CRS-000093,BR-04,CRS-000093 has no offering starting in the planning period; planned start 2027-05-31
+COURSE_UNAVAILABLE,REC-EMP-000411-CRS-000082,BR-04,CRS-000082 has no offering starting in the planning period; planned start 2027-06-21
+DUPLICATE_COMPLETION,CMP-2026-000875,BR-13,"second completion of ENR-EMP-000415-CRS-000067, first is CMP-2026-000586"
+DUPLICATE_COMPLETION,CMP-2026-000876,BR-13,"second completion of ENR-EMP-000015-CRS-000001, first is CMP-2026-000623"
+DUPLICATE_COMPLETION,CMP-2026-000877,BR-13,"second completion of ENR-EMP-000316-CRS-000044, first is CMP-2026-000737"
+DUPLICATE_COMPLETION,CMP-2026-000878,BR-13,"second completion of ENR-EMP-000370-CRS-000056, first is CMP-2026-000760"
+DUPLICATE_COMPLETION,CMP-2026-000879,BR-13,"second completion of ENR-EMP-000042-CRS-000002, first is CMP-2026-000811"
+GAP_NOT_REASSESSED,CMP-2026-000105,BR-17,"completed 2026-03-15, no post-course assessment of SKL-000038 by 2026-03-29"
+GAP_NOT_REASSESSED,CMP-2026-000230,BR-17,"completed 2026-04-12, no post-course assessment of SKL-000039 by 2026-04-26"
+GAP_NOT_REASSESSED,CMP-2026-000292,BR-17,"completed 2026-05-17, no post-course assessment of SKL-000029 by 2026-05-31"
+GAP_NOT_REASSESSED,CMP-2026-000310,BR-17,"completed 2026-05-24, no post-course assessment of SKL-000043 by 2026-06-07"
+GAP_NOT_REASSESSED,CMP-2026-000571,BR-17,"completed 2026-08-09, no post-course assessment of SKL-000047 by 2026-08-23"
+PREREQUISITE_VIOLATION,REC-EMP-000034-CRS-000008,BR-05,CRS-000008 is planned without CRS-000003 passed or planned at least 14 days earlier in the path
+PREREQUISITE_VIOLATION,REC-EMP-000075-CRS-000010,BR-05,CRS-000010 is planned without CRS-000003 passed or planned at least 14 days earlier in the path
+PREREQUISITE_VIOLATION,REC-EMP-000092-CRS-000083,BR-05,CRS-000083 is planned without CRS-000082 passed or planned at least 14 days earlier in the path
+PREREQUISITE_VIOLATION,REC-EMP-000125-CRS-000089,BR-05,CRS-000089 is planned without CRS-000084 passed or planned at least 14 days earlier in the path
+PREREQUISITE_VIOLATION,REC-EMP-000453-CRS-000080,BR-05,CRS-000080 is planned without CRS-000074 passed or planned at least 14 days earlier in the path

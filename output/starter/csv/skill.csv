@@ -1,0 +1,51 @@
+skill_id,skill_name,skill_category
+SKL-000001,Code Review Design,Software Engineering
+SKL-000002,Frontend Design,Software Engineering
+SKL-000003,Microservice Automation,Software Engineering
+SKL-000004,Testing Troubleshooting,Software Engineering
+SKL-000005,Version Control Strategy,Software Engineering
+SKL-000006,Data Quality Strategy,Data & AI
+SKL-000007,Data Visualisation Fundamentals,Data & AI
+SKL-000008,Forecasting Troubleshooting,Data & AI
+SKL-000009,Machine Learning Troubleshooting,Data & AI
+SKL-000010,SQL Automation,Data & AI
+SKL-000011,Containers Automation,Infrastructure & Cloud
+SKL-000012,Incident Response Fundamentals,Infrastructure & Cloud
+SKL-000013,Infrastructure as Code Fundamentals,Infrastructure & Cloud
+SKL-000014,Monitoring Design,Infrastructure & Cloud
+SKL-000015,Monitoring Troubleshooting,Infrastructure & Cloud
+SKL-000016,CRM Automation,Sales
+SKL-000017,Contract Design,Sales
+SKL-000018,Contract Strategy,Sales
+SKL-000019,Prospecting Strategy,Sales
+SKL-000020,Territory Troubleshooting,Sales
+SKL-000021,Campaign Troubleshooting,Marketing
+SKL-000022,Event Design,Marketing
+SKL-000023,Event Troubleshooting,Marketing
+SKL-000024,Market Research Strategy,Marketing
+SKL-000025,Product Marketing Strategy,Marketing
+SKL-000026,Cost Accounting Automation,Finance
+SKL-000027,Cost Accounting Design,Finance
+SKL-000028,Procurement Automation,Finance
+SKL-000029,Risk Control Troubleshooting,Finance
+SKL-000030,Tax Strategy,Finance
+SKL-000031,Compensation Fundamentals,People & HR
+SKL-000032,Compensation Strategy,People & HR
+SKL-000033,Onboarding Automation,People & HR
+SKL-000034,Performance Review Fundamentals,People & HR
+SKL-000035,Wellbeing Troubleshooting,People & HR
+SKL-000036,Capacity Planning Troubleshooting,Operations & Supply Chain
+SKL-000037,Demand Planning Fundamentals,Operations & Supply Chain
+SKL-000038,Logistics Automation,Operations & Supply Chain
+SKL-000039,Quality Control Fundamentals,Operations & Supply Chain
+SKL-000040,Quality Control Troubleshooting,Operations & Supply Chain
+SKL-000041,Business Writing Automation,Leadership & Communication
+SKL-000042,Business Writing Strategy,Leadership & Communication
+SKL-000043,Coaching Design,Leadership & Communication
+SKL-000044,Facilitation Strategy,Leadership & Communication
+SKL-000045,Stakeholder Design,Leadership & Communication
+SKL-000046,Collaboration Tools Automation,Digital Productivity
+SKL-000047,Collaboration Tools Design,Digital Productivity
+SKL-000048,Collaboration Tools Fundamentals,Digital Productivity
+SKL-000049,Spreadsheet Design,Digital Productivity
+SKL-000050,Workflow Fundamentals,Digital Productivity
