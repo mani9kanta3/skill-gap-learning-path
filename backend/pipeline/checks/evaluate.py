@@ -11,7 +11,7 @@ from collections import Counter
 import pandas as pd
 
 from .. import config
-from ..rules import prerequisites
+from . import feasibility
 
 
 def _metric(rows, group, name, value, dimension="ALL"):
@@ -48,20 +48,22 @@ def evaluate(ctx, ground_truth, detected):
     _metric(rows, "gap_coverage", "planning_gaps", len(open_gaps))
     _metric(rows, "gap_coverage", "average_planning_gap", open_gaps["planning_gap"].mean() if len(open_gaps) else 0)
 
-    # ---------- feasibility of RECOMMENDED rows ----------
+    # ---------- proposed plan: feasibility on every planning condition ----------
     recommended = [r for r in t["recommendation"] if r["decision"] == "RECOMMENDED"]
-    bad_prereq = set()
-    for employee_id, path in ctx.path_by_employee.items():
-        violations = prerequisites.path_violations(path, ctx.prerequisites, set())
-        bad_prereq |= {r["recommendation_id"] for r in path if r["course_id"] in violations}
-    bad_available = {
-        r["recommendation_id"]
-        for r in recommended
-        if r["course_id"] not in ctx.available or not config.PERIOD_START <= r["planned_start_date"] <= config.PERIOD_END
-    }
-    feasible = len(recommended) - len(bad_prereq | bad_available)
+    failing = feasibility.failures(ctx)
     _metric(rows, "feasibility", "recommended_rows", len(recommended))
-    _metric(rows, "feasibility", "share_feasible", _rate(feasible, len(recommended)))
+    _metric(rows, "feasibility", "share_feasible_all_checks", _rate(len(recommended) - len(failing), len(recommended)))
+    by_rule = Counter(code for codes in failing.values() for code in codes)
+    for code in ("BR-04", "BR-05", "BR-07", "BR-08", "BR-09"):
+        _metric(rows, "feasibility", "steps_failing", by_rule[code], code)
+
+    # ---------- funded plan ----------
+    funding = Counter(r["funding_status"] for r in recommended)
+    for status, n in sorted(funding.items()):
+        _metric(rows, "funding", "steps", n, status)
+    _metric(rows, "funding", "share_funded", _rate(funding["FUNDED"], len(recommended)))
+    feasible_and_funded = sum(1 for r in recommended if r["funding_status"] == "FUNDED" and r["recommendation_id"] not in failing)
+    _metric(rows, "funding", "share_feasible_and_funded", _rate(feasible_and_funded, len(recommended)))
     decisions = Counter((r["decision"], r["reason_code"]) for r in t["recommendation"])
     for (decision, reason), n in sorted(decisions.items()):
         _metric(rows, "feasibility", f"{decision.lower()}_rows", n, reason)
@@ -76,6 +78,7 @@ def evaluate(ctx, ground_truth, detected):
         code = b["department_code"]
         _metric(rows, "budget", "limit", b["limit_amount"], code)
         _metric(rows, "budget", "planned", b["planned_amount"], code)
+        _metric(rows, "budget", "funded", b["funded_amount"], code)
         _metric(rows, "budget", "committed", b["committed_amount"], code)
         _metric(rows, "budget", "utilization_pct", b["utilization_pct"], code)
         _metric(rows, "budget", "budget_rejections", rejected_budget[code], code)

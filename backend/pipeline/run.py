@@ -228,19 +228,22 @@ def evaluation_md(scale_name, metrics, truth):
         "",
         "## Recommendations",
         "",
-        f"- RECOMMENDED rows: {get('feasibility', 'recommended_rows'):.0f}",
-        f"- Feasible (BR-04 and BR-05 hold): {pct(get('feasibility', 'share_feasible'))}",
+        f"- Proposed steps (RECOMMENDED rows): {get('feasibility', 'recommended_rows'):.0f}",
+        f"- Feasible on every planning check (BR-04, 05, 07, 08, 09): {pct(get('feasibility', 'share_feasible_all_checks'))}",
+        f"- Funded by the department budget (BR-21): {pct(get('funding', 'share_funded'))}",
+        f"- Feasible and funded: {pct(get('funding', 'share_feasible_and_funded'))}",
         f"- Planning gaps: {get('gap_coverage', 'planning_gaps'):.0f}, of which PLANNED: "
         f"{pct(get('gap_coverage', 'share_of_planning_gaps', 'PLANNED'))}",
         "",
         "## Budgets",
         "",
-        "| Department | Limit | Planned | Committed | Utilization | Budget rejections |",
-        "|---|---|---|---|---|---|",
+        "| Department | Limit | Proposed | Funded | Committed | Utilization | Budget rejections |",
+        "|---|---|---|---|---|---|---|",
     ]
     for code in config.DEPARTMENT_CODES:
         lines.append(
             f"| {code} | {get('budget', 'limit', code):,.0f} | {get('budget', 'planned', code):,.0f} | "
+            f"{get('budget', 'funded', code):,.0f} | "
             f"{get('budget', 'committed', code):,.0f} | {get('budget', 'utilization_pct', code):.2f}% | "
             f"{get('budget', 'budget_rejections', code):.0f} |"
         )
