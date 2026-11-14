@@ -1,0 +1,15 @@
+# The generator, the rules and the checks
+pandas==3.1.1
+numpy==2.5.4
+
+# The API
+fastapi==0.141.1
+uvicorn==0.52.4
+pydantic==2.12.5
+python-dotenv==1.2.3
+
+# Postgres, used by the loader and the API. Raw SQL, no ORM.
+psycopg2-binary==2.9.12
+
+# Tests
+pytest==9.2.0
