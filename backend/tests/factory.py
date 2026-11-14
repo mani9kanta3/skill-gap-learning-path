@@ -34,7 +34,7 @@ class World:
             "course_offering": [],
             "role_skill_target": [],
             "budget": [
-                {"budget_id": "BUD-ENG-2026", "department_code": "ENG", "limit_amount": limit}
+                {"budget_id": "BUD-ENG-2026", "department_code": "ENG", "fiscal_year": 2026, "limit_amount": limit}
             ],
             "proficiency_assessment": [],
             "completion": [],

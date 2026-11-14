@@ -15,6 +15,8 @@ Tables are passed as lists of dicts, with dates as datetime.date.
 from collections import defaultdict
 from dataclasses import dataclass, field
 
+from .. import config
+
 
 @dataclass
 class Catalog:
@@ -29,9 +31,15 @@ class Catalog:
     role_targets: dict  # role_id -> [dict(skill_id, target_level, importance)]
     department_limit: dict  # department_code -> limit_amount
     budget_department: dict  # budget_id -> department_code
+    employee_department: dict = field(default_factory=dict)  # employee_id -> department_code
 
 
-def build_catalog(tables):
+def build_catalog(tables, fiscal_year=config.FISCAL_YEAR):
+    """
+    fiscal_year picks which year's budgets apply. The data holds 2026 only,
+    and the API refuses periods outside it, so a 2027 plan can never be
+    checked against a 2026 budget.
+    """
     courses = {
         row["course_id"]: {
             "course_status": row["course_status"],
@@ -83,7 +91,8 @@ def build_catalog(tables):
     # Budgets are set after the January plan (see s07_budgets), so the
     # January run builds its catalog before any budget exists. A missing
     # limit means "not set yet", which the planner treats as unlimited.
-    department_limit = {row["department_code"]: float(row["limit_amount"]) for row in tables.get("budget", ())}
+    budgets = [row for row in tables.get("budget", ()) if int(row["fiscal_year"]) == fiscal_year]
+    department_limit = {row["department_code"]: float(row["limit_amount"]) for row in budgets}
     budget_department = {row["budget_id"]: row["department_code"] for row in tables.get("budget", ())}
 
     return Catalog(
@@ -96,6 +105,7 @@ def build_catalog(tables):
         role_targets=dict(role_targets),
         department_limit=department_limit,
         budget_department=budget_department,
+        employee_department={e["employee_id"]: e["department_code"] for e in tables.get("employee", ())},
     )
 
 
@@ -112,6 +122,21 @@ class Snapshot:
     spent: dict = field(default_factory=lambda: defaultdict(float))  # employee_id -> money
     committed: dict = field(default_factory=lambda: defaultdict(float))  # department -> money
     seats_approved: dict = field(default_factory=lambda: defaultdict(int))  # offering_id -> count
+    # Money allocated to FUNDED steps that are still open on the date (not
+    # yet decided, start still ahead), per department and per employee.
+    reserved: dict = field(default_factory=lambda: defaultdict(float))
+    reserved_by_employee: dict = field(default_factory=lambda: defaultdict(float))
+
+    def department_free(self, catalog, employee):
+        """
+        BR-09(b): limit - committed - money allocated to other people's open
+        funded steps. The employee's own open steps are left out, because a
+        re-plan for them replaces those steps.
+        """
+        department = employee["department_code"]
+        limit = catalog.department_limit.get(department, float("inf"))
+        others = self.reserved.get(department, 0.0) - self.reserved_by_employee.get(employee["employee_id"], 0.0)
+        return limit - self.committed.get(department, 0.0) - others
 
 
 def build_snapshot(tables, catalog, planning_date, period_start, period_end):
@@ -148,6 +173,7 @@ def build_snapshot(tables, catalog, planning_date, period_start, period_end):
         if row["requested_on"] <= planning_date:
             snap.blocked[row["employee_id"]].add(row["course_id"])
 
+    decided = set()
     events = defaultdict(list)
     for row in tables.get("enrollment_event", ()):
         if row["event_on"] <= planning_date:
@@ -165,10 +191,28 @@ def build_snapshot(tables, catalog, planning_date, period_start, period_end):
                 snap.spent[enrollment["employee_id"]] += cost
 
         last = max(history, key=lambda e: e["event_seq"])["to_status"]
+        if any(e["to_status"] in ("APPROVED", "REJECTED") for e in history):
+            decided.add(enrollment_id)
         if last in ("APPROVED", "IN_PROGRESS"):
             end = catalog.offerings[enrollment["offering_id"]]["end_date"]
             employee = enrollment["employee_id"]
             snap.busy_until[employee] = max(end, snap.busy_until.get(employee, end))
+
+    # Open funded allocations (BR-21). A step stops holding money once its
+    # enrollment is decided (approved money is in `committed` instead) or
+    # once its planned start is no longer ahead.
+    by_recommendation = {e.get("recommendation_id"): e["enrollment_id"] for e in enrollments.values()}
+    for row in tables.get("recommendation", ()):
+        if row.get("funding_status") != "FUNDED" or row["planned_start_date"] <= planning_date:
+            continue
+        if by_recommendation.get(row["recommendation_id"]) in decided:
+            continue
+        department = catalog.employee_department.get(row["employee_id"])
+        if department is None:
+            continue
+        cost = float(row["estimated_cost"])
+        snap.reserved[department] += cost
+        snap.reserved_by_employee[row["employee_id"]] += cost
 
     return snap
 

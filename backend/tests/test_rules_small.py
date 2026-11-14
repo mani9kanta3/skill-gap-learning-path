@@ -142,19 +142,69 @@ def test_department_limit_rounds_up():
     assert budget.department_limit(1_000_000, 0.62) == 620_000
 
 
-def test_approval_edge_is_inclusive():
-    assert budget.can_approve(committed=90, cost=10, limit=100)
-    assert not budget.can_approve(committed=90, cost=10.01, limit=100)
+def test_only_funded_steps_can_be_approved():
+    assert budget.can_approve("FUNDED", committed=90, cost=10, limit=100)
+    assert not budget.can_approve("FUNDED", committed=90, cost=10.01, limit=100)
+    assert not budget.can_approve("NOT_FUNDED_BUDGET", committed=0, cost=10, limit=100)
+    assert not budget.can_approve(None, committed=0, cost=10, limit=100)
 
 
-def test_over_limit_replay_uses_event_order():
-    approvals = [
-        {"department_code": "ENG", "event_on": date(2026, 1, 2), "event_id": "EVT-000002", "enrollment_id": "B", "cost": 60},
-        {"department_code": "ENG", "event_on": date(2026, 1, 2), "event_id": "EVT-000001", "enrollment_id": "A", "cost": 60},
-        {"department_code": "ENG", "event_on": date(2026, 1, 1), "event_id": "EVT-000003", "enrollment_id": "C", "cost": 30},
+def test_department_check_uses_the_total_path_cost():
+    # The reported bug: two 7,000 courses with 10,000 free. Each fits on its
+    # own; together they do not.
+    assert not budget.fits_department(path_cost=0, extra_cost=14_000, department_free=10_000)
+    assert not budget.fits_department(path_cost=7_000, extra_cost=7_000, department_free=10_000)
+    assert budget.fits_department(path_cost=3_000, extra_cost=7_000, department_free=10_000)
+
+
+def _step(rid, employee, course, start, cost, seq=1):
+    return {
+        "recommendation_id": rid,
+        "employee_id": employee,
+        "course_id": course,
+        "planned_start_date": start,
+        "estimated_cost": cost,
+        "path_sequence": seq,
+    }
+
+
+def test_allocation_funds_earliest_steps_until_the_limit():
+    steps = [
+        _step("late", "E1", "C3", date(2026, 6, 1), 50),
+        _step("early", "E2", "C1", date(2026, 2, 2), 60),
+        _step("mid", "E3", "C2", date(2026, 4, 6), 30),
     ]
-    # Order: C (30), A (90), B (150 > 100).
-    assert budget.over_limit_approvals(approvals, {"ENG": 100}) == {"B": 90}
+    status, allocated = budget.allocate(steps, limit=100, prerequisites={})
+    assert status == {"early": "FUNDED", "mid": "FUNDED", "late": "NOT_FUNDED_BUDGET"}
+    assert allocated == 90
+
+
+def test_allocation_funds_everyones_first_step_before_anyones_second():
+    steps = [
+        _step("a1", "E1", "C1", date(2026, 2, 2), 40, 1),
+        _step("a2", "E1", "C2", date(2026, 3, 2), 40, 2),
+        _step("b1", "E2", "C3", date(2026, 6, 1), 40, 1),
+    ]
+    status, _ = budget.allocate(steps, limit=80, prerequisites={})
+    # E2's first step starts later than E1's second, but is funded first.
+    assert status == {"a1": "FUNDED", "b1": "FUNDED", "a2": "NOT_FUNDED_BUDGET"}
+
+
+def test_allocation_does_not_fund_a_step_whose_prerequisite_is_unfunded():
+    steps = [
+        _step("prereq", "E1", "F", date(2026, 2, 2), 80, 1),
+        _step("other", "E2", "X", date(2026, 1, 19), 30, 1),
+        _step("course", "E1", "A", date(2026, 3, 2), 10, 2),
+    ]
+    status, allocated = budget.allocate(steps, limit=100, prerequisites={"A": ["F"]})
+    # "other" starts first and takes 30, so the 80 prerequisite no longer fits,
+    # and the cheap course that needs it cannot be funded either.
+    assert status == {"other": "FUNDED", "prereq": "NOT_FUNDED_BUDGET", "course": "NOT_FUNDED_PREREQUISITE"}
+    assert allocated == 30
+
+
+def test_obligations():
+    assert budget.obligations(funded_amount=95, approved_outside_plan=10) == 105
 
 
 # ---------- schedule ----------
@@ -269,3 +319,44 @@ def test_snapshot_only_sees_the_past():
 
     jul = snapshot.build_snapshot(w.tables, catalog, date(2026, 7, 1), date(2026, 1, 1), date(2026, 12, 31))
     assert jul.levels[(EMP, S1)] == 4
+
+
+# ---------- budget year and open funded steps ----------
+
+
+def test_catalog_only_uses_the_requested_budget_year():
+    w = World(limit=100)
+    w.tables["budget"].append(
+        {"budget_id": "BUD-ENG-2027", "department_code": "ENG", "fiscal_year": 2027, "limit_amount": 999}
+    )
+    assert snapshot.build_catalog(w.tables, fiscal_year=2026).department_limit == {"ENG": 100}
+    assert snapshot.build_catalog(w.tables, fiscal_year=2027).department_limit == {"ENG": 999}
+    assert snapshot.build_catalog(w.tables, fiscal_year=2028).department_limit == {}
+
+
+def _funded_step(employee_id, course, start, cost, status="FUNDED"):
+    return {
+        "recommendation_id": f"REC-{employee_id}-{course}",
+        "employee_id": employee_id,
+        "course_id": course,
+        "planned_start_date": start,
+        "estimated_cost": cost,
+        "funding_status": status,
+    }
+
+
+def test_department_free_holds_back_other_peoples_open_funded_steps():
+    w = World(limit=10_000)
+    me = w.employee("EMP-000001")
+    w.employee("EMP-000002")
+    w.tables["employee"] = list(w.employees.values())
+    w.tables["recommendation"] = [
+        _funded_step("EMP-000002", c(1), date(2026, 9, 7), 3_000),  # someone else, still open
+        _funded_step("EMP-000002", c(2), date(2026, 3, 2), 2_000),  # start already passed
+        _funded_step("EMP-000002", c(3), date(2026, 9, 7), 1_000, "NOT_FUNDED_BUDGET"),  # holds nothing
+        _funded_step("EMP-000001", c(4), date(2026, 9, 7), 4_000),  # my own: a re-plan replaces it
+    ]
+    catalog = snapshot.build_catalog(w.tables)
+    snap = snapshot.build_snapshot(w.tables, catalog, date(2026, 7, 1), date(2026, 1, 1), date(2026, 12, 31))
+    assert snap.reserved["ENG"] == 7_000
+    assert snap.department_free(catalog, me) == 10_000 - 3_000

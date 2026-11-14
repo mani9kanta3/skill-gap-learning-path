@@ -101,11 +101,7 @@ class Planner:
         passed = snapshot.passed.get(employee_id, set())
         blocked = snapshot.blocked.get(employee_id, set())
         spent = snapshot.spent.get(employee_id, 0.0)
-        department = employee["department_code"]
-        department_remaining = (
-            self.catalog.department_limit.get(department, float("inf"))
-            - snapshot.committed.get(department, 0.0)
-        )
+        department_free = snapshot.department_free(self.catalog, employee)
 
         path = []  # dicts in path order
         rows_by_course = {}  # course_id -> row, RECOMMENDED or NOT_RECOMMENDED
@@ -150,7 +146,7 @@ class Planner:
                     blocked,
                     path,
                     spent,
-                    department_remaining,
+                    department_free,
                     slot,
                     ledger,
                 )
@@ -202,7 +198,7 @@ class Planner:
         )
         return rows, self.gap_rows(employee, snapshot, rows)
 
-    def check_candidate(self, candidate, chain_ids, blocked, path, spent, department_remaining, slot, ledger):
+    def check_candidate(self, candidate, chain_ids, blocked, path, spent, department_free, slot, ledger):
         """
         Run the four checks in order. Returns a reason string on the first
         failure, or the placement (list of (course_id, offering)) on success.
@@ -221,12 +217,13 @@ class Planner:
         if len(path) + len(chain_ids) + 1 > s.max_path:
             return "PATH_LIMIT"
 
-        # 3. Budget (BR-09).
-        new_costs = [self.cost(c) for c in chain_ids + [candidate]]
+        # 3. Budget (BR-09), always on the TOTAL: the path so far, every new
+        #    prerequisite and the candidate together.
+        new_cost = sum(self.cost(c) for c in chain_ids + [candidate])
         path_cost = sum(step["estimated_cost"] for step in path)
-        if not budget.within_allowance(spent, path_cost, sum(new_costs), s.allowance):
+        if not budget.within_allowance(spent, path_cost, new_cost, s.allowance):
             return "OVER_BUDGET"
-        if not budget.fits_department(new_costs, department_remaining):
+        if not budget.fits_department(path_cost, new_cost, department_free):
             return "OVER_BUDGET"
 
         # 4. Schedule and seats (BR-08). Placing the chain before the
@@ -259,6 +256,8 @@ class Planner:
             "planned_end_date": offering["end_date"] if offering else None,
             "estimated_cost": self.cost(course_id),
             "cumulative_cost": None,
+            # Decided later, when the department budget is allocated (BR-21).
+            "funding_status": None,
             "planning_date": s.planning_date,
             "period_start": s.period_start,
             "period_end": s.period_end,

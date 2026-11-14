@@ -150,6 +150,32 @@ def test_allowance_edge_is_inclusive():
     assert status_of(gaps, S1) == "OVER_BUDGET"
 
 
+def test_department_check_counts_prerequisites_and_earlier_steps():
+    # The reported bug: a 7,000 course with a 7,000 prerequisite (14,000 in
+    # all) was recommended with only 10,000 free, because each course was
+    # compared with the 10,000 on its own.
+    w = World(limit=10_000)
+    w.target(S1, 4)
+    w.employee(levels={S1: 1})
+    w.course(1, {S1: 2}, cost=7_000, starts=(date(2026, 1, 19),))
+    w.course(2, {S1: 4}, cost=7_000, prereqs=(1,), starts=(date(2026, 3, 2),))
+    rows, gaps = w.plan()
+    assert path_of(rows) == []
+    assert rows[0]["reason_code"] == "OVER_BUDGET"
+
+    # Same with a course chosen earlier for another gap: 6,000 already on the
+    # path, so a second 6,000 course must not fit into 10,000.
+    w = World(limit=10_000)
+    w.target(S1, 4)
+    w.target(S2, 3)
+    w.employee(levels={S1: 2, S2: 1})
+    w.course(1, {S1: 4}, cost=6_000, starts=(date(2026, 1, 19),))
+    w.course(2, {S2: 3}, cost=6_000, starts=(date(2026, 4, 6),))
+    rows, gaps = w.plan()
+    assert [r["course_id"] for r in path_of(rows)] == [c(1)]
+    assert status_of(gaps, S2) == "OVER_BUDGET"
+
+
 def test_department_remaining_budget_is_checked():
     w = World(limit=500)
     w.target(S1, 4)
