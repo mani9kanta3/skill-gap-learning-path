@@ -147,6 +147,17 @@ everyone's first course before anyone's second, which gives the *funded* plan.
 Only funded steps can be approved. Asking for an unfunded step is rejected for
 budget, which happens 231 times at full scale.
 
+The Budgets page keeps two questions apart:
+
+- **Is the department over-committed?** Obligations are the funded steps plus any
+  approvals outside the funded plan. When they pass the limit, the badge reads
+  **"Over-committed by ₹X"**, and hovering it shows the reason.
+- **How much has been spent?** "Spent so far" counts approved enrollments to date.
+  "Not yet spent" is the limit minus that.
+
+A department can be over-committed while most of its money is not spent yet,
+because funded courses later in the year will use it.
+
 **Learning outcomes come from evidence.** Each completion has an exam score and
 attendance, which decide pass or fail. A gap-closing course is then followed by
 a post-course skill test. The proficiency level is read from fixed score bands,

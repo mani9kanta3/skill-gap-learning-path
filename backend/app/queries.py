@@ -379,17 +379,61 @@ def course_detail(course_id):
 
 
 def budgets():
-    return db.fetch_all(
+    """
+    One row per department, with every figure needed to read the status.
+
+    Two different questions are answered here, and they must not be mixed:
+
+    - Spending: committed_amount (approved so far) and remaining_amount
+      (limit - committed). This is cash used to date.
+    - Obligations: funded_amount (money the January allocation promised
+      to funded steps) + outside_plan_amount (approvals of steps that were
+      never funded). budget_status is EXCEEDED when obligations are above
+      the limit, even if less has been spent so far.
+
+    unallocated_amount = limit - obligations, so a negative number is the
+    amount the department is over-committed by.
+    """
+    rows = db.fetch_all(
         """
         SELECT b.*, d.department_name,
                (SELECT count(*) FROM enrollment_event ev
                 JOIN enrollment en ON en.enrollment_id = ev.enrollment_id
                 WHERE en.budget_id = b.budget_id AND ev.reason_code = 'BUDGET_EXHAUSTED') AS budget_rejections,
-               (SELECT count(*) FROM enrollment en WHERE en.budget_id = b.budget_id) AS enrollments
+               (SELECT count(*) FROM enrollment en WHERE en.budget_id = b.budget_id) AS enrollments,
+               (SELECT coalesce(sum(en.cost_amount), 0) FROM enrollment en
+                JOIN recommendation r ON r.recommendation_id = en.recommendation_id
+                WHERE en.budget_id = b.budget_id
+                  AND r.funding_status <> 'FUNDED'
+                  AND EXISTS (SELECT 1 FROM enrollment_event ev
+                              WHERE ev.enrollment_id = en.enrollment_id AND ev.to_status = 'APPROVED')
+               ) AS outside_plan_amount,
+               (SELECT count(*) FROM enrollment en
+                JOIN recommendation r ON r.recommendation_id = en.recommendation_id
+                WHERE en.budget_id = b.budget_id
+                  AND r.funding_status <> 'FUNDED'
+                  AND EXISTS (SELECT 1 FROM enrollment_event ev
+                              WHERE ev.enrollment_id = en.enrollment_id AND ev.to_status = 'APPROVED')
+               ) AS outside_plan_count
         FROM budget b JOIN department d ON d.department_code = b.department_code
         ORDER BY b.department_code
         """
     )
+    for row in rows:
+        limit = float(row["limit_amount"])
+        obligations = float(row["funded_amount"]) + float(row["outside_plan_amount"])
+        row["obligations_amount"] = obligations
+        row["unallocated_amount"] = limit - obligations
+        row["obligations_pct"] = round(100 * obligations / limit, 2)
+        if row["budget_status"] == "EXCEEDED":
+            row["status_reason"] = (
+                f"{row['outside_plan_count']} enrollment(s) worth {float(row['outside_plan_amount']):,.0f} "
+                "were approved outside the funded plan, so funded steps plus those approvals "
+                f"come to {obligations:,.0f}, which is {obligations - limit:,.0f} over the limit."
+            )
+        else:
+            row["status_reason"] = "Funded steps plus any approvals outside the plan fit within the limit."
+    return rows
 
 
 def exceptions(issue_type, limit, offset):

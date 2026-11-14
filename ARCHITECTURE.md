@@ -332,7 +332,7 @@ recomputes the value from other rows and the validator checks it again.
 | committed_amount | NUMERIC(12,2) | yes | derived: sum of cost_amount of enrollments that reached APPROVED |
 | remaining_amount | NUMERIC(12,2) | yes | derived: limit - committed. Can be negative |
 | utilization_pct | NUMERIC(6,2) | yes | derived: committed / limit x 100 |
-| budget_status | VARCHAR(12) | yes | derived: EXCEEDED when funded_amount + approvals outside the funded plan > limit, otherwise WITHIN_LIMIT |
+| budget_status | VARCHAR(12) | yes | derived: EXCEEDED when funded_amount + approvals outside the funded plan > limit, otherwise WITHIN_LIMIT. The UI shows EXCEEDED as **"Over-committed"**, because it is about promises, not cash: a department can be over-committed while most of its money is not spent yet |
 | currency | CHAR(3) | yes | INR |
 
 **recommendation**
@@ -486,7 +486,7 @@ Other lifecycles:
 - **Skill:** BASELINE assessment, then course, completion and POST_COURSE
   assessment. The current level always comes from the latest assessment.
 - **Course:** ACTIVE or RETIRED. Available only under BR-04.
-- **Budget:** WITHIN_LIMIT or EXCEEDED, derived from approvals.
+- **Budget:** WITHIN_LIMIT or EXCEEDED ("Over-committed" in the UI), derived from funded steps plus approvals outside the funded plan.
 
 ---
 
@@ -865,7 +865,7 @@ routes under `/api`.
 | POST | `/api/recommendations/preview` | body `{employee_id, planning_date, period_start, period_end}`. **All three dates are required.** The period must lie inside the 2026 budget year (otherwise 422), planning_date must be within the period, and period_end must be after period_start. The budget is picked by the period's fiscal year, never assumed. The result is a proposal; department free money = limit - committed - money held for other people's open funded steps. Runs `rules/recommend.py` on a point-in-time snapshot (BR-20) with a seat ledger built from the database. Returns the path with planned offerings and dates, rejected candidates with reasons, plan_status per gap, total cost vs allowance left vs department remaining. Nothing is saved |
 | GET | `/api/courses?search=&category=&level=&available=` | list |
 | GET | `/api/courses/{course_id}` | skills and levels, prerequisite chain (both ways), offerings with planned/approved/capacity |
-| GET | `/api/budgets` | per department: limit, planned, committed, remaining, utilization, status |
+| GET | `/api/budgets` | per department, two separate views. **Obligations**: funded_amount, outside_plan_amount and outside_plan_count, obligations_amount, unallocated_amount (limit - obligations; negative = over-committed), status and status_reason (a sentence explaining the status). **Spending**: committed_amount (spent so far), remaining_amount (not yet spent), utilization_pct. Also budget rejections |
 | GET | `/api/exceptions?issue_type=&limit=&offset=` | detected issues, linked to their records |
 | GET | `/api/evaluation` | validation summary, metrics, per-ID detection match, reproducibility |
 | GET | `/api/departments`, `/api/skills/categories` | dropdown options |

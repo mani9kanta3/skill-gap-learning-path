@@ -189,7 +189,7 @@ function Dashboard() {
         <div className="col-lg-7">
           <Card
             title="Budget use by department"
-            subtitle="Bar = committed spend. Black line = the department's limit."
+            subtitle="Bar = spent so far. Black line = the limit. Over-commitment is explained on the Budgets page."
             actions={
               <Link className="btn-quiet" to="/budgets">
                 Details
