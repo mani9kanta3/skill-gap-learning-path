@@ -1,0 +1,375 @@
+{
+  "files": [
+    {
+      "identical": true,
+      "path": "csv/budget.csv",
+      "rows_a": 8,
+      "rows_b": 8,
+      "sha256_a": "9c04344ce9970643171994d699d28cddbaad3057b1655b35d3c7e186f121a332",
+      "sha256_b": "9c04344ce9970643171994d699d28cddbaad3057b1655b35d3c7e186f121a332"
+    },
+    {
+      "identical": true,
+      "path": "csv/completion.csv",
+      "rows_a": 8584,
+      "rows_b": 8584,
+      "sha256_a": "03e7e26f6adc01e932fc77f4b75b28402887bb17c1722211116a8e2ceb2005c5",
+      "sha256_b": "03e7e26f6adc01e932fc77f4b75b28402887bb17c1722211116a8e2ceb2005c5"
+    },
+    {
+      "identical": true,
+      "path": "csv/course.csv",
+      "rows_a": 1000,
+      "rows_b": 1000,
+      "sha256_a": "0c766b6f3ab269b4511007727f716e113f7d5673de8c6335382e12ce27882c44",
+      "sha256_b": "0c766b6f3ab269b4511007727f716e113f7d5673de8c6335382e12ce27882c44"
+    },
+    {
+      "identical": true,
+      "path": "csv/course_offering.csv",
+      "rows_a": 4052,
+      "rows_b": 4052,
+      "sha256_a": "8bd21c801bce9101b5e7114578320c2192b38af2ac437bf8b3f8298a68328af2",
+      "sha256_b": "8bd21c801bce9101b5e7114578320c2192b38af2ac437bf8b3f8298a68328af2"
+    },
+    {
+      "identical": true,
+      "path": "csv/course_prerequisite.csv",
+      "rows_a": 657,
+      "rows_b": 657,
+      "sha256_a": "fcdff87f2aa641ecac0f526960b1426d6d05fe2f9fca4d3e73067956779823e0",
+      "sha256_b": "fcdff87f2aa641ecac0f526960b1426d6d05fe2f9fca4d3e73067956779823e0"
+    },
+    {
+      "identical": true,
+      "path": "csv/course_skill.csv",
+      "rows_a": 1955,
+      "rows_b": 1955,
+      "sha256_a": "f229b35de00fbcb77b943d0da7390b012db5094545ccc996abb4658c34cbccb1",
+      "sha256_b": "f229b35de00fbcb77b943d0da7390b012db5094545ccc996abb4658c34cbccb1"
+    },
+    {
+      "identical": true,
+      "path": "csv/department.csv",
+      "rows_a": 8,
+      "rows_b": 8,
+      "sha256_a": "1bdbe83d6f7966ae841cd81b15d5e23f841e6c5a8d33e01ef94eca8956554f0c",
+      "sha256_b": "1bdbe83d6f7966ae841cd81b15d5e23f841e6c5a8d33e01ef94eca8956554f0c"
+    },
+    {
+      "identical": true,
+      "path": "csv/employee.csv",
+      "rows_a": 5000,
+      "rows_b": 5000,
+      "sha256_a": "09d0e7a77dd810341946224f6ffeab03c56f8e403251b6d2cbe644f684406f25",
+      "sha256_b": "09d0e7a77dd810341946224f6ffeab03c56f8e403251b6d2cbe644f684406f25"
+    },
+    {
+      "identical": true,
+      "path": "csv/employee_skill.csv",
+      "rows_a": 37108,
+      "rows_b": 37108,
+      "sha256_a": "dc7987693eec729521dadc6ec783f740bb3594bf9f0f5996f73bbe9549988aea",
+      "sha256_b": "dc7987693eec729521dadc6ec783f740bb3594bf9f0f5996f73bbe9549988aea"
+    },
+    {
+      "identical": true,
+      "path": "csv/enrollment.csv",
+      "rows_a": 10000,
+      "rows_b": 10000,
+      "sha256_a": "085afb9153578b0c12ceebf52a6363e9924f86cbb60a0cbcee88297fb5a2b4a3",
+      "sha256_b": "085afb9153578b0c12ceebf52a6363e9924f86cbb60a0cbcee88297fb5a2b4a3"
+    },
+    {
+      "identical": true,
+      "path": "csv/enrollment_event.csv",
+      "rows_a": 37879,
+      "rows_b": 37879,
+      "sha256_a": "09d7fe14aef2e4248541f67fe1beca8a37726ee057495f56709b853ce411043a",
+      "sha256_b": "09d7fe14aef2e4248541f67fe1beca8a37726ee057495f56709b853ce411043a"
+    },
+    {
+      "identical": true,
+      "path": "csv/job_role.csv",
+      "rows_a": 40,
+      "rows_b": 40,
+      "sha256_a": "d598960f454154f8b0e666c785a42b22072bb0e13fa136678ebb46ee1dec50e4",
+      "sha256_b": "d598960f454154f8b0e666c785a42b22072bb0e13fa136678ebb46ee1dec50e4"
+    },
+    {
+      "identical": true,
+      "path": "csv/proficiency_assessment.csv",
+      "rows_a": 42852,
+      "rows_b": 42852,
+      "sha256_a": "9ddd834b963818bc40761c3b0343f2c50a2122d88aee4a6c6a02b10797e27e3f",
+      "sha256_b": "9ddd834b963818bc40761c3b0343f2c50a2122d88aee4a6c6a02b10797e27e3f"
+    },
+    {
+      "identical": true,
+      "path": "csv/recommendation.csv",
+      "rows_a": 23414,
+      "rows_b": 23414,
+      "sha256_a": "5e8320eb0e4777c9b31e587848ffddb8e4eaf318ba4a9a16c226ed03c228e194",
+      "sha256_b": "5e8320eb0e4777c9b31e587848ffddb8e4eaf318ba4a9a16c226ed03c228e194"
+    },
+    {
+      "identical": true,
+      "path": "csv/role_skill_target.csv",
+      "rows_a": 320,
+      "rows_b": 320,
+      "sha256_a": "0cb8b08636758ff6ddb7e8c6355f81ec53b30ed6d31fd975adf5d8ca615586eb",
+      "sha256_b": "0cb8b08636758ff6ddb7e8c6355f81ec53b30ed6d31fd975adf5d8ca615586eb"
+    },
+    {
+      "identical": true,
+      "path": "csv/skill.csv",
+      "rows_a": 500,
+      "rows_b": 500,
+      "sha256_a": "4c67722db3a5a8a94819971f515e22fe1b1e606751b0dd41f1e8e5f84291b629",
+      "sha256_b": "4c67722db3a5a8a94819971f515e22fe1b1e606751b0dd41f1e8e5f84291b629"
+    },
+    {
+      "identical": true,
+      "path": "csv/skill_gap.csv",
+      "rows_a": 37108,
+      "rows_b": 37108,
+      "sha256_a": "3e783619ebbff7bf48c72122a2a5c047c205827d73c6143238695472cf1e9de4",
+      "sha256_b": "3e783619ebbff7bf48c72122a2a5c047c205827d73c6143238695472cf1e9de4"
+    },
+    {
+      "identical": true,
+      "path": "ground_truth/ground_truth.csv",
+      "rows_a": 250,
+      "rows_b": 250,
+      "sha256_a": "df403fb3f15e1e9b0f515c9394c158268b9f109df96b14df9719766020114549",
+      "sha256_b": "df403fb3f15e1e9b0f515c9394c158268b9f109df96b14df9719766020114549"
+    },
+    {
+      "identical": true,
+      "path": "ground_truth/ground_truth.json",
+      "rows_a": 250,
+      "rows_b": 250,
+      "sha256_a": "c0fe6a5e455dceeda6e75e073f102bdd823fe102c944b09e16a234e8d6bae257",
+      "sha256_b": "c0fe6a5e455dceeda6e75e073f102bdd823fe102c944b09e16a234e8d6bae257"
+    },
+    {
+      "identical": true,
+      "path": "json/budget.json",
+      "rows_a": 8,
+      "rows_b": 8,
+      "sha256_a": "06c3287b3f2c212f37d498bfff5b14ed97ef95800fde82cff76c83b1c4c30572",
+      "sha256_b": "06c3287b3f2c212f37d498bfff5b14ed97ef95800fde82cff76c83b1c4c30572"
+    },
+    {
+      "identical": true,
+      "path": "json/completion.json",
+      "rows_a": 8584,
+      "rows_b": 8584,
+      "sha256_a": "f22dd623abe351092e3d28d8a9ca22b3fc8d5cd89eeaf8bd559533188c4037d5",
+      "sha256_b": "f22dd623abe351092e3d28d8a9ca22b3fc8d5cd89eeaf8bd559533188c4037d5"
+    },
+    {
+      "identical": true,
+      "path": "json/course.json",
+      "rows_a": 1000,
+      "rows_b": 1000,
+      "sha256_a": "8711fe125439555b4cb21a2a8b8248b3a5a120d51dc666c5cc781110d803a85c",
+      "sha256_b": "8711fe125439555b4cb21a2a8b8248b3a5a120d51dc666c5cc781110d803a85c"
+    },
+    {
+      "identical": true,
+      "path": "json/course_offering.json",
+      "rows_a": 4052,
+      "rows_b": 4052,
+      "sha256_a": "4faac7e57feff99436755f17960499a7f45f3f17e366c571df6ebe17e5842bcb",
+      "sha256_b": "4faac7e57feff99436755f17960499a7f45f3f17e366c571df6ebe17e5842bcb"
+    },
+    {
+      "identical": true,
+      "path": "json/course_prerequisite.json",
+      "rows_a": 657,
+      "rows_b": 657,
+      "sha256_a": "6d91d6949291b2dbd6c1f5d74205dec9d132f626beb3242e4791d238e2246097",
+      "sha256_b": "6d91d6949291b2dbd6c1f5d74205dec9d132f626beb3242e4791d238e2246097"
+    },
+    {
+      "identical": true,
+      "path": "json/course_skill.json",
+      "rows_a": 1955,
+      "rows_b": 1955,
+      "sha256_a": "f0770d32ccb6959287dd9f9a9265e9137da9801eaa0b09251d05818a6c9c756b",
+      "sha256_b": "f0770d32ccb6959287dd9f9a9265e9137da9801eaa0b09251d05818a6c9c756b"
+    },
+    {
+      "identical": true,
+      "path": "json/department.json",
+      "rows_a": 8,
+      "rows_b": 8,
+      "sha256_a": "8d16bf011f20f4fc66173428d24a7f62ad3fed84be11b7f26fe7de5bf5250fbb",
+      "sha256_b": "8d16bf011f20f4fc66173428d24a7f62ad3fed84be11b7f26fe7de5bf5250fbb"
+    },
+    {
+      "identical": true,
+      "path": "json/employee.json",
+      "rows_a": 5000,
+      "rows_b": 5000,
+      "sha256_a": "76cfaa1ba1b825af40d9ea9b013c2ec212ae8cfd8a29a039f6c3663e5b766348",
+      "sha256_b": "76cfaa1ba1b825af40d9ea9b013c2ec212ae8cfd8a29a039f6c3663e5b766348"
+    },
+    {
+      "identical": true,
+      "path": "json/employee_skill.json",
+      "rows_a": 37108,
+      "rows_b": 37108,
+      "sha256_a": "ebda6d2e31c0e540f8e5fcaaa433c2e8b54abd855222877edee53c0771e0bb14",
+      "sha256_b": "ebda6d2e31c0e540f8e5fcaaa433c2e8b54abd855222877edee53c0771e0bb14"
+    },
+    {
+      "identical": true,
+      "path": "json/enrollment.json",
+      "rows_a": 10000,
+      "rows_b": 10000,
+      "sha256_a": "edc2dde79423f59c6f0a22235ca29079e07c2235a62eaa7c638d32eb67b1bc57",
+      "sha256_b": "edc2dde79423f59c6f0a22235ca29079e07c2235a62eaa7c638d32eb67b1bc57"
+    },
+    {
+      "identical": true,
+      "path": "json/enrollment_event.json",
+      "rows_a": 37879,
+      "rows_b": 37879,
+      "sha256_a": "40f6c686246f64c72820ffd6ba0363311924681b0fb44adc5043db76c5fb56b5",
+      "sha256_b": "40f6c686246f64c72820ffd6ba0363311924681b0fb44adc5043db76c5fb56b5"
+    },
+    {
+      "identical": true,
+      "path": "json/job_role.json",
+      "rows_a": 40,
+      "rows_b": 40,
+      "sha256_a": "8b0ac9bf743e23d2b4c66fe025f25ddebd8c00fb4c504c8149133f97637c23c5",
+      "sha256_b": "8b0ac9bf743e23d2b4c66fe025f25ddebd8c00fb4c504c8149133f97637c23c5"
+    },
+    {
+      "identical": true,
+      "path": "json/proficiency_assessment.json",
+      "rows_a": 42852,
+      "rows_b": 42852,
+      "sha256_a": "cffe4b640c56a146de2460c7eab26fda694c6ccdf1f8214187f14814ef46c6a6",
+      "sha256_b": "cffe4b640c56a146de2460c7eab26fda694c6ccdf1f8214187f14814ef46c6a6"
+    },
+    {
+      "identical": true,
+      "path": "json/recommendation.json",
+      "rows_a": 23414,
+      "rows_b": 23414,
+      "sha256_a": "8704b360a882e6ef792ccfb334598a295ad1c8a7db3e193d4bbaf0953c7f59d1",
+      "sha256_b": "8704b360a882e6ef792ccfb334598a295ad1c8a7db3e193d4bbaf0953c7f59d1"
+    },
+    {
+      "identical": true,
+      "path": "json/role_skill_target.json",
+      "rows_a": 320,
+      "rows_b": 320,
+      "sha256_a": "7c13eb022b5085e61de519013774ad3b5ac990c5252841ca6063500df6dbbd90",
+      "sha256_b": "7c13eb022b5085e61de519013774ad3b5ac990c5252841ca6063500df6dbbd90"
+    },
+    {
+      "identical": true,
+      "path": "json/skill.json",
+      "rows_a": 500,
+      "rows_b": 500,
+      "sha256_a": "3ede888a8b40dd9e99c8618018a6b81a98eae9a5d74c325b71c16d5dc3f6325d",
+      "sha256_b": "3ede888a8b40dd9e99c8618018a6b81a98eae9a5d74c325b71c16d5dc3f6325d"
+    },
+    {
+      "identical": true,
+      "path": "json/skill_gap.json",
+      "rows_a": 37108,
+      "rows_b": 37108,
+      "sha256_a": "949c2aa0e99fa794733424c4cacef75a02a0ae01394a4b0fdd8bebd94626da0b",
+      "sha256_b": "949c2aa0e99fa794733424c4cacef75a02a0ae01394a4b0fdd8bebd94626da0b"
+    },
+    {
+      "identical": true,
+      "path": "manifest.json",
+      "rows_a": null,
+      "rows_b": null,
+      "sha256_a": "d424c2324b4cb4a8ba4eaffd54921947edf5f44429b6ddb8c7d08cde65aa1edb",
+      "sha256_b": "d424c2324b4cb4a8ba4eaffd54921947edf5f44429b6ddb8c7d08cde65aa1edb"
+    },
+    {
+      "identical": true,
+      "path": "reports/detected_issues.csv",
+      "rows_a": 250,
+      "rows_b": 250,
+      "sha256_a": "a9060c382c7c66b3c865908a9a198df64a49dae8e303554074ff6e837597c35d",
+      "sha256_b": "a9060c382c7c66b3c865908a9a198df64a49dae8e303554074ff6e837597c35d"
+    },
+    {
+      "identical": true,
+      "path": "reports/evaluation.md",
+      "rows_a": 57,
+      "rows_b": 57,
+      "sha256_a": "89c3ca1eeecd4a7bb852c518d84b2434bb863a5437d124475be43b965df64d9e",
+      "sha256_b": "89c3ca1eeecd4a7bb852c518d84b2434bb863a5437d124475be43b965df64d9e"
+    },
+    {
+      "identical": true,
+      "path": "reports/metric.csv",
+      "rows_a": 130,
+      "rows_b": 130,
+      "sha256_a": "b3df5cf2f0b9f4ccda149d45b36dea9b3811bd1d5e49871d8225a7733e507a8b",
+      "sha256_b": "b3df5cf2f0b9f4ccda149d45b36dea9b3811bd1d5e49871d8225a7733e507a8b"
+    },
+    {
+      "identical": true,
+      "path": "reports/metrics.json",
+      "rows_a": 130,
+      "rows_b": 130,
+      "sha256_a": "ee9bd35ef3442a889cbeebe3278be91ade082e4f9b3ef5a99c9dc658a719ee85",
+      "sha256_b": "ee9bd35ef3442a889cbeebe3278be91ade082e4f9b3ef5a99c9dc658a719ee85"
+    },
+    {
+      "identical": true,
+      "path": "reports/validation_result.csv",
+      "rows_a": 149,
+      "rows_b": 149,
+      "sha256_a": "279a24c53522ffdaf251b0ee0852c394bfe69ba47f8e20c92513105af23484bb",
+      "sha256_b": "279a24c53522ffdaf251b0ee0852c394bfe69ba47f8e20c92513105af23484bb"
+    },
+    {
+      "identical": true,
+      "path": "reports/validation_summary.json",
+      "rows_a": null,
+      "rows_b": null,
+      "sha256_a": "7dc72648706114cf030c8b47eb540d77f4f2d941811b16077c608458fd93c169",
+      "sha256_b": "7dc72648706114cf030c8b47eb540d77f4f2d941811b16077c608458fd93c169"
+    },
+    {
+      "identical": true,
+      "path": "reports/validation_summary.md",
+      "rows_a": 161,
+      "rows_b": 161,
+      "sha256_a": "2403ea75def8c576b4f05c211e541c16cc67661ca5edaa31b9bdf66e1b4a8d98",
+      "sha256_b": "2403ea75def8c576b4f05c211e541c16cc67661ca5edaa31b9bdf66e1b4a8d98"
+    },
+    {
+      "identical": true,
+      "path": "sql/schema.sql",
+      "rows_a": 432,
+      "rows_b": 432,
+      "sha256_a": "b0b10c8c47f2fb9b2d625e7b65c30bff0f2309f51c92eeca9cd0cc21fc896615",
+      "sha256_b": "b0b10c8c47f2fb9b2d625e7b65c30bff0f2309f51c92eeca9cd0cc21fc896615"
+    },
+    {
+      "identical": true,
+      "path": "sql/seed.sql",
+      "rows_a": 211513,
+      "rows_b": 211513,
+      "sha256_a": "5e1b49095dadc12d9d8b34c573a4aa9d6b27e025e4a429c698b38cacd7d55ae1",
+      "sha256_b": "5e1b49095dadc12d9d8b34c573a4aa9d6b27e025e4a429c698b38cacd7d55ae1"
+    }
+  ],
+  "identical": true,
+  "scale": "full",
+  "seed": 20261022
+}
