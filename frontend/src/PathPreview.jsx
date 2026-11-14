@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import api from "./api";
@@ -13,8 +13,14 @@ import { PLAN_STATUS, REASONS, label } from "./options";
   only uses what was known on that date (their level then, courses
   passed by then, seats and budget left then) and only runs that start
   at least 14 days later. It is the same engine as the January run, and
-  nothing is saved.
+  nothing is saved. The result is a proposal: it is not funded until the
+  department budget is allocated to it.
+
+  The period has to stay inside the budget year, because there is no
+  budget for any other year to check the money against.
 */
+const YEAR_START = "2026-01-01";
+const YEAR_END = "2026-12-31";
 function PathPreview({ employeeId }) {
   const [form, setForm] = useState({
     planning_date: "2026-07-01",
@@ -24,6 +30,14 @@ function PathPreview({ employeeId }) {
   const [result, setResult] = useState(null);
   const [load, setLoad] = useState(false);
   const [error, setError] = useState("");
+
+  // A result belongs to one employee. Moving to another employee clears it,
+  // so one person's path is never shown under someone else's name.
+  // (EmployeeDetail also keys this component by employee ID.)
+  useEffect(() => {
+    setResult(null);
+    setError("");
+  }, [employeeId]);
 
   async function preview(event) {
     event.preventDefault();
@@ -46,6 +60,8 @@ function PathPreview({ employeeId }) {
       <input
         type="date"
         className="form-control"
+        min={YEAR_START}
+        max={YEAR_END}
         value={form[name]}
         onChange={(e) => setForm({ ...form, [name]: e.target.value })}
         disabled={load}
@@ -61,7 +77,8 @@ function PathPreview({ employeeId }) {
         Preview a path from another date
       </h2>
       <p className="info-text">
-        Uses only what was known on the planning date. Nothing is saved.
+        Uses only what was known on the planning date, within the 2026 budget
+        year. The result is a proposal, not a funded plan. Nothing is saved.
       </p>
 
       <form onSubmit={preview} className="row g-3 align-items-end">
@@ -95,9 +112,12 @@ function PathPreview({ employeeId }) {
             </div>
             <div className="col-md-4">
               <div className="tile">
-                <div className="tile-label">{result.department_code} budget left</div>
-                <div className="tile-value">{money(result.department_remaining)}</div>
-                <div className="tile-note">as of {result.planning_date}</div>
+                <div className="tile-label">{result.department_code} budget free</div>
+                <div className="tile-value">{money(result.department_free)}</div>
+                <div className="tile-note">
+                  {money(result.department_limit)} limit, {money(result.department_committed)} committed,{" "}
+                  {money(result.department_reserved_for_others)} held for other funded steps, as of {result.planning_date}
+                </div>
               </div>
             </div>
           </div>

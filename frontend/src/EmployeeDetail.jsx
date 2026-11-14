@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import api from "./api";
 import getErrorMessage from "./errorMessage";
 import money from "./money";
-import { PLAN_STATUS, REASONS, label } from "./options";
+import { FUNDING, PLAN_STATUS, REASONS, label } from "./options";
 import PageHeader from "./PageHeader";
 import PathPreview from "./PathPreview";
 import StatusBadge from "./StatusBadge";
@@ -13,8 +13,9 @@ import StatusBadge from "./StatusBadge";
   One employee: the whole workflow for one person, top to bottom.
 
   1. Skill gaps against the target role, at planning time and now.
-  2. The January learning path, with the reason for every course, and the
-     courses that were considered and turned down, with why.
+  2. The January learning path: the proposed courses with the reason for
+     each, whether the department budget funded each one, and the courses
+     that were considered and turned down, with why.
   3. Enrollments with their full event history.
   4. Results, where completion, passing and the post-course test sit side
      by side, because finishing a course and closing a gap are different
@@ -57,6 +58,7 @@ function EmployeeDetail() {
   }
 
   const path = employee.recommendations.filter((r) => r.decision === "RECOMMENDED");
+  const funded = path.filter((r) => r.funding_status === "FUNDED");
   const turnedDown = employee.recommendations.filter((r) => r.decision === "NOT_RECOMMENDED");
   const careerPath = employee.target_role_id !== employee.role_id;
 
@@ -98,8 +100,13 @@ function EmployeeDetail() {
         <div className="col-md-4">
           <div className="tile">
             <div className="tile-label">January plan</div>
-            <div className="fw-bold">{path.length} courses · {money(path.reduce((s, r) => s + r.estimated_cost, 0))}</div>
-            <div className="tile-note">{turnedDown.length} courses considered and turned down</div>
+            <div className="fw-bold">
+              {path.length} proposed · {funded.length} funded
+            </div>
+            <div className="tile-note">
+              {money(funded.reduce((s, r) => s + r.estimated_cost, 0))} funded of{" "}
+              {money(path.reduce((s, r) => s + r.estimated_cost, 0))} proposed · {turnedDown.length} turned down
+            </div>
           </div>
         </div>
       </div>
@@ -147,7 +154,7 @@ function EmployeeDetail() {
       </div>
 
       {/* 2. Path */}
-      <h2 className="section-title mb-2">January learning path</h2>
+      <h2 className="section-title mb-2">January learning path (proposed and funded)</h2>
       <div className="panel corners table-wrap mb-3">
         <table className="table data-table">
           <thead>
@@ -159,6 +166,7 @@ function EmployeeDetail() {
               <th>Planned run</th>
               <th className="text-end">Cost</th>
               <th className="text-end">Running total</th>
+              <th>Funding</th>
               <th>Enrollment</th>
             </tr>
           </thead>
@@ -180,12 +188,15 @@ function EmployeeDetail() {
                 </td>
                 <td className="text-end">{money(r.estimated_cost)}</td>
                 <td className="text-end">{money(r.cumulative_cost)}</td>
+                <td>
+                  <StatusBadge status={r.funding_status} text={label(FUNDING, r.funding_status)} />
+                </td>
                 <td>{r.enrollment_status ? <StatusBadge status={r.enrollment_status} /> : <span className="info-text">not requested</span>}</td>
               </tr>
             ))}
             {path.length === 0 && (
               <tr>
-                <td colSpan="8" className="info-text text-center py-3">
+                <td colSpan="9" className="info-text text-center py-3">
                   No path: {employee.employment_status === "ON_LEAVE" ? "the employee is on leave." : "no gap could be planned."}
                 </td>
               </tr>
@@ -254,8 +265,8 @@ function EmployeeDetail() {
         ))}
       </div>
 
-      {/* 5. Preview */}
-      <PathPreview employeeId={employee.employee_id} />
+      {/* 5. Preview. Keyed by employee, so nothing carries over between people. */}
+      <PathPreview key={employee.employee_id} employeeId={employee.employee_id} />
     </div>
   );
 }
