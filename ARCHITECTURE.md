@@ -6,7 +6,7 @@ and the order we build it in.
 
 If code and this file disagree, one of them is wrong. Fix it, don't work around it.
 
-Revision 3. Section 16 lists what changed after review; section 17 lists what changed while building.
+Revision 4. Section 16 lists the changes from the first review, section 17 the changes made while building, and section 18 the changes from the second review.
 
 ---
 
@@ -45,7 +45,7 @@ thing they share.
      v
  stages/s01..s05   master and catalog data          (parents first, IDs assigned at creation)
  stages/s06_plan   January planning run             (rules/recommend.py, planning-date data only)
- stages/s07_budgets  budget limits = funding ratio x the plan's demand
+ stages/s07_budgets  limits, then allocate them to proposed steps (the funded plan)
  stages/s08_simulate  2026 event simulation         (requests, decisions, starts, withdrawals,
                                                      completions with results, reassessments)
      |   = the valid baseline. With injection switched off it must pass every check.
@@ -326,12 +326,13 @@ recomputes the value from other rows and the validator checks it again.
 | budget_id | VARCHAR(16) PK | yes | `^BUD-[A-Z]{3}-2026$` |
 | department_code | FK department | yes | unique per fiscal_year |
 | fiscal_year | SMALLINT | yes | 2026 |
-| limit_amount | NUMERIC(12,2) | yes | policy: `FUNDING_RATIO` (0.62) x the department's planned demand in the January plan, rounded up to 10,000 |
-| planned_amount | NUMERIC(12,2) | yes | derived: sum of estimated_cost of RECOMMENDED rows in the department (demand) |
+| limit_amount | NUMERIC(12,2) | yes | policy: `FUNDING_RATIO` (0.85) x the department's proposed demand in the January plan, rounded up to 10,000 |
+| planned_amount | NUMERIC(12,2) | yes | derived: sum of estimated_cost of RECOMMENDED (proposed) rows in the department |
+| funded_amount | NUMERIC(12,2) | yes | derived: sum of estimated_cost of FUNDED rows. Never above the limit |
 | committed_amount | NUMERIC(12,2) | yes | derived: sum of cost_amount of enrollments that reached APPROVED |
 | remaining_amount | NUMERIC(12,2) | yes | derived: limit - committed. Can be negative |
 | utilization_pct | NUMERIC(6,2) | yes | derived: committed / limit x 100 |
-| budget_status | VARCHAR(12) | yes | derived: WITHIN_LIMIT, EXCEEDED |
+| budget_status | VARCHAR(12) | yes | derived: EXCEEDED when funded_amount + approvals outside the funded plan > limit, otherwise WITHIN_LIMIT |
 | currency | CHAR(3) | yes | INR |
 
 **recommendation**
@@ -349,6 +350,7 @@ recomputes the value from other rows and the validator checks it again.
 | planned_start_date, planned_end_date | DATE | no | derived from planned_offering_id |
 | estimated_cost | NUMERIC(12,2) | yes | derived: course.cost_amount |
 | cumulative_cost | NUMERIC(12,2) | no | derived: running sum of estimated_cost over path_sequence 1..n. No more than the learning allowance |
+| funding_status | VARCHAR(24) | no | FUNDED, NOT_FUNDED_BUDGET, NOT_FUNDED_PREREQUISITE on RECOMMENDED rows (BR-21), null on NOT_RECOMMENDED |
 | planning_date | DATE | yes | 2026-01-05 |
 | period_start, period_end | DATE | yes | 2026-01-01, 2026-12-31 |
 
@@ -506,15 +508,16 @@ for a given planning date and period.
 | BR-06 | Candidate order for a gap: available first, then lowest cost, then shortest duration, then lowest course_id. A course that already has a recommendation row for this employee is skipped (it cannot get a second row). |
 | BR-07 | Path size: at most 4 RECOMMENDED courses. A course is added only together with its whole prerequisite chain. If a chain does not fit, **the next candidate is tried**. |
 | BR-08 | Schedule and seats: the path runs one course at a time. Step 1 starts at least 14 days after the planning date. Each next step starts at least 14 days after the previous step's end. Every planned start is inside the planning period. Each step uses the earliest offering that meets these limits **and still has a free seat** (`capacity - approved as of planning date - seats already planned in this run > 0`). The plan books that seat. |
-| BR-09 | Planning budget: (a) `cumulative_cost <= learning_allowance_per_employee` (config), and (b) every course's cost is no more than the department's remaining budget as of the planning date. |
-| BR-20 | Point-in-time rule: the plan only uses assessments, completions, enrollments, seats and budget dated on or before the planning date, and only offerings that start inside the planning period. |
+| BR-09 | Planning budget, always on the **total**: what is already on the path + every new prerequisite + the candidate. (a) That total plus what the employee already spent this period is within the 60,000 allowance. (b) That total is within the department money still free on the planning date: limit - committed - money allocated to other people's open funded steps. |
+| BR-20 | Point-in-time rule: the plan only uses assessments, completions, enrollments, seats and budget dated on or before the planning date, and only offerings that start inside the planning period. The period must be inside the budget year (2026), because there is no budget for any other year. |
+| BR-21 | Funding: each department's limit is shared out over its proposed steps, everyone's first step before anyone's second (within a round: earliest planned start, then employee_id). A step is FUNDED if it fits what is left, NOT_FUNDED_PREREQUISITE if a prerequisite step in its path was not funded, otherwise NOT_FUNDED_BUDGET. |
 
 **Operational rules.** These are applied in the simulation and checked by the validator.
 
 | Code | Rule |
 |---|---|
 | BR-10 | Seats at approval: approve only if `seats_approved < capacity`. A seat is taken on approval and not given back. Checked before budget. |
-| BR-11 | Budget at approval: approve only if `committed + cost <= limit`. Committed is the running total of approvals in `(event_on, event_id)` order of the decision event. Money is committed on approval and not refunded. |
+| BR-11 | Budget at approval: approve only a **FUNDED** step (BR-21), and only if `committed + cost <= limit` (a second guard; funded steps never add up to more than the limit). A request for an unfunded step is REJECTED with BUDGET_EXHAUSTED by HR. Money is committed on approval and not refunded. |
 | BR-12 | Lifecycle: only the transitions in 3.7. The first event is REQUESTED. |
 | BR-13 | One completion per enrollment, only for enrollments that reached COMPLETED, with `completed_on = offering.end_date`. |
 | BR-14 | `result = PASSED` if and only if `attendance_pct >= 75` and `final_score >= 60`. |
@@ -524,13 +527,25 @@ for a given planning date and period.
 | BR-18 | No retakes: `(employee_id, course_id)` is unique in recommendation and enrollment. |
 | BR-19 | History is append-only. Status and proficiency are derived from the latest event, never overwritten. |
 
-**Why plans book seats but not money.** A seat belongs to one class on one date,
-so a plan that ignores seats is simply wrong. Money is a shared pool. Each
-person's plan is capped by their allowance (BR-09). The department limit is
-deliberately set below total demand (`limit = FUNDING_RATIO x planned demand`, ratio 0.62),
-and requests are funded first-come-first-served at approval (BR-11). That
-documented gap between plan and funding is where budget rejections come from.
-Budgets show `planned_amount` next to `limit_amount` so HR can see it.
+**Proposed and funded.** The January data holds two plans, kept apart on purpose:
+
+1. The **proposed plan** is every RECOMMENDED row. The engine makes it before any
+   budget exists, and checks dates, seats, prerequisites, path size and the
+   employee's allowance. Plans book seats, because a seat belongs to one class on
+   one date.
+2. Each department's **limit** is then set to 85% of its proposed demand
+   (`FUNDING_RATIO`). A department funds less than its people propose, on purpose.
+3. The limit is **allocated** to proposed steps (BR-21). That gives the **funded
+   plan**: the FUNDED rows, which never cost more than the limit.
+4. At approval, only funded steps go through (BR-11). Some employees ask for an
+   unfunded step anyway, and HR rejects it. That is the normal budget exception
+   path, and it is visible in the data.
+
+Setting the limit from the proposals cannot change the proposals. In January
+nothing is committed or allocated, so BR-09(b) only asks whether one employee's
+whole path costs more than the department's whole budget. A path never costs more
+than the 60,000 allowance, and s07 stops the run if any limit is below that.
+The Budgets page shows proposed, limit, funded and committed side by side.
 
 ---
 
@@ -548,9 +563,9 @@ another stage's numbers.
 | s02 | `s02_employees.py` | employee | Department sizes ENG 22%, OPS 16%, SAL 14%, DAT 12%, ITS 11%, FIN 9%, MKT 9%, HRM 7%. Career levels 35/30/20/10/5%. 5% ON_LEAVE. 25% of ACTIVE employees below level 5 target the next role. IDs assigned, then managers picked (same department, higher level) |
 | s03 | `s03_proficiency.py` | proficiency_assessment (BASELINE), employee_skill | For each current-role skill: `level = max(0, target - d)` with d = 0/1/2/3 at 45/30/17/8%. Skills only in the target role start at 0 to 2. The score is drawn uniformly inside that level's band, so BR-15 holds. Dated Q4 2025. Assessment IDs are given in s10 |
 | s04 | `s04_catalog.py` | course, course_skill, course_prerequisite | 2 PRIMARY courses per skill: the first FOUNDATION or INTERMEDIATE (50/50), the second INTERMEDIATE or ADVANCED (40/60). 0 to 2 SECONDARY skills from the same category. Mode ONLINE 50%, BLENDED 30%, CLASSROOM 20%. 4% RETIRED. 60% of INTERMEDIATE courses get 1 FOUNDATION prerequisite. Every ADVANCED course gets 1 INTERMEDIATE prerequisite, plus a FOUNDATION one 30% of the time |
-| s05 | `s05_offerings.py` | course_offering | ACTIVE courses: 3 to 6 offerings with Monday starts between 12 Jan and 21 Dec 2026. 6% of ACTIVE courses get 1 to 2 offerings in 2027 only, so they are unavailable in the period. RETIRED courses: none |
+| s05 | `s05_offerings.py` | course_offering | ACTIVE courses: 4 to 7 offerings with Monday starts between 12 Jan and 21 Dec 2026. 10% of ACTIVE courses get 1 to 2 offerings in 2027 only, so they are unavailable in the period. RETIRED courses: none |
 | s06 | `s06_plan.py` | recommendation | The January planning run: `rules/recommend.py` for every ACTIVE employee in employee_id order, planning_date 2026-01-05, sharing one seat ledger (5.2) |
-| s07 | `s07_budgets.py` | budget (limit only) | `limit = FUNDING_RATIO x planned demand`, rounded up to 10,000. Setting it after the plan cannot change the plan: in January nothing is committed, so BR-09(b) only asks whether one course costs more than the whole department budget, and s07 stops the run if any limit is below the dearest course |
+| s07 | `s07_budgets.py` | budget, recommendation.funding_status | Limit = `FUNDING_RATIO` (0.85) x proposed demand, rounded up to 10,000. Then the funded plan: the limit is allocated to proposed steps (BR-21). s07 stops the run if any limit is below one employee's allowance, which proves BR-09(b) could not have changed a January proposal |
 | s08 | `s08_simulate.py` | enrollment, enrollment_event, completion, proficiency_assessment (POST_COURSE) | One discrete-event simulation of 2026 that also produces results and reassessments, so every later decision can see earlier pass/fail results (5.3) |
 | s09 | `s09_inject.py` | extra rows, ground truth | The 5 edge-case types (section 6) |
 | s10 | `s10_finalize.py` | assessment IDs, every derived column, skill_gap | Assessment IDs (3.2). Then cost, end_date, seats, budget totals, cumulative cost, current_status, current_level and gaps, all recomputed from the final rows |
@@ -586,8 +601,9 @@ recommend(employee_id, planning_date, period_start, period_end, data, seat_ledge
         check 1  availability of candidate and chain (BR-04)
                  -> COURSE_UNAVAILABLE / PREREQUISITE_UNAVAILABLE
         check 2  path size: len(path) + len(chain) + 1 <= 4 (BR-07)    -> PATH_LIMIT
-        check 3  budget: spent + path cost + chain cost + cost <= allowance,
-                 and each cost <= dept_remaining (BR-09)                -> OVER_BUDGET
+        check 3  budget on the TOTAL: spent + path cost + chain cost + cost
+                 <= allowance, and path cost + chain cost + cost
+                 <= department free money (BR-09)                       -> OVER_BUDGET
         check 4  schedule: place chain then candidate one after another from
                  slot_start, earliest offering with a free seat, every gap
                  >= 14 days, start inside the period (BR-08). This also proves
@@ -632,14 +648,17 @@ the simulation used.
    path_sequence order, using the planned offering for each step.
 2. **Request:** `requested_on = planned_start - U{7..21}` days. For step k > 1
    it must also be after the last terminal date of an earlier step. Then:
-   - The step is requested with probability 0.9, otherwise skipped.
+   - A FUNDED step is requested with probability 0.95. An unfunded step is
+     still requested with probability 0.5 (the employee asks anyway), and is
+     then rejected for budget. Otherwise the step is skipped.
    - It is skipped if an in-path prerequisite was not PASSED (BR-05). The result
      is already known, because the prerequisite ended at least 14 days before
      this step starts.
    - It is not requested if `requested_on` falls after 30 Nov (the simulation's
      request horizon).
 3. **Decide:** `decided_on = requested_on + U{1..5}`. Check seats (BR-10), then
-   budget (BR-11). Write APPROVED or REJECTED with a reason. Seats were booked
+   funding (BR-11: only a FUNDED step is approved). Write APPROVED or REJECTED
+   with a reason. Seats were booked
    by the plan, so NO_SEATS is expected to be rare or zero in the baseline. It
    stays a real check, and the live preview can still hit full classes.
 4. **Withdraw:** an approved enrollment is withdrawn with probability 0.05 on a
@@ -673,8 +692,8 @@ the simulation used.
    missing.** It never quietly writes a smaller dataset. Rejected requests are
    enrollment rows and count toward the total.
 
-Calibration knobs, all in `config.py`: request probability, withdrawal
-probability, `LEARNING_ALLOWANCE_PER_EMPLOYEE`, `FUNDING_RATIO`. They are
+Calibration knobs, all in `config.py`: request probabilities (funded and unfunded),
+withdrawal probability, offerings per course, `LEARNING_ALLOWANCE_PER_EMPLOYEE`, `FUNDING_RATIO`. They are
 tuned once so the counts are reached and some budget rejections happen late in
 the year. `reports/metrics.json` prints the real rates. The knobs are never
 changed per run.
@@ -696,7 +715,7 @@ Ground rules:
 |---|---|---|---|---|
 | `PREREQUISITE_VIOLATION` | 50 / 5 | Add a RECOMMENDED `CLOSES_GAP` row for one of the employee's unplanned gap skills. The course is available and has a prerequisite that is neither PASSED nor in the path. It passes every other planning check: the path stays at 4 or fewer, the cost stays within the allowance, and the planned offering has a free seat and starts at least 14 days after the previous step ends, inside the period | BR-05 | recommendation_id |
 | `COURSE_UNAVAILABLE` | 50 / 5 | Same as above, but the course is ACTIVE, has **no prerequisites**, and only has 2027 offerings. The planned offering is its earliest 2027 offering after the previous step + 14 days. It passes the size, budget and seat checks | BR-04 | recommendation_id |
-| `BUDGET_EXCEEDED` | 50 / 5 | Take RECOMMENDED rows that were never requested and whose planned offering starts at least 7 days after the injection window opens. Create enrollments requested in the 5 days right after the **last normal decision of the whole simulation** (full scale: early December; starter reaches its target sooner, so earlier), so they are the last approvals in their department. The planned offering is used, so the plan's booked seat covers it. The course has no in-path prerequisite, or it was PASSED. Its cost is above what the department had left after every normal approval, so it breaks the limit no matter which injected approval lands first. APPROVED by a MANAGER. Departments are taken round-robin, smallest remaining budget first | BR-11 | enrollment_id |
+| `BUDGET_EXCEEDED` | 50 / 5 | Take NOT_FUNDED_BUDGET steps that were never requested and approve them anyway (requested 7 to 21 days before the planned run, approved by a MANAGER). A step is only left unfunded when it costs more than what was still unallocated, so approving it always pushes the department's obligations (funded steps + approvals outside the funded plan) past its limit. The planned run is used, so the plan's booked seat covers it, and in-path prerequisites were PASSED. Funded approvals are judged on their own funding, not a running total, so the injected approval never changes how a normal row is judged. Departments are taken round-robin | BR-11 | enrollment_id |
 | `DUPLICATE_COMPLETION` | 50 / 5 | For a COMPLETED enrollment, add a second completion row with a new CMP number and **exactly the same** completed_on, attendance, score and result. Only "one completion per enrollment" is broken | BR-13 | the second completion_id |
 | `GAP_NOT_REASSESSED` | 50 / 5 | Pick a CLOSES_GAP completion where `completed_on <= as_of - 14`, the target skill still had a gap, and **no later completion of that employee touches the same skill** (so no later score was built on the removed one). Its POST_COURSE assessment is dropped before assessment IDs exist, so there is no hole in the numbering | BR-17 | completion_id |
 
@@ -708,7 +727,7 @@ error if any pool is smaller than its target count.
 `case_id, issue_type, entity, record_id, employee_id, related_ids, rule_code, expected_decision, description`
 
 Example:
-`GT-000051, BUDGET_EXCEEDED, enrollment, ENR-EMP-001204-CRS-000317, EMP-001204, BUD-ENG-2026;OFF-002210, BR-11, REJECTED:BUDGET_EXHAUSTED, "Approved with 3,400 remaining against cost 18,000"`
+`GT-000051, BUDGET_EXCEEDED, enrollment, ENR-EMP-001204-CRS-000317, EMP-001204, BUD-ENG-2026;REC-EMP-001204-CRS-000317, BR-11, REJECTED:BUDGET_EXHAUSTED, "Approved 18,000 for a step the ENG budget did not fund; only 1,200 of the limit was unallocated."`
 
 ---
 
@@ -737,7 +756,8 @@ Each check returns `{check_id, rule_code, table, kind, failing_ids}`.
 | Engine reconciliation | re-run `rules/recommend.py` for the January planning date on the input data. Every RECOMMENDED and NOT_RECOMMENDED row it produces must exist unchanged. The **only** extra rows allowed in the table are the ground-truth PREREQUISITE_VIOLATION and COURSE_UNAVAILABLE IDs |
 | RULE: BR-05 | RECOMMENDED rows whose prerequisites are neither PASSED nor planned early enough. Enrollments whose in-path prerequisite was not PASSED before start |
 | RULE: BR-04 | RECOMMENDED rows for unavailable courses |
-| RULE: BR-11 | approvals over the running limit |
+| RULE: BR-11 | approvals of steps that were not FUNDED, or that took committed spend past the limit |
+| Funding (STRUCTURAL) | re-run the BR-21 allocation on the engine's proposed steps: it must give exactly the stored funding_status, and never allocate more than the limit. RECOMMENDED rows have a funding_status, NOT_RECOMMENDED rows do not |
 | RULE: BR-13 | completions beyond the first per enrollment (lowest completion_id is the first) |
 | RULE: BR-17 | due CLOSES_GAP completions (first per enrollment only) with no POST_COURSE assessment |
 | Leakage | no input column looks like issue, anomaly, label or ground_truth. ground_truth/ is separate from csv/ |
@@ -750,9 +770,9 @@ check's failing set equals its ground truth set exactly.
 The detector reads only input tables and never opens ground truth. It applies
 the same five rule functions and writes `reports/detected_issues.csv` with
 `issue_type, record_id, rule_code, evidence`.
-- **BR-11:** walk approvals per department in (event_on, event_id) order. Every
-  injected approval is dated after every normal decision in its department, so
-  normal rows are never flagged.
+- **BR-11:** walk approvals per department in (event_on, event_id) order and flag
+  any approval of a step that was not FUNDED, or that took committed spend past
+  the limit. Normal approvals are always of funded steps, so they are never flagged.
 - **BR-17:** only the first completion of each enrollment is looked at, so a
   duplicate completion is never counted under a second issue type.
 
@@ -763,8 +783,9 @@ the same five rule functions and writes `reports/detected_issues.csv` with
 | Detection | per issue_type and overall: TP, FP, FN, precision, recall and F1 on `(issue_type, record_id)`. Expected 1.0, and anything lower is a bug that the report names by ID |
 | Gap coverage | share of gaps by plan_status. Share PLANNED |
 | Gap closure by plan | for every RECOMMENDED path: does each CLOSES_GAP course cover its target (BR-03)? Must be 100% |
-| Feasibility | share of RECOMMENDED rows meeting BR-04, 05, 07, 08 and 09. Engine rows 100%. Final data lower by exactly the injected rows |
-| Budget | per department: limit, planned (demand), committed, utilization, budget rejections |
+| Feasibility | share of proposed (RECOMMENDED) steps that pass **every** planning check: BR-04 availability, BR-05 prerequisites, BR-07 path size, BR-08 schedule spacing, period and seats, BR-09 allowance and department limit (`checks/feasibility.py`). Plus the count failing each rule. Engine rows 100%; the final data is lower by exactly the injected rows |
+| Funding | share of proposed steps FUNDED, and share both feasible and funded. Reported separately, because a step can be feasible and still not funded |
+| Budget | per department: limit, proposed, funded, committed, utilization, budget rejections |
 | Funnel | recommended, requested, approved, started, completed, passed, reassessed, closed |
 | Outcomes | closure rate of reassessed gaps, average score and level uplift, PASSED vs FAILED uplift |
 | Outcome vs attendance | completion rate, pass rate and gap closure rate side by side |
@@ -841,7 +862,7 @@ routes under `/api`.
 | GET | `/api/summary` | headline counts and rates |
 | GET | `/api/employees?search=&department=&manager_id=&status=&limit=50&offset=0` | list with open-gap count |
 | GET | `/api/employees/{employee_id}` | profile, roles, skill gaps, January path with decisions and reasons, enrollments with event timeline, completions next to assessments |
-| POST | `/api/recommendations/preview` | body `{employee_id, planning_date, period_start, period_end}`. **All three dates are required.** planning_date must be within the period, and period_end must be after period_start. Runs `rules/recommend.py` on a point-in-time snapshot (BR-20) with a seat ledger built from the database. Returns the path with planned offerings and dates, rejected candidates with reasons, plan_status per gap, total cost vs allowance left vs department remaining. Nothing is saved |
+| POST | `/api/recommendations/preview` | body `{employee_id, planning_date, period_start, period_end}`. **All three dates are required.** The period must lie inside the 2026 budget year (otherwise 422), planning_date must be within the period, and period_end must be after period_start. The budget is picked by the period's fiscal year, never assumed. The result is a proposal; department free money = limit - committed - money held for other people's open funded steps. Runs `rules/recommend.py` on a point-in-time snapshot (BR-20) with a seat ledger built from the database. Returns the path with planned offerings and dates, rejected candidates with reasons, plan_status per gap, total cost vs allowance left vs department remaining. Nothing is saved |
 | GET | `/api/courses?search=&category=&level=&available=` | list |
 | GET | `/api/courses/{course_id}` | skills and levels, prerequisite chain (both ways), offerings with planned/approved/capacity |
 | GET | `/api/budgets` | per department: limit, planned, committed, remaining, utilization, status |
@@ -919,7 +940,7 @@ C:\CandidateWorkspace\
 │   │   │   ├── availability.py   BR-04
 │   │   │   ├── prerequisites.py  chain expansion, BR-05
 │   │   │   ├── schedule.py       BR-08 offering placement + seat ledger
-│   │   │   ├── budget.py         BR-09 planning check, BR-11 running total
+│   │   │   ├── budget.py         BR-09 total-cost checks, BR-21 allocation, BR-11 approval
 │   │   │   ├── recommend.py      BR-02, 03, 06, 07 + calls the above (5.2)
 │   │   │   ├── lifecycle.py      BR-12, status from events
 │   │   │   └── outcomes.py       BR-14, BR-15 bands, BR-16 cap
@@ -937,6 +958,7 @@ C:\CandidateWorkspace\
 │   │   │   └── s10_finalize.py
 │   │   ├── checks/
 │   │   │   ├── context.py        shared read-only indexes over the loaded tables
+│   │   │   ├── feasibility.py    every planning condition per proposed step
 │   │   │   ├── validate.py
 │   │   │   ├── detect.py
 │   │   │   └── evaluate.py
@@ -1048,9 +1070,8 @@ npm run dev                                       # http://localhost:5173
 
 - Injected events and completions take the next free EVT and CMP numbers
   (3.2). IDs are not features, and the detector ignores ID order.
-- Injected budget cases are requests dated in the 5 days after the last normal
-  decision of the simulation. Being last is what guarantees they never change
-  how a normal row is judged. The timing itself breaks no business rule.
+- A preview is a proposal for one person. It is not funded until a budget
+  allocation includes it, and the API never saves it.
 - `COURSE_UNAVAILABLE` is both an issue type and a normal NOT_RECOMMENDED
   reason the engine writes for honest rejections. The input vocabulary is the
   reason code; the label lives only in ground truth.
@@ -1085,4 +1106,18 @@ npm run dev                                       # http://localhost:5173
 | JSON files hold one record per line | Same content, about half the size of indented JSON | 7.4 |
 | `checks/context.py`, `stages/common.py`, `pipeline/generate.py` added | Shared indexes, shared helpers and the stage runner, so no logic is copied between files | 11 |
 | Validator re-derives the budget limit from the engine's own rows | Injected recommendations must not change what the limit should have been | 7.1 |
+
+---
+
+## 18. Changes in revision 4 (second review)
+
+| Review point | Fix | Where |
+|---|---|---|
+| The budget check let unaffordable paths through: a 14,000 path was recommended with 10,000 free | BR-09 now checks the **total**: the path so far, every new prerequisite and the candidate together, against both the allowance and the department money free on the planning date. The free money also holds back what is already allocated to other people's open funded steps. Unit tests reproduce the reported case | `rules/budget.py`, `rules/recommend.py`, `rules/snapshot.py`, 4 |
+| January plans came before budgets, so they were proposed plans presented as funded | Two explicit plans. The proposed plan (RECOMMENDED rows), then budgets, then the funded plan (BR-21 allocation, `funding_status` on every proposed step). Only funded steps can be approved (BR-11), and unfunded requests are rejected for budget. The validator re-runs the allocation | `stages/s07_budgets.py`, 3.5, 4, 5.3 |
+| The feasibility metric only covered availability and prerequisites | `checks/feasibility.py` checks every planning condition (BR-04, 05, 07, 08 including seats, 09). Funding is a separate metric | 7.3 |
+| The preview accepted 2027 dates but used the 2026 budget | The request must lie inside the 2026 budget year (422 otherwise), and budgets are picked by fiscal year | `app/schemas.py`, `rules/snapshot.py`, 9 |
+| The preview result stayed on screen when switching employees | The preview is keyed by employee ID and also clears itself when the ID changes | `PathPreview.jsx`, `EmployeeDetail.jsx` |
+| (Follow-on) Budget edge case | It is now "a step the budget never funded, approved anyway", which needs no special timing, so the late-December window is gone | 6 |
+| (Follow-on) Calibration | Funding ratio 0.85, 4 to 7 runs per course, 10% next-year-only courses, request probability 0.95 (funded) and 0.5 (unfunded). These are tuned so both scales reach their exact enrollment counts with headroom, and every edge-case pool is large enough | `config.py` |
 

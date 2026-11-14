@@ -22,29 +22,35 @@ Everything is synthetic. No external dataset and no real person is involved.
 
 | What | Result |
 |---|---|
-| Validation checks | **149 of 149 pass**: 143 structural checks with zero failing records, plus 6 rule checks matched to ground truth record by record |
+| Validation checks | **150 of 150 pass**: 144 structural checks with zero failing records, plus 6 rule checks matched to ground truth record by record |
 | Labelled exceptions found | **250 of 250**, no false alarms. Precision 1.000, recall 1.000 for all five types |
-| Clean baseline (no injected cases) | 149 of 149 pass, every check with zero failing records |
+| Clean baseline (no injected cases) | 150 of 150 pass, every check with zero failing records |
 | Reproducibility | Two runs give **46 of 46 files byte-identical** (SHA-256) at both scales |
 | Exact volumes | 5,000 employees, 500 skills, 1,000 courses, 10,000 enrollments |
-| Tests | 245 pytest tests pass |
+| Database and API | Full dataset loaded into PostgreSQL with every constraint and row count verified, then every endpoint and the dashboard checked live |
+| Tests | 258 pytest tests pass |
 
 What the data looks like:
 
 | Funnel | Count |
 |---|---|
-| Recommended courses (January plan) | 13,421 |
+| Proposed course steps (January plan) | 14,610 |
+| Funded by department budgets | 12,701 (86.9%) |
 | Requested | 10,000 |
-| Approved / rejected (budget or seats) | 9,039 / 961 |
-| Started / withdrawn | 8,884 / 461 |
-| Completed / passed | 8,534 / 5,773 |
-| Reassessed after a gap-closing course | 5,744 |
+| Approved / rejected for budget | 9,769 / 231 |
+| Started / withdrawn | 9,594 / 476 |
+| Completed / passed | 9,282 / 6,308 |
+| Reassessed after a gap-closing course | 6,316 |
 
 Attending, passing and learning are kept apart, as the brief asks:
 
-- 96.1% of started courses are completed.
-- 67.7% of completions pass.
-- Only 52.8% of reassessed gap-closing courses actually close the gap.
+- 96.8% of started courses are completed.
+- 68.0% of completions pass.
+- Only 52.1% of reassessed gap-closing courses actually close the gap.
+
+Proposed steps that pass every planning check (availability, prerequisites, path
+size, schedule and seats, allowance and department budget): 99.3%. Every step the
+engine made passes; the only failures are the 100 planted exceptions.
 
 ---
 
@@ -109,7 +115,8 @@ s03 proficiency baseline skill test per skill, Q4 2025
 s04 catalog     courses, the skills they teach and to which level, prerequisites
 s05 offerings   course runs with dates and seats (some courses only run in 2027)
 s06 plan        January planning run: the recommendation engine, per employee
-s07 budgets     department limit = 62% of planned demand
+s07 budgets     department limit = 85% of proposed demand, then allocated to
+                proposed steps: the funded plan
 s08 simulate    the whole of 2026 as one event queue: requests, approvals,
                 starts, withdrawals, completions with exam results, post-course tests
 s09 inject      the five labelled exception types, with ground truth kept apart
@@ -124,13 +131,21 @@ accepted if it passes four checks:
 
 1. It runs in the planning period.
 2. The whole prerequisite chain fits in a path of at most 4 courses.
-3. It fits the employee's ₹60,000 allowance and the department's remaining budget.
+3. The **total** cost (the path so far, every new prerequisite and the candidate)
+   fits the employee's ₹60,000 allowance and the department money still free.
 4. Every course can be placed one after another, 14 days apart, in a run with a
    free seat.
 
 A failed check moves on to the next candidate. If every candidate fails, the
 reason is recorded. It only uses facts known on its planning date. The API's
 preview runs the same code for any date.
+
+**Proposed and funded are two separate plans.** The January run makes a
+*proposed* plan before any budget exists. Each department's limit is then set to
+85% of what its people proposed. That limit is shared out over the proposed steps,
+everyone's first course before anyone's second, which gives the *funded* plan.
+Only funded steps can be approved. Asking for an unfunded step is rejected for
+budget, which happens 231 times at full scale.
 
 **Learning outcomes come from evidence.** Each completion has an exam score and
 attendance, which decide pass or fail. A gap-closing course is then followed by
@@ -145,7 +160,7 @@ and a course can never certify above the level it teaches.
 |---|---|---|---|
 | Recommendation violates prerequisite | BR-05 | A RECOMMENDED course whose prerequisite is neither passed nor planned earlier | 50 / 5 |
 | Course unavailable in planning period | BR-04 | A RECOMMENDED course that only runs in 2027 | 50 / 5 |
-| Budget exceeded | BR-11 | An enrollment approved when the department had less left than the course costs | 50 / 5 |
+| Budget exceeded | BR-11 | An enrollment approved for a step the department budget did not fund, so the department owes more than its limit | 50 / 5 |
 | Completion counted twice | BR-13 | A second completion row for the same enrollment, same date and values | 50 / 5 |
 | Skill gap remains after course without reassessment | BR-17 | A completed gap-closing course with no post-course test, so the gap is still open | 50 / 5 |
 
@@ -163,7 +178,7 @@ docs/                  data dictionary (generated), business rules, edge cases, 
 backend/pipeline/      generator: config, dictionary, rules/, stages/, checks/, export, run
 backend/app/           FastAPI: config, db, queries (raw SQL), schemas, main
 backend/scripts/       create_tables, load_data, check_reproducibility
-backend/tests/         245 tests: rules on hand-made data, the whole pipeline, leakage, reproducibility
+backend/tests/         258 tests: rules on hand-made data, the whole pipeline, leakage, reproducibility, API request rules
 frontend/src/          React pages: Home, Employees, Employee detail + path preview,
                        Courses, Course detail, Budgets, Exceptions, Evaluation
 output/starter/        csv/, json/, sql/ (schema + seed), ground_truth/, reports/, manifest.json
