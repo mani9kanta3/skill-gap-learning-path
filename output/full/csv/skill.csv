@@ -1,0 +1,501 @@
+skill_id,skill_name,skill_category
+SKL-000001,API Automation,Software Engineering
+SKL-000002,API Design,Software Engineering
+SKL-000003,API Fundamentals,Software Engineering
+SKL-000004,API Strategy,Software Engineering
+SKL-000005,API Troubleshooting,Software Engineering
+SKL-000006,Code Review Automation,Software Engineering
+SKL-000007,Code Review Design,Software Engineering
+SKL-000008,Code Review Fundamentals,Software Engineering
+SKL-000009,Code Review Strategy,Software Engineering
+SKL-000010,Code Review Troubleshooting,Software Engineering
+SKL-000011,Frontend Automation,Software Engineering
+SKL-000012,Frontend Design,Software Engineering
+SKL-000013,Frontend Fundamentals,Software Engineering
+SKL-000014,Frontend Strategy,Software Engineering
+SKL-000015,Frontend Troubleshooting,Software Engineering
+SKL-000016,Java Automation,Software Engineering
+SKL-000017,Java Design,Software Engineering
+SKL-000018,Java Fundamentals,Software Engineering
+SKL-000019,Java Strategy,Software Engineering
+SKL-000020,Java Troubleshooting,Software Engineering
+SKL-000021,Microservice Automation,Software Engineering
+SKL-000022,Microservice Design,Software Engineering
+SKL-000023,Microservice Fundamentals,Software Engineering
+SKL-000024,Microservice Strategy,Software Engineering
+SKL-000025,Microservice Troubleshooting,Software Engineering
+SKL-000026,Python Automation,Software Engineering
+SKL-000027,Python Design,Software Engineering
+SKL-000028,Python Fundamentals,Software Engineering
+SKL-000029,Python Strategy,Software Engineering
+SKL-000030,Python Troubleshooting,Software Engineering
+SKL-000031,Refactoring Automation,Software Engineering
+SKL-000032,Refactoring Design,Software Engineering
+SKL-000033,Refactoring Fundamentals,Software Engineering
+SKL-000034,Refactoring Strategy,Software Engineering
+SKL-000035,Refactoring Troubleshooting,Software Engineering
+SKL-000036,Secure Coding Automation,Software Engineering
+SKL-000037,Secure Coding Design,Software Engineering
+SKL-000038,Secure Coding Fundamentals,Software Engineering
+SKL-000039,Secure Coding Strategy,Software Engineering
+SKL-000040,Secure Coding Troubleshooting,Software Engineering
+SKL-000041,Testing Automation,Software Engineering
+SKL-000042,Testing Design,Software Engineering
+SKL-000043,Testing Fundamentals,Software Engineering
+SKL-000044,Testing Strategy,Software Engineering
+SKL-000045,Testing Troubleshooting,Software Engineering
+SKL-000046,Version Control Automation,Software Engineering
+SKL-000047,Version Control Design,Software Engineering
+SKL-000048,Version Control Fundamentals,Software Engineering
+SKL-000049,Version Control Strategy,Software Engineering
+SKL-000050,Version Control Troubleshooting,Software Engineering
+SKL-000051,Data Modelling Automation,Data & AI
+SKL-000052,Data Modelling Design,Data & AI
+SKL-000053,Data Modelling Fundamentals,Data & AI
+SKL-000054,Data Modelling Strategy,Data & AI
+SKL-000055,Data Modelling Troubleshooting,Data & AI
+SKL-000056,Data Quality Automation,Data & AI
+SKL-000057,Data Quality Design,Data & AI
+SKL-000058,Data Quality Fundamentals,Data & AI
+SKL-000059,Data Quality Strategy,Data & AI
+SKL-000060,Data Quality Troubleshooting,Data & AI
+SKL-000061,Data Visualisation Automation,Data & AI
+SKL-000062,Data Visualisation Design,Data & AI
+SKL-000063,Data Visualisation Fundamentals,Data & AI
+SKL-000064,Data Visualisation Strategy,Data & AI
+SKL-000065,Data Visualisation Troubleshooting,Data & AI
+SKL-000066,ETL Automation,Data & AI
+SKL-000067,ETL Design,Data & AI
+SKL-000068,ETL Fundamentals,Data & AI
+SKL-000069,ETL Strategy,Data & AI
+SKL-000070,ETL Troubleshooting,Data & AI
+SKL-000071,Experimentation Automation,Data & AI
+SKL-000072,Experimentation Design,Data & AI
+SKL-000073,Experimentation Fundamentals,Data & AI
+SKL-000074,Experimentation Strategy,Data & AI
+SKL-000075,Experimentation Troubleshooting,Data & AI
+SKL-000076,Forecasting Automation,Data & AI
+SKL-000077,Forecasting Design,Data & AI
+SKL-000078,Forecasting Fundamentals,Data & AI
+SKL-000079,Forecasting Strategy,Data & AI
+SKL-000080,Forecasting Troubleshooting,Data & AI
+SKL-000081,Machine Learning Automation,Data & AI
+SKL-000082,Machine Learning Design,Data & AI
+SKL-000083,Machine Learning Fundamentals,Data & AI
+SKL-000084,Machine Learning Strategy,Data & AI
+SKL-000085,Machine Learning Troubleshooting,Data & AI
+SKL-000086,Prompt Engineering Automation,Data & AI
+SKL-000087,Prompt Engineering Design,Data & AI
+SKL-000088,Prompt Engineering Fundamentals,Data & AI
+SKL-000089,Prompt Engineering Strategy,Data & AI
+SKL-000090,Prompt Engineering Troubleshooting,Data & AI
+SKL-000091,SQL Automation,Data & AI
+SKL-000092,SQL Design,Data & AI
+SKL-000093,SQL Fundamentals,Data & AI
+SKL-000094,SQL Strategy,Data & AI
+SKL-000095,SQL Troubleshooting,Data & AI
+SKL-000096,Statistics Automation,Data & AI
+SKL-000097,Statistics Design,Data & AI
+SKL-000098,Statistics Fundamentals,Data & AI
+SKL-000099,Statistics Strategy,Data & AI
+SKL-000100,Statistics Troubleshooting,Data & AI
+SKL-000101,Backup Automation,Infrastructure & Cloud
+SKL-000102,Backup Design,Infrastructure & Cloud
+SKL-000103,Backup Fundamentals,Infrastructure & Cloud
+SKL-000104,Backup Strategy,Infrastructure & Cloud
+SKL-000105,Backup Troubleshooting,Infrastructure & Cloud
+SKL-000106,Cloud Networking Automation,Infrastructure & Cloud
+SKL-000107,Cloud Networking Design,Infrastructure & Cloud
+SKL-000108,Cloud Networking Fundamentals,Infrastructure & Cloud
+SKL-000109,Cloud Networking Strategy,Infrastructure & Cloud
+SKL-000110,Cloud Networking Troubleshooting,Infrastructure & Cloud
+SKL-000111,Containers Automation,Infrastructure & Cloud
+SKL-000112,Containers Design,Infrastructure & Cloud
+SKL-000113,Containers Fundamentals,Infrastructure & Cloud
+SKL-000114,Containers Strategy,Infrastructure & Cloud
+SKL-000115,Containers Troubleshooting,Infrastructure & Cloud
+SKL-000116,Cost Management Automation,Infrastructure & Cloud
+SKL-000117,Cost Management Design,Infrastructure & Cloud
+SKL-000118,Cost Management Fundamentals,Infrastructure & Cloud
+SKL-000119,Cost Management Strategy,Infrastructure & Cloud
+SKL-000120,Cost Management Troubleshooting,Infrastructure & Cloud
+SKL-000121,Identity Management Automation,Infrastructure & Cloud
+SKL-000122,Identity Management Design,Infrastructure & Cloud
+SKL-000123,Identity Management Fundamentals,Infrastructure & Cloud
+SKL-000124,Identity Management Strategy,Infrastructure & Cloud
+SKL-000125,Identity Management Troubleshooting,Infrastructure & Cloud
+SKL-000126,Incident Response Automation,Infrastructure & Cloud
+SKL-000127,Incident Response Design,Infrastructure & Cloud
+SKL-000128,Incident Response Fundamentals,Infrastructure & Cloud
+SKL-000129,Incident Response Strategy,Infrastructure & Cloud
+SKL-000130,Incident Response Troubleshooting,Infrastructure & Cloud
+SKL-000131,Infrastructure as Code Automation,Infrastructure & Cloud
+SKL-000132,Infrastructure as Code Design,Infrastructure & Cloud
+SKL-000133,Infrastructure as Code Fundamentals,Infrastructure & Cloud
+SKL-000134,Infrastructure as Code Strategy,Infrastructure & Cloud
+SKL-000135,Infrastructure as Code Troubleshooting,Infrastructure & Cloud
+SKL-000136,Kubernetes Automation,Infrastructure & Cloud
+SKL-000137,Kubernetes Design,Infrastructure & Cloud
+SKL-000138,Kubernetes Fundamentals,Infrastructure & Cloud
+SKL-000139,Kubernetes Strategy,Infrastructure & Cloud
+SKL-000140,Kubernetes Troubleshooting,Infrastructure & Cloud
+SKL-000141,Linux Automation,Infrastructure & Cloud
+SKL-000142,Linux Design,Infrastructure & Cloud
+SKL-000143,Linux Fundamentals,Infrastructure & Cloud
+SKL-000144,Linux Strategy,Infrastructure & Cloud
+SKL-000145,Linux Troubleshooting,Infrastructure & Cloud
+SKL-000146,Monitoring Automation,Infrastructure & Cloud
+SKL-000147,Monitoring Design,Infrastructure & Cloud
+SKL-000148,Monitoring Fundamentals,Infrastructure & Cloud
+SKL-000149,Monitoring Strategy,Infrastructure & Cloud
+SKL-000150,Monitoring Troubleshooting,Infrastructure & Cloud
+SKL-000151,Account Planning Automation,Sales
+SKL-000152,Account Planning Design,Sales
+SKL-000153,Account Planning Fundamentals,Sales
+SKL-000154,Account Planning Strategy,Sales
+SKL-000155,Account Planning Troubleshooting,Sales
+SKL-000156,CRM Automation,Sales
+SKL-000157,CRM Design,Sales
+SKL-000158,CRM Fundamentals,Sales
+SKL-000159,CRM Strategy,Sales
+SKL-000160,CRM Troubleshooting,Sales
+SKL-000161,Contract Automation,Sales
+SKL-000162,Contract Design,Sales
+SKL-000163,Contract Fundamentals,Sales
+SKL-000164,Contract Strategy,Sales
+SKL-000165,Contract Troubleshooting,Sales
+SKL-000166,Negotiation Automation,Sales
+SKL-000167,Negotiation Design,Sales
+SKL-000168,Negotiation Fundamentals,Sales
+SKL-000169,Negotiation Strategy,Sales
+SKL-000170,Negotiation Troubleshooting,Sales
+SKL-000171,Pipeline Automation,Sales
+SKL-000172,Pipeline Design,Sales
+SKL-000173,Pipeline Fundamentals,Sales
+SKL-000174,Pipeline Strategy,Sales
+SKL-000175,Pipeline Troubleshooting,Sales
+SKL-000176,Pricing Automation,Sales
+SKL-000177,Pricing Design,Sales
+SKL-000178,Pricing Fundamentals,Sales
+SKL-000179,Pricing Strategy,Sales
+SKL-000180,Pricing Troubleshooting,Sales
+SKL-000181,Prospecting Automation,Sales
+SKL-000182,Prospecting Design,Sales
+SKL-000183,Prospecting Fundamentals,Sales
+SKL-000184,Prospecting Strategy,Sales
+SKL-000185,Prospecting Troubleshooting,Sales
+SKL-000186,Renewal Automation,Sales
+SKL-000187,Renewal Design,Sales
+SKL-000188,Renewal Fundamentals,Sales
+SKL-000189,Renewal Strategy,Sales
+SKL-000190,Renewal Troubleshooting,Sales
+SKL-000191,Solution Selling Automation,Sales
+SKL-000192,Solution Selling Design,Sales
+SKL-000193,Solution Selling Fundamentals,Sales
+SKL-000194,Solution Selling Strategy,Sales
+SKL-000195,Solution Selling Troubleshooting,Sales
+SKL-000196,Territory Automation,Sales
+SKL-000197,Territory Design,Sales
+SKL-000198,Territory Fundamentals,Sales
+SKL-000199,Territory Strategy,Sales
+SKL-000200,Territory Troubleshooting,Sales
+SKL-000201,Brand Automation,Marketing
+SKL-000202,Brand Design,Marketing
+SKL-000203,Brand Fundamentals,Marketing
+SKL-000204,Brand Strategy,Marketing
+SKL-000205,Brand Troubleshooting,Marketing
+SKL-000206,Campaign Automation,Marketing
+SKL-000207,Campaign Design,Marketing
+SKL-000208,Campaign Fundamentals,Marketing
+SKL-000209,Campaign Strategy,Marketing
+SKL-000210,Campaign Troubleshooting,Marketing
+SKL-000211,Content Automation,Marketing
+SKL-000212,Content Design,Marketing
+SKL-000213,Content Fundamentals,Marketing
+SKL-000214,Content Strategy,Marketing
+SKL-000215,Content Troubleshooting,Marketing
+SKL-000216,Email Marketing Automation,Marketing
+SKL-000217,Email Marketing Design,Marketing
+SKL-000218,Email Marketing Fundamentals,Marketing
+SKL-000219,Email Marketing Strategy,Marketing
+SKL-000220,Email Marketing Troubleshooting,Marketing
+SKL-000221,Event Automation,Marketing
+SKL-000222,Event Design,Marketing
+SKL-000223,Event Fundamentals,Marketing
+SKL-000224,Event Strategy,Marketing
+SKL-000225,Event Troubleshooting,Marketing
+SKL-000226,Market Research Automation,Marketing
+SKL-000227,Market Research Design,Marketing
+SKL-000228,Market Research Fundamentals,Marketing
+SKL-000229,Market Research Strategy,Marketing
+SKL-000230,Market Research Troubleshooting,Marketing
+SKL-000231,Marketing Analytics Automation,Marketing
+SKL-000232,Marketing Analytics Design,Marketing
+SKL-000233,Marketing Analytics Fundamentals,Marketing
+SKL-000234,Marketing Analytics Strategy,Marketing
+SKL-000235,Marketing Analytics Troubleshooting,Marketing
+SKL-000236,Product Marketing Automation,Marketing
+SKL-000237,Product Marketing Design,Marketing
+SKL-000238,Product Marketing Fundamentals,Marketing
+SKL-000239,Product Marketing Strategy,Marketing
+SKL-000240,Product Marketing Troubleshooting,Marketing
+SKL-000241,SEO Automation,Marketing
+SKL-000242,SEO Design,Marketing
+SKL-000243,SEO Fundamentals,Marketing
+SKL-000244,SEO Strategy,Marketing
+SKL-000245,SEO Troubleshooting,Marketing
+SKL-000246,Social Media Automation,Marketing
+SKL-000247,Social Media Design,Marketing
+SKL-000248,Social Media Fundamentals,Marketing
+SKL-000249,Social Media Strategy,Marketing
+SKL-000250,Social Media Troubleshooting,Marketing
+SKL-000251,Audit Automation,Finance
+SKL-000252,Audit Design,Finance
+SKL-000253,Audit Fundamentals,Finance
+SKL-000254,Audit Strategy,Finance
+SKL-000255,Audit Troubleshooting,Finance
+SKL-000256,Budgeting Automation,Finance
+SKL-000257,Budgeting Design,Finance
+SKL-000258,Budgeting Fundamentals,Finance
+SKL-000259,Budgeting Strategy,Finance
+SKL-000260,Budgeting Troubleshooting,Finance
+SKL-000261,Cash Flow Automation,Finance
+SKL-000262,Cash Flow Design,Finance
+SKL-000263,Cash Flow Fundamentals,Finance
+SKL-000264,Cash Flow Strategy,Finance
+SKL-000265,Cash Flow Troubleshooting,Finance
+SKL-000266,Cost Accounting Automation,Finance
+SKL-000267,Cost Accounting Design,Finance
+SKL-000268,Cost Accounting Fundamentals,Finance
+SKL-000269,Cost Accounting Strategy,Finance
+SKL-000270,Cost Accounting Troubleshooting,Finance
+SKL-000271,Financial Modelling Automation,Finance
+SKL-000272,Financial Modelling Design,Finance
+SKL-000273,Financial Modelling Fundamentals,Finance
+SKL-000274,Financial Modelling Strategy,Finance
+SKL-000275,Financial Modelling Troubleshooting,Finance
+SKL-000276,Financial Reporting Automation,Finance
+SKL-000277,Financial Reporting Design,Finance
+SKL-000278,Financial Reporting Fundamentals,Finance
+SKL-000279,Financial Reporting Strategy,Finance
+SKL-000280,Financial Reporting Troubleshooting,Finance
+SKL-000281,Payroll Automation,Finance
+SKL-000282,Payroll Design,Finance
+SKL-000283,Payroll Fundamentals,Finance
+SKL-000284,Payroll Strategy,Finance
+SKL-000285,Payroll Troubleshooting,Finance
+SKL-000286,Procurement Automation,Finance
+SKL-000287,Procurement Design,Finance
+SKL-000288,Procurement Fundamentals,Finance
+SKL-000289,Procurement Strategy,Finance
+SKL-000290,Procurement Troubleshooting,Finance
+SKL-000291,Risk Control Automation,Finance
+SKL-000292,Risk Control Design,Finance
+SKL-000293,Risk Control Fundamentals,Finance
+SKL-000294,Risk Control Strategy,Finance
+SKL-000295,Risk Control Troubleshooting,Finance
+SKL-000296,Tax Automation,Finance
+SKL-000297,Tax Design,Finance
+SKL-000298,Tax Fundamentals,Finance
+SKL-000299,Tax Strategy,Finance
+SKL-000300,Tax Troubleshooting,Finance
+SKL-000301,Compensation Automation,People & HR
+SKL-000302,Compensation Design,People & HR
+SKL-000303,Compensation Fundamentals,People & HR
+SKL-000304,Compensation Strategy,People & HR
+SKL-000305,Compensation Troubleshooting,People & HR
+SKL-000306,Employee Relations Automation,People & HR
+SKL-000307,Employee Relations Design,People & HR
+SKL-000308,Employee Relations Fundamentals,People & HR
+SKL-000309,Employee Relations Strategy,People & HR
+SKL-000310,Employee Relations Troubleshooting,People & HR
+SKL-000311,HR Analytics Automation,People & HR
+SKL-000312,HR Analytics Design,People & HR
+SKL-000313,HR Analytics Fundamentals,People & HR
+SKL-000314,HR Analytics Strategy,People & HR
+SKL-000315,HR Analytics Troubleshooting,People & HR
+SKL-000316,HR Policy Automation,People & HR
+SKL-000317,HR Policy Design,People & HR
+SKL-000318,HR Policy Fundamentals,People & HR
+SKL-000319,HR Policy Strategy,People & HR
+SKL-000320,HR Policy Troubleshooting,People & HR
+SKL-000321,Learning Design Automation,People & HR
+SKL-000322,Learning Design Design,People & HR
+SKL-000323,Learning Design Fundamentals,People & HR
+SKL-000324,Learning Design Strategy,People & HR
+SKL-000325,Learning Design Troubleshooting,People & HR
+SKL-000326,Onboarding Automation,People & HR
+SKL-000327,Onboarding Design,People & HR
+SKL-000328,Onboarding Fundamentals,People & HR
+SKL-000329,Onboarding Strategy,People & HR
+SKL-000330,Onboarding Troubleshooting,People & HR
+SKL-000331,Performance Review Automation,People & HR
+SKL-000332,Performance Review Design,People & HR
+SKL-000333,Performance Review Fundamentals,People & HR
+SKL-000334,Performance Review Strategy,People & HR
+SKL-000335,Performance Review Troubleshooting,People & HR
+SKL-000336,Recruiting Automation,People & HR
+SKL-000337,Recruiting Design,People & HR
+SKL-000338,Recruiting Fundamentals,People & HR
+SKL-000339,Recruiting Strategy,People & HR
+SKL-000340,Recruiting Troubleshooting,People & HR
+SKL-000341,Wellbeing Automation,People & HR
+SKL-000342,Wellbeing Design,People & HR
+SKL-000343,Wellbeing Fundamentals,People & HR
+SKL-000344,Wellbeing Strategy,People & HR
+SKL-000345,Wellbeing Troubleshooting,People & HR
+SKL-000346,Workforce Planning Automation,People & HR
+SKL-000347,Workforce Planning Design,People & HR
+SKL-000348,Workforce Planning Fundamentals,People & HR
+SKL-000349,Workforce Planning Strategy,People & HR
+SKL-000350,Workforce Planning Troubleshooting,People & HR
+SKL-000351,Capacity Planning Automation,Operations & Supply Chain
+SKL-000352,Capacity Planning Design,Operations & Supply Chain
+SKL-000353,Capacity Planning Fundamentals,Operations & Supply Chain
+SKL-000354,Capacity Planning Strategy,Operations & Supply Chain
+SKL-000355,Capacity Planning Troubleshooting,Operations & Supply Chain
+SKL-000356,Demand Planning Automation,Operations & Supply Chain
+SKL-000357,Demand Planning Design,Operations & Supply Chain
+SKL-000358,Demand Planning Fundamentals,Operations & Supply Chain
+SKL-000359,Demand Planning Strategy,Operations & Supply Chain
+SKL-000360,Demand Planning Troubleshooting,Operations & Supply Chain
+SKL-000361,Health and Safety Automation,Operations & Supply Chain
+SKL-000362,Health and Safety Design,Operations & Supply Chain
+SKL-000363,Health and Safety Fundamentals,Operations & Supply Chain
+SKL-000364,Health and Safety Strategy,Operations & Supply Chain
+SKL-000365,Health and Safety Troubleshooting,Operations & Supply Chain
+SKL-000366,Inventory Automation,Operations & Supply Chain
+SKL-000367,Inventory Design,Operations & Supply Chain
+SKL-000368,Inventory Fundamentals,Operations & Supply Chain
+SKL-000369,Inventory Strategy,Operations & Supply Chain
+SKL-000370,Inventory Troubleshooting,Operations & Supply Chain
+SKL-000371,Lean Automation,Operations & Supply Chain
+SKL-000372,Lean Design,Operations & Supply Chain
+SKL-000373,Lean Fundamentals,Operations & Supply Chain
+SKL-000374,Lean Strategy,Operations & Supply Chain
+SKL-000375,Lean Troubleshooting,Operations & Supply Chain
+SKL-000376,Logistics Automation,Operations & Supply Chain
+SKL-000377,Logistics Design,Operations & Supply Chain
+SKL-000378,Logistics Fundamentals,Operations & Supply Chain
+SKL-000379,Logistics Strategy,Operations & Supply Chain
+SKL-000380,Logistics Troubleshooting,Operations & Supply Chain
+SKL-000381,Process Improvement Automation,Operations & Supply Chain
+SKL-000382,Process Improvement Design,Operations & Supply Chain
+SKL-000383,Process Improvement Fundamentals,Operations & Supply Chain
+SKL-000384,Process Improvement Strategy,Operations & Supply Chain
+SKL-000385,Process Improvement Troubleshooting,Operations & Supply Chain
+SKL-000386,Quality Control Automation,Operations & Supply Chain
+SKL-000387,Quality Control Design,Operations & Supply Chain
+SKL-000388,Quality Control Fundamentals,Operations & Supply Chain
+SKL-000389,Quality Control Strategy,Operations & Supply Chain
+SKL-000390,Quality Control Troubleshooting,Operations & Supply Chain
+SKL-000391,Supplier Automation,Operations & Supply Chain
+SKL-000392,Supplier Design,Operations & Supply Chain
+SKL-000393,Supplier Fundamentals,Operations & Supply Chain
+SKL-000394,Supplier Strategy,Operations & Supply Chain
+SKL-000395,Supplier Troubleshooting,Operations & Supply Chain
+SKL-000396,Warehouse Automation,Operations & Supply Chain
+SKL-000397,Warehouse Design,Operations & Supply Chain
+SKL-000398,Warehouse Fundamentals,Operations & Supply Chain
+SKL-000399,Warehouse Strategy,Operations & Supply Chain
+SKL-000400,Warehouse Troubleshooting,Operations & Supply Chain
+SKL-000401,Business Writing Automation,Leadership & Communication
+SKL-000402,Business Writing Design,Leadership & Communication
+SKL-000403,Business Writing Fundamentals,Leadership & Communication
+SKL-000404,Business Writing Strategy,Leadership & Communication
+SKL-000405,Business Writing Troubleshooting,Leadership & Communication
+SKL-000406,Change Management Automation,Leadership & Communication
+SKL-000407,Change Management Design,Leadership & Communication
+SKL-000408,Change Management Fundamentals,Leadership & Communication
+SKL-000409,Change Management Strategy,Leadership & Communication
+SKL-000410,Change Management Troubleshooting,Leadership & Communication
+SKL-000411,Coaching Automation,Leadership & Communication
+SKL-000412,Coaching Design,Leadership & Communication
+SKL-000413,Coaching Fundamentals,Leadership & Communication
+SKL-000414,Coaching Strategy,Leadership & Communication
+SKL-000415,Coaching Troubleshooting,Leadership & Communication
+SKL-000416,Conflict Resolution Automation,Leadership & Communication
+SKL-000417,Conflict Resolution Design,Leadership & Communication
+SKL-000418,Conflict Resolution Fundamentals,Leadership & Communication
+SKL-000419,Conflict Resolution Strategy,Leadership & Communication
+SKL-000420,Conflict Resolution Troubleshooting,Leadership & Communication
+SKL-000421,Decision Making Automation,Leadership & Communication
+SKL-000422,Decision Making Design,Leadership & Communication
+SKL-000423,Decision Making Fundamentals,Leadership & Communication
+SKL-000424,Decision Making Strategy,Leadership & Communication
+SKL-000425,Decision Making Troubleshooting,Leadership & Communication
+SKL-000426,Facilitation Automation,Leadership & Communication
+SKL-000427,Facilitation Design,Leadership & Communication
+SKL-000428,Facilitation Fundamentals,Leadership & Communication
+SKL-000429,Facilitation Strategy,Leadership & Communication
+SKL-000430,Facilitation Troubleshooting,Leadership & Communication
+SKL-000431,Feedback Automation,Leadership & Communication
+SKL-000432,Feedback Design,Leadership & Communication
+SKL-000433,Feedback Fundamentals,Leadership & Communication
+SKL-000434,Feedback Strategy,Leadership & Communication
+SKL-000435,Feedback Troubleshooting,Leadership & Communication
+SKL-000436,Presentation Automation,Leadership & Communication
+SKL-000437,Presentation Design,Leadership & Communication
+SKL-000438,Presentation Fundamentals,Leadership & Communication
+SKL-000439,Presentation Strategy,Leadership & Communication
+SKL-000440,Presentation Troubleshooting,Leadership & Communication
+SKL-000441,Stakeholder Automation,Leadership & Communication
+SKL-000442,Stakeholder Design,Leadership & Communication
+SKL-000443,Stakeholder Fundamentals,Leadership & Communication
+SKL-000444,Stakeholder Strategy,Leadership & Communication
+SKL-000445,Stakeholder Troubleshooting,Leadership & Communication
+SKL-000446,Team Leadership Automation,Leadership & Communication
+SKL-000447,Team Leadership Design,Leadership & Communication
+SKL-000448,Team Leadership Fundamentals,Leadership & Communication
+SKL-000449,Team Leadership Strategy,Leadership & Communication
+SKL-000450,Team Leadership Troubleshooting,Leadership & Communication
+SKL-000451,Accessibility Automation,Digital Productivity
+SKL-000452,Accessibility Design,Digital Productivity
+SKL-000453,Accessibility Fundamentals,Digital Productivity
+SKL-000454,Accessibility Strategy,Digital Productivity
+SKL-000455,Accessibility Troubleshooting,Digital Productivity
+SKL-000456,Collaboration Tools Automation,Digital Productivity
+SKL-000457,Collaboration Tools Design,Digital Productivity
+SKL-000458,Collaboration Tools Fundamentals,Digital Productivity
+SKL-000459,Collaboration Tools Strategy,Digital Productivity
+SKL-000460,Collaboration Tools Troubleshooting,Digital Productivity
+SKL-000461,Dashboard Automation,Digital Productivity
+SKL-000462,Dashboard Design,Digital Productivity
+SKL-000463,Dashboard Fundamentals,Digital Productivity
+SKL-000464,Dashboard Strategy,Digital Productivity
+SKL-000465,Dashboard Troubleshooting,Digital Productivity
+SKL-000466,Data Privacy Automation,Digital Productivity
+SKL-000467,Data Privacy Design,Digital Productivity
+SKL-000468,Data Privacy Fundamentals,Digital Productivity
+SKL-000469,Data Privacy Strategy,Digital Productivity
+SKL-000470,Data Privacy Troubleshooting,Digital Productivity
+SKL-000471,Document Management Automation,Digital Productivity
+SKL-000472,Document Management Design,Digital Productivity
+SKL-000473,Document Management Fundamentals,Digital Productivity
+SKL-000474,Document Management Strategy,Digital Productivity
+SKL-000475,Document Management Troubleshooting,Digital Productivity
+SKL-000476,Knowledge Base Automation,Digital Productivity
+SKL-000477,Knowledge Base Design,Digital Productivity
+SKL-000478,Knowledge Base Fundamentals,Digital Productivity
+SKL-000479,Knowledge Base Strategy,Digital Productivity
+SKL-000480,Knowledge Base Troubleshooting,Digital Productivity
+SKL-000481,Remote Working Automation,Digital Productivity
+SKL-000482,Remote Working Design,Digital Productivity
+SKL-000483,Remote Working Fundamentals,Digital Productivity
+SKL-000484,Remote Working Strategy,Digital Productivity
+SKL-000485,Remote Working Troubleshooting,Digital Productivity
+SKL-000486,Spreadsheet Automation,Digital Productivity
+SKL-000487,Spreadsheet Design,Digital Productivity
+SKL-000488,Spreadsheet Fundamentals,Digital Productivity
+SKL-000489,Spreadsheet Strategy,Digital Productivity
+SKL-000490,Spreadsheet Troubleshooting,Digital Productivity
+SKL-000491,Time Management Automation,Digital Productivity
+SKL-000492,Time Management Design,Digital Productivity
+SKL-000493,Time Management Fundamentals,Digital Productivity
+SKL-000494,Time Management Strategy,Digital Productivity
+SKL-000495,Time Management Troubleshooting,Digital Productivity
+SKL-000496,Workflow Automation,Digital Productivity
+SKL-000497,Workflow Design,Digital Productivity
+SKL-000498,Workflow Fundamentals,Digital Productivity
+SKL-000499,Workflow Strategy,Digital Productivity
+SKL-000500,Workflow Troubleshooting,Digital Productivity

@@ -1,0 +1,161 @@
+# Validation summary: full
+
+Seed 20261022. Edge cases injected: yes.
+
+**149 of 149 checks passed.**
+
+STRUCTURAL checks must fail on nothing. RULE checks must fail on exactly the
+ground-truth records of their issue type, matched by ID (unexpected = failing but
+not labelled, missed = labelled but not failing).
+
+| Check | Rule | Table | Kind | Failing | Expected | Unexpected | Missed | Status |
+|---|---|---|---|---|---|---|---|---|
+| primary_key.department |  | department | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| required.department |  | department | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| enums.department |  | department | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| ranges.department |  | department | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| formats.department |  | department | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| unique.department.department_name |  | department | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| primary_key.job_role |  | job_role | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| required.job_role |  | job_role | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| enums.job_role |  | job_role | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| ranges.job_role |  | job_role | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| formats.job_role |  | job_role | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| unique.job_role.role_title |  | job_role | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| primary_key.skill |  | skill | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| required.skill |  | skill | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| enums.skill |  | skill | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| ranges.skill |  | skill | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| formats.skill |  | skill | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| unique.skill.skill_name |  | skill | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| primary_key.role_skill_target |  | role_skill_target | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| required.role_skill_target |  | role_skill_target | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| enums.role_skill_target |  | role_skill_target | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| ranges.role_skill_target |  | role_skill_target | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| formats.role_skill_target |  | role_skill_target | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| primary_key.employee |  | employee | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| required.employee |  | employee | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| enums.employee |  | employee | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| ranges.employee |  | employee | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| formats.employee |  | employee | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| primary_key.course |  | course | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| required.course |  | course | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| enums.course |  | course | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| ranges.course |  | course | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| formats.course |  | course | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| unique.course.course_title |  | course | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| primary_key.course_skill |  | course_skill | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| required.course_skill |  | course_skill | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| enums.course_skill |  | course_skill | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| ranges.course_skill |  | course_skill | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| formats.course_skill |  | course_skill | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| primary_key.course_prerequisite |  | course_prerequisite | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| required.course_prerequisite |  | course_prerequisite | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| enums.course_prerequisite |  | course_prerequisite | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| ranges.course_prerequisite |  | course_prerequisite | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| formats.course_prerequisite |  | course_prerequisite | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| primary_key.course_offering |  | course_offering | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| required.course_offering |  | course_offering | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| enums.course_offering |  | course_offering | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| ranges.course_offering |  | course_offering | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| formats.course_offering |  | course_offering | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| primary_key.budget |  | budget | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| required.budget |  | budget | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| enums.budget |  | budget | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| ranges.budget |  | budget | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| formats.budget |  | budget | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| unique.budget.department_code+fiscal_year |  | budget | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| primary_key.recommendation |  | recommendation | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| required.recommendation |  | recommendation | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| enums.recommendation |  | recommendation | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| ranges.recommendation |  | recommendation | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| formats.recommendation |  | recommendation | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| unique.recommendation.employee_id+course_id | BR-18 | recommendation | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| primary_key.enrollment |  | enrollment | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| required.enrollment |  | enrollment | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| enums.enrollment |  | enrollment | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| ranges.enrollment |  | enrollment | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| formats.enrollment |  | enrollment | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| unique.enrollment.employee_id+course_id | BR-18 | enrollment | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| primary_key.enrollment_event |  | enrollment_event | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| required.enrollment_event |  | enrollment_event | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| enums.enrollment_event |  | enrollment_event | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| ranges.enrollment_event |  | enrollment_event | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| formats.enrollment_event |  | enrollment_event | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| unique.enrollment_event.enrollment_id+event_seq |  | enrollment_event | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| primary_key.completion |  | completion | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| required.completion |  | completion | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| enums.completion |  | completion | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| ranges.completion |  | completion | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| formats.completion |  | completion | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| primary_key.proficiency_assessment |  | proficiency_assessment | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| required.proficiency_assessment |  | proficiency_assessment | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| enums.proficiency_assessment |  | proficiency_assessment | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| ranges.proficiency_assessment |  | proficiency_assessment | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| formats.proficiency_assessment |  | proficiency_assessment | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| primary_key.employee_skill |  | employee_skill | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| required.employee_skill |  | employee_skill | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| enums.employee_skill |  | employee_skill | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| ranges.employee_skill |  | employee_skill | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| formats.employee_skill |  | employee_skill | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| primary_key.skill_gap |  | skill_gap | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| required.skill_gap |  | skill_gap | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| enums.skill_gap |  | skill_gap | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| ranges.skill_gap |  | skill_gap | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| formats.skill_gap |  | skill_gap | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| foreign_keys.department |  | department | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| foreign_keys.job_role |  | job_role | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| foreign_keys.skill |  | skill | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| foreign_keys.role_skill_target |  | role_skill_target | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| foreign_keys.employee |  | employee | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| foreign_keys.course |  | course | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| foreign_keys.course_skill |  | course_skill | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| foreign_keys.course_prerequisite |  | course_prerequisite | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| foreign_keys.course_offering |  | course_offering | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| foreign_keys.budget |  | budget | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| foreign_keys.recommendation |  | recommendation | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| foreign_keys.enrollment |  | enrollment | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| foreign_keys.enrollment_event |  | enrollment_event | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| foreign_keys.completion |  | completion | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| foreign_keys.proficiency_assessment |  | proficiency_assessment | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| foreign_keys.employee_skill |  | employee_skill | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| foreign_keys.skill_gap |  | skill_gap | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| row_counts |  | * | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| ladder.next_role |  | job_role | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| ladder.target_count |  | role_skill_target | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| ladder.targets_never_go_down |  | role_skill_target | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| course.cost_is_hours_x_rate |  | course | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| course.duration_by_level |  | course | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| course.one_primary_skill |  | course_skill | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| course.category_is_primary_category |  | course | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| course.target_levels_by_level |  | course_skill | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| prerequisite.same_category_lower_level |  | course_prerequisite | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| offering.dates_and_capacity |  | course_offering | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| employee.role_department_manager |  | employee | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| employee_skill.covers_current_and_target_role |  | employee_skill | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| baseline.one_per_skill_dated_q4_2025 |  | proficiency_assessment | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| recommendation.row_shape |  | recommendation | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| recommendation.path_shape | BR-07 | recommendation | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| recommendation.closes_its_gap | BR-03 | recommendation | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| recommendation.engine_rows_unchanged |  | recommendation | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| recommendation.only_injected_rows_added |  | recommendation | RULE | 100 | 100 | 0 | 0 | PASS |
+| enrollment.links_and_dates |  | enrollment | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| enrollment_event.lifecycle | BR-12 | enrollment_event | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| offering.approved_within_capacity | BR-10 | course_offering | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| enrollment.prerequisites_passed_before_start | BR-05 | enrollment | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| completion.matches_enrollment | BR-13 | completion | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| assessment.level_is_band_of_score | BR-15 | proficiency_assessment | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| assessment.post_course_cap | BR-16 | proficiency_assessment | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| assessment.post_course_links_and_dates | BR-17 | proficiency_assessment | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| derived.offering_seats |  | course_offering | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| derived.recommendation_costs_and_dates |  | recommendation | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| derived.enrollment_status_and_cost |  | enrollment | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| derived.budget_totals |  | budget | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| derived.employee_skill_current |  | employee_skill | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| derived.skill_gap | BR-01 | skill_gap | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |
+| rule.prerequisite_violation | BR-05 | recommendation | RULE | 50 | 50 | 0 | 0 | PASS |
+| rule.course_unavailable | BR-04 | recommendation | RULE | 50 | 50 | 0 | 0 | PASS |
+| rule.budget_exceeded | BR-11 | enrollment | RULE | 50 | 50 | 0 | 0 | PASS |
+| rule.duplicate_completion | BR-13 | completion | RULE | 50 | 50 | 0 | 0 | PASS |
+| rule.gap_not_reassessed | BR-17 | completion | RULE | 50 | 50 | 0 | 0 | PASS |
+| leakage.no_label_columns_in_input |  | * | STRUCTURAL | 0 | 0 | 0 | 0 | PASS |

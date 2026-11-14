@@ -1,0 +1,251 @@
+issue_type,record_id,rule_code,evidence
+BUDGET_EXCEEDED,ENR-EMP-000039-CRS-000064,BR-11,"approved 7,200.00 with 12,187,600.00 already committed against a ENG limit of 12,160,000.00"
+BUDGET_EXCEEDED,ENR-EMP-000087-CRS-000064,BR-11,"approved 7,200.00 with 12,166,000.00 already committed against a ENG limit of 12,160,000.00"
+BUDGET_EXCEEDED,ENR-EMP-000136-CRS-000938,BR-11,"approved 16,000.00 with 12,194,800.00 already committed against a ENG limit of 12,160,000.00"
+BUDGET_EXCEEDED,ENR-EMP-000203-CRS-000064,BR-11,"approved 7,200.00 with 12,180,400.00 already committed against a ENG limit of 12,160,000.00"
+BUDGET_EXCEEDED,ENR-EMP-000494-CRS-000064,BR-11,"approved 7,200.00 with 12,158,800.00 already committed against a ENG limit of 12,160,000.00"
+BUDGET_EXCEEDED,ENR-EMP-001024-CRS-000064,BR-11,"approved 7,200.00 with 12,173,200.00 already committed against a ENG limit of 12,160,000.00"
+BUDGET_EXCEEDED,ENR-EMP-001117-CRS-000114,BR-11,"approved 4,800.00 with 9,518,800.00 already committed against a DAT limit of 9,520,000.00"
+BUDGET_EXCEEDED,ENR-EMP-001172-CRS-000162,BR-11,"approved 14,400.00 with 9,547,600.00 already committed against a DAT limit of 9,520,000.00"
+BUDGET_EXCEEDED,ENR-EMP-001322-CRS-000162,BR-11,"approved 14,400.00 with 9,562,000.00 already committed against a DAT limit of 9,520,000.00"
+BUDGET_EXCEEDED,ENR-EMP-001329-CRS-000162,BR-11,"approved 14,400.00 with 9,533,200.00 already committed against a DAT limit of 9,520,000.00"
+BUDGET_EXCEEDED,ENR-EMP-001408-CRS-000158,BR-11,"approved 9,600.00 with 9,523,600.00 already committed against a DAT limit of 9,520,000.00"
+BUDGET_EXCEEDED,ENR-EMP-001528-CRS-000114,BR-11,"approved 4,800.00 with 9,576,400.00 already committed against a DAT limit of 9,520,000.00"
+BUDGET_EXCEEDED,ENR-EMP-001755-CRS-000868,BR-11,"approved 14,400.00 with 12,562,400.00 already committed against a ITS limit of 12,520,000.00"
+BUDGET_EXCEEDED,ENR-EMP-001769-CRS-000868,BR-11,"approved 14,400.00 with 12,524,000.00 already committed against a ITS limit of 12,520,000.00"
+BUDGET_EXCEEDED,ENR-EMP-001819-CRS-000851,BR-11,"approved 12,000.00 with 12,576,800.00 already committed against a ITS limit of 12,520,000.00"
+BUDGET_EXCEEDED,ENR-EMP-001875-CRS-000929,BR-11,"approved 24,000.00 with 12,588,800.00 already committed against a ITS limit of 12,520,000.00"
+BUDGET_EXCEEDED,ENR-EMP-002143-CRS-000868,BR-11,"approved 14,400.00 with 12,509,600.00 already committed against a ITS limit of 12,520,000.00"
+BUDGET_EXCEEDED,ENR-EMP-002208-CRS-000929,BR-11,"approved 24,000.00 with 12,538,400.00 already committed against a ITS limit of 12,520,000.00"
+BUDGET_EXCEEDED,ENR-EMP-002264-CRS-000367,BR-11,"approved 7,200.00 with 9,600,800.00 already committed against a SAL limit of 9,560,000.00"
+BUDGET_EXCEEDED,ENR-EMP-002288-CRS-000369,BR-11,"approved 9,600.00 with 9,579,200.00 already committed against a SAL limit of 9,560,000.00"
+BUDGET_EXCEEDED,ENR-EMP-002458-CRS-000367,BR-11,"approved 7,200.00 with 9,560,000.00 already committed against a SAL limit of 9,560,000.00"
+BUDGET_EXCEEDED,ENR-EMP-002554-CRS-000335,BR-11,"approved 12,000.00 with 9,588,800.00 already committed against a SAL limit of 9,560,000.00"
+BUDGET_EXCEEDED,ENR-EMP-002620-CRS-000335,BR-11,"approved 12,000.00 with 9,567,200.00 already committed against a SAL limit of 9,560,000.00"
+BUDGET_EXCEEDED,ENR-EMP-002865-CRS-000371,BR-11,"approved 12,000.00 with 9,608,000.00 already committed against a SAL limit of 9,560,000.00"
+BUDGET_EXCEEDED,ENR-EMP-002880-CRS-000367,BR-11,"approved 7,200.00 with 9,620,000.00 already committed against a SAL limit of 9,560,000.00"
+BUDGET_EXCEEDED,ENR-EMP-002983-CRS-000431,BR-11,"approved 4,800.00 with 6,600,800.00 already committed against a MKT limit of 6,580,000.00"
+BUDGET_EXCEEDED,ENR-EMP-003049-CRS-000431,BR-11,"approved 4,800.00 with 6,596,000.00 already committed against a MKT limit of 6,580,000.00"
+BUDGET_EXCEEDED,ENR-EMP-003060-CRS-000431,BR-11,"approved 4,800.00 with 6,605,600.00 already committed against a MKT limit of 6,580,000.00"
+BUDGET_EXCEEDED,ENR-EMP-003195-CRS-000431,BR-11,"approved 4,800.00 with 6,591,200.00 already committed against a MKT limit of 6,580,000.00"
+BUDGET_EXCEEDED,ENR-EMP-003369-CRS-000463,BR-11,"approved 7,200.00 with 6,579,200.00 already committed against a MKT limit of 6,580,000.00"
+BUDGET_EXCEEDED,ENR-EMP-003394-CRS-000431,BR-11,"approved 4,800.00 with 6,586,400.00 already committed against a MKT limit of 6,580,000.00"
+BUDGET_EXCEEDED,ENR-EMP-003615-CRS-000585,BR-11,"approved 19,200.00 with 8,906,800.00 already committed against a FIN limit of 8,910,000.00"
+BUDGET_EXCEEDED,ENR-EMP-003744-CRS-000585,BR-11,"approved 19,200.00 with 8,980,400.00 already committed against a FIN limit of 8,910,000.00"
+BUDGET_EXCEEDED,ENR-EMP-003750-CRS-000585,BR-11,"approved 19,200.00 with 8,961,200.00 already committed against a FIN limit of 8,910,000.00"
+BUDGET_EXCEEDED,ENR-EMP-003766-CRS-000585,BR-11,"approved 19,200.00 with 8,926,000.00 already committed against a FIN limit of 8,910,000.00"
+BUDGET_EXCEEDED,ENR-EMP-003793-CRS-000585,BR-11,"approved 19,200.00 with 8,999,600.00 already committed against a FIN limit of 8,910,000.00"
+BUDGET_EXCEEDED,ENR-EMP-003836-CRS-000938,BR-11,"approved 16,000.00 with 8,945,200.00 already committed against a FIN limit of 8,910,000.00"
+BUDGET_EXCEEDED,ENR-EMP-003867-CRS-000837,BR-11,"approved 12,000.00 with 5,606,000.00 already committed against a HRM limit of 5,560,000.00"
+BUDGET_EXCEEDED,ENR-EMP-003877-CRS-000837,BR-11,"approved 12,000.00 with 5,618,000.00 already committed against a HRM limit of 5,560,000.00"
+BUDGET_EXCEEDED,ENR-EMP-003881-CRS-000613,BR-11,"approved 12,000.00 with 5,558,000.00 already committed against a HRM limit of 5,560,000.00"
+BUDGET_EXCEEDED,ENR-EMP-003932-CRS-000837,BR-11,"approved 12,000.00 with 5,570,000.00 already committed against a HRM limit of 5,560,000.00"
+BUDGET_EXCEEDED,ENR-EMP-003956-CRS-000613,BR-11,"approved 12,000.00 with 5,582,000.00 already committed against a HRM limit of 5,560,000.00"
+BUDGET_EXCEEDED,ENR-EMP-003984-CRS-000837,BR-11,"approved 12,000.00 with 5,594,000.00 already committed against a HRM limit of 5,560,000.00"
+BUDGET_EXCEEDED,ENR-EMP-004206-CRS-000848,BR-11,"approved 8,000.00 with 11,900,400.00 already committed against a OPS limit of 11,880,000.00"
+BUDGET_EXCEEDED,ENR-EMP-004442-CRS-000709,BR-11,"approved 4,800.00 with 11,937,200.00 already committed against a OPS limit of 11,880,000.00"
+BUDGET_EXCEEDED,ENR-EMP-004450-CRS-000848,BR-11,"approved 8,000.00 with 11,929,200.00 already committed against a OPS limit of 11,880,000.00"
+BUDGET_EXCEEDED,ENR-EMP-004570-CRS-000938,BR-11,"approved 16,000.00 with 11,879,600.00 already committed against a OPS limit of 11,880,000.00"
+BUDGET_EXCEEDED,ENR-EMP-004671-CRS-000709,BR-11,"approved 4,800.00 with 11,895,600.00 already committed against a OPS limit of 11,880,000.00"
+BUDGET_EXCEEDED,ENR-EMP-004707-CRS-000709,BR-11,"approved 4,800.00 with 11,908,400.00 already committed against a OPS limit of 11,880,000.00"
+BUDGET_EXCEEDED,ENR-EMP-004826-CRS-000938,BR-11,"approved 16,000.00 with 11,913,200.00 already committed against a OPS limit of 11,880,000.00"
+COURSE_UNAVAILABLE,REC-EMP-001784-CRS-000219,BR-04,CRS-000219 has no offering starting in the planning period; planned start 2027-03-15
+COURSE_UNAVAILABLE,REC-EMP-001800-CRS-000219,BR-04,CRS-000219 has no offering starting in the planning period; planned start 2027-03-15
+COURSE_UNAVAILABLE,REC-EMP-001801-CRS-000219,BR-04,CRS-000219 has no offering starting in the planning period; planned start 2027-03-15
+COURSE_UNAVAILABLE,REC-EMP-001807-CRS-000219,BR-04,CRS-000219 has no offering starting in the planning period; planned start 2027-03-15
+COURSE_UNAVAILABLE,REC-EMP-001845-CRS-000219,BR-04,CRS-000219 has no offering starting in the planning period; planned start 2027-03-15
+COURSE_UNAVAILABLE,REC-EMP-001866-CRS-000219,BR-04,CRS-000219 has no offering starting in the planning period; planned start 2027-03-15
+COURSE_UNAVAILABLE,REC-EMP-001868-CRS-000219,BR-04,CRS-000219 has no offering starting in the planning period; planned start 2027-03-15
+COURSE_UNAVAILABLE,REC-EMP-002968-CRS-000461,BR-04,CRS-000461 has no offering starting in the planning period; planned start 2027-01-11
+COURSE_UNAVAILABLE,REC-EMP-002972-CRS-000461,BR-04,CRS-000461 has no offering starting in the planning period; planned start 2027-01-11
+COURSE_UNAVAILABLE,REC-EMP-002983-CRS-000461,BR-04,CRS-000461 has no offering starting in the planning period; planned start 2027-01-11
+COURSE_UNAVAILABLE,REC-EMP-002988-CRS-000425,BR-04,CRS-000425 has no offering starting in the planning period; planned start 2027-03-22
+COURSE_UNAVAILABLE,REC-EMP-003046-CRS-000461,BR-04,CRS-000461 has no offering starting in the planning period; planned start 2027-01-11
+COURSE_UNAVAILABLE,REC-EMP-003060-CRS-000461,BR-04,CRS-000461 has no offering starting in the planning period; planned start 2027-01-11
+COURSE_UNAVAILABLE,REC-EMP-003077-CRS-000461,BR-04,CRS-000461 has no offering starting in the planning period; planned start 2027-01-11
+COURSE_UNAVAILABLE,REC-EMP-003108-CRS-000461,BR-04,CRS-000461 has no offering starting in the planning period; planned start 2027-01-11
+COURSE_UNAVAILABLE,REC-EMP-003146-CRS-000461,BR-04,CRS-000461 has no offering starting in the planning period; planned start 2027-01-11
+COURSE_UNAVAILABLE,REC-EMP-003147-CRS-000461,BR-04,CRS-000461 has no offering starting in the planning period; planned start 2027-01-11
+COURSE_UNAVAILABLE,REC-EMP-003181-CRS-000461,BR-04,CRS-000461 has no offering starting in the planning period; planned start 2027-01-11
+COURSE_UNAVAILABLE,REC-EMP-003183-CRS-000425,BR-04,CRS-000425 has no offering starting in the planning period; planned start 2027-03-22
+COURSE_UNAVAILABLE,REC-EMP-003184-CRS-000461,BR-04,CRS-000461 has no offering starting in the planning period; planned start 2027-01-11
+COURSE_UNAVAILABLE,REC-EMP-003187-CRS-000461,BR-04,CRS-000461 has no offering starting in the planning period; planned start 2027-01-11
+COURSE_UNAVAILABLE,REC-EMP-003210-CRS-000459,BR-04,CRS-000459 has no offering starting in the planning period; planned start 2027-06-14
+COURSE_UNAVAILABLE,REC-EMP-003212-CRS-000461,BR-04,CRS-000461 has no offering starting in the planning period; planned start 2027-01-11
+COURSE_UNAVAILABLE,REC-EMP-003213-CRS-000461,BR-04,CRS-000461 has no offering starting in the planning period; planned start 2027-01-11
+COURSE_UNAVAILABLE,REC-EMP-003223-CRS-000425,BR-04,CRS-000425 has no offering starting in the planning period; planned start 2027-03-22
+COURSE_UNAVAILABLE,REC-EMP-003229-CRS-000461,BR-04,CRS-000461 has no offering starting in the planning period; planned start 2027-01-11
+COURSE_UNAVAILABLE,REC-EMP-003234-CRS-000461,BR-04,CRS-000461 has no offering starting in the planning period; planned start 2027-01-11
+COURSE_UNAVAILABLE,REC-EMP-003256-CRS-000461,BR-04,CRS-000461 has no offering starting in the planning period; planned start 2027-02-01
+COURSE_UNAVAILABLE,REC-EMP-003259-CRS-000425,BR-04,CRS-000425 has no offering starting in the planning period; planned start 2027-03-22
+COURSE_UNAVAILABLE,REC-EMP-003280-CRS-000459,BR-04,CRS-000459 has no offering starting in the planning period; planned start 2027-06-14
+COURSE_UNAVAILABLE,REC-EMP-003284-CRS-000425,BR-04,CRS-000425 has no offering starting in the planning period; planned start 2027-03-22
+COURSE_UNAVAILABLE,REC-EMP-003289-CRS-000461,BR-04,CRS-000461 has no offering starting in the planning period; planned start 2027-02-01
+COURSE_UNAVAILABLE,REC-EMP-003290-CRS-000425,BR-04,CRS-000425 has no offering starting in the planning period; planned start 2027-03-22
+COURSE_UNAVAILABLE,REC-EMP-003291-CRS-000461,BR-04,CRS-000461 has no offering starting in the planning period; planned start 2027-02-01
+COURSE_UNAVAILABLE,REC-EMP-003293-CRS-000425,BR-04,CRS-000425 has no offering starting in the planning period; planned start 2027-03-22
+COURSE_UNAVAILABLE,REC-EMP-003294-CRS-000459,BR-04,CRS-000459 has no offering starting in the planning period; planned start 2027-06-14
+COURSE_UNAVAILABLE,REC-EMP-003298-CRS-000461,BR-04,CRS-000461 has no offering starting in the planning period; planned start 2027-02-01
+COURSE_UNAVAILABLE,REC-EMP-003299-CRS-000425,BR-04,CRS-000425 has no offering starting in the planning period; planned start 2027-03-22
+COURSE_UNAVAILABLE,REC-EMP-003309-CRS-000461,BR-04,CRS-000461 has no offering starting in the planning period; planned start 2027-02-01
+COURSE_UNAVAILABLE,REC-EMP-003312-CRS-000461,BR-04,CRS-000461 has no offering starting in the planning period; planned start 2027-02-01
+COURSE_UNAVAILABLE,REC-EMP-003317-CRS-000425,BR-04,CRS-000425 has no offering starting in the planning period; planned start 2027-03-22
+COURSE_UNAVAILABLE,REC-EMP-003326-CRS-000461,BR-04,CRS-000461 has no offering starting in the planning period; planned start 2027-02-01
+COURSE_UNAVAILABLE,REC-EMP-003334-CRS-000459,BR-04,CRS-000459 has no offering starting in the planning period; planned start 2027-06-14
+COURSE_UNAVAILABLE,REC-EMP-003337-CRS-000459,BR-04,CRS-000459 has no offering starting in the planning period; planned start 2027-06-14
+COURSE_UNAVAILABLE,REC-EMP-003339-CRS-000459,BR-04,CRS-000459 has no offering starting in the planning period; planned start 2027-06-14
+COURSE_UNAVAILABLE,REC-EMP-003356-CRS-000461,BR-04,CRS-000461 has no offering starting in the planning period; planned start 2027-01-11
+COURSE_UNAVAILABLE,REC-EMP-003369-CRS-000461,BR-04,CRS-000461 has no offering starting in the planning period; planned start 2027-02-01
+COURSE_UNAVAILABLE,REC-EMP-003377-CRS-000459,BR-04,CRS-000459 has no offering starting in the planning period; planned start 2027-06-14
+COURSE_UNAVAILABLE,REC-EMP-003378-CRS-000461,BR-04,CRS-000461 has no offering starting in the planning period; planned start 2027-01-11
+COURSE_UNAVAILABLE,REC-EMP-003394-CRS-000461,BR-04,CRS-000461 has no offering starting in the planning period; planned start 2027-01-11
+DUPLICATE_COMPLETION,CMP-2026-008535,BR-13,"second completion of ENR-EMP-000365-CRS-000042, first is CMP-2026-000212"
+DUPLICATE_COMPLETION,CMP-2026-008536,BR-13,"second completion of ENR-EMP-001936-CRS-000208, first is CMP-2026-000262"
+DUPLICATE_COMPLETION,CMP-2026-008537,BR-13,"second completion of ENR-EMP-000292-CRS-000011, first is CMP-2026-000636"
+DUPLICATE_COMPLETION,CMP-2026-008538,BR-13,"second completion of ENR-EMP-001921-CRS-000223, first is CMP-2026-001284"
+DUPLICATE_COMPLETION,CMP-2026-008539,BR-13,"second completion of ENR-EMP-002182-CRS-000223, first is CMP-2026-001291"
+DUPLICATE_COMPLETION,CMP-2026-008540,BR-13,"second completion of ENR-EMP-003854-CRS-000605, first is CMP-2026-001503"
+DUPLICATE_COMPLETION,CMP-2026-008541,BR-13,"second completion of ENR-EMP-003460-CRS-000541, first is CMP-2026-001789"
+DUPLICATE_COMPLETION,CMP-2026-008542,BR-13,"second completion of ENR-EMP-004097-CRS-000667, first is CMP-2026-002197"
+DUPLICATE_COMPLETION,CMP-2026-008543,BR-13,"second completion of ENR-EMP-004007-CRS-000605, first is CMP-2026-002356"
+DUPLICATE_COMPLETION,CMP-2026-008544,BR-13,"second completion of ENR-EMP-001434-CRS-000136, first is CMP-2026-002408"
+DUPLICATE_COMPLETION,CMP-2026-008545,BR-13,"second completion of ENR-EMP-000016-CRS-000064, first is CMP-2026-002742"
+DUPLICATE_COMPLETION,CMP-2026-008546,BR-13,"second completion of ENR-EMP-004176-CRS-000605, first is CMP-2026-002935"
+DUPLICATE_COMPLETION,CMP-2026-008547,BR-13,"second completion of ENR-EMP-002172-CRS-000208, first is CMP-2026-002989"
+DUPLICATE_COMPLETION,CMP-2026-008548,BR-13,"second completion of ENR-EMP-001179-CRS-000115, first is CMP-2026-003101"
+DUPLICATE_COMPLETION,CMP-2026-008549,BR-13,"second completion of ENR-EMP-002952-CRS-000470, first is CMP-2026-003150"
+DUPLICATE_COMPLETION,CMP-2026-008550,BR-13,"second completion of ENR-EMP-002530-CRS-000369, first is CMP-2026-003283"
+DUPLICATE_COMPLETION,CMP-2026-008551,BR-13,"second completion of ENR-EMP-002551-CRS-000369, first is CMP-2026-003295"
+DUPLICATE_COMPLETION,CMP-2026-008552,BR-13,"second completion of ENR-EMP-002654-CRS-000369, first is CMP-2026-003337"
+DUPLICATE_COMPLETION,CMP-2026-008553,BR-13,"second completion of ENR-EMP-004217-CRS-000747, first is CMP-2026-003505"
+DUPLICATE_COMPLETION,CMP-2026-008554,BR-13,"second completion of ENR-EMP-003418-CRS-000525, first is CMP-2026-003737"
+DUPLICATE_COMPLETION,CMP-2026-008555,BR-13,"second completion of ENR-EMP-002817-CRS-000369, first is CMP-2026-004219"
+DUPLICATE_COMPLETION,CMP-2026-008556,BR-13,"second completion of ENR-EMP-003504-CRS-000535, first is CMP-2026-004370"
+DUPLICATE_COMPLETION,CMP-2026-008557,BR-13,"second completion of ENR-EMP-003650-CRS-000528, first is CMP-2026-004375"
+DUPLICATE_COMPLETION,CMP-2026-008558,BR-13,"second completion of ENR-EMP-002727-CRS-000313, first is CMP-2026-004606"
+DUPLICATE_COMPLETION,CMP-2026-008559,BR-13,"second completion of ENR-EMP-003425-CRS-000502, first is CMP-2026-004629"
+DUPLICATE_COMPLETION,CMP-2026-008560,BR-13,"second completion of ENR-EMP-001888-CRS-000208, first is CMP-2026-005039"
+DUPLICATE_COMPLETION,CMP-2026-008561,BR-13,"second completion of ENR-EMP-002281-CRS-000345, first is CMP-2026-005067"
+DUPLICATE_COMPLETION,CMP-2026-008562,BR-13,"second completion of ENR-EMP-001325-CRS-000139, first is CMP-2026-005351"
+DUPLICATE_COMPLETION,CMP-2026-008563,BR-13,"second completion of ENR-EMP-003653-CRS-000508, first is CMP-2026-005521"
+DUPLICATE_COMPLETION,CMP-2026-008564,BR-13,"second completion of ENR-EMP-002791-CRS-000372, first is CMP-2026-005702"
+DUPLICATE_COMPLETION,CMP-2026-008565,BR-13,"second completion of ENR-EMP-004410-CRS-000938, first is CMP-2026-005752"
+DUPLICATE_COMPLETION,CMP-2026-008566,BR-13,"second completion of ENR-EMP-002536-CRS-000345, first is CMP-2026-006015"
+DUPLICATE_COMPLETION,CMP-2026-008567,BR-13,"second completion of ENR-EMP-003410-CRS-000525, first is CMP-2026-006053"
+DUPLICATE_COMPLETION,CMP-2026-008568,BR-13,"second completion of ENR-EMP-003605-CRS-000502, first is CMP-2026-006202"
+DUPLICATE_COMPLETION,CMP-2026-008569,BR-13,"second completion of ENR-EMP-003990-CRS-000944, first is CMP-2026-006445"
+DUPLICATE_COMPLETION,CMP-2026-008570,BR-13,"second completion of ENR-EMP-000602-CRS-000064, first is CMP-2026-006499"
+DUPLICATE_COMPLETION,CMP-2026-008571,BR-13,"second completion of ENR-EMP-002831-CRS-000313, first is CMP-2026-007095"
+DUPLICATE_COMPLETION,CMP-2026-008572,BR-13,"second completion of ENR-EMP-000400-CRS-000018, first is CMP-2026-007168"
+DUPLICATE_COMPLETION,CMP-2026-008573,BR-13,"second completion of ENR-EMP-000587-CRS-000018, first is CMP-2026-007174"
+DUPLICATE_COMPLETION,CMP-2026-008574,BR-13,"second completion of ENR-EMP-001736-CRS-000868, first is CMP-2026-007241"
+DUPLICATE_COMPLETION,CMP-2026-008575,BR-13,"second completion of ENR-EMP-002203-CRS-000868, first is CMP-2026-007278"
+DUPLICATE_COMPLETION,CMP-2026-008576,BR-13,"second completion of ENR-EMP-004511-CRS-000749, first is CMP-2026-007430"
+DUPLICATE_COMPLETION,CMP-2026-008577,BR-13,"second completion of ENR-EMP-004527-CRS-000758, first is CMP-2026-007440"
+DUPLICATE_COMPLETION,CMP-2026-008578,BR-13,"second completion of ENR-EMP-003915-CRS-000650, first is CMP-2026-007878"
+DUPLICATE_COMPLETION,CMP-2026-008579,BR-13,"second completion of ENR-EMP-004004-CRS-000650, first is CMP-2026-007902"
+DUPLICATE_COMPLETION,CMP-2026-008580,BR-13,"second completion of ENR-EMP-004023-CRS-000650, first is CMP-2026-007910"
+DUPLICATE_COMPLETION,CMP-2026-008581,BR-13,"second completion of ENR-EMP-002825-CRS-000841, first is CMP-2026-008002"
+DUPLICATE_COMPLETION,CMP-2026-008582,BR-13,"second completion of ENR-EMP-000137-CRS-000011, first is CMP-2026-008074"
+DUPLICATE_COMPLETION,CMP-2026-008583,BR-13,"second completion of ENR-EMP-000302-CRS-000037, first is CMP-2026-008416"
+DUPLICATE_COMPLETION,CMP-2026-008584,BR-13,"second completion of ENR-EMP-001602-CRS-000950, first is CMP-2026-008505"
+GAP_NOT_REASSESSED,CMP-2026-000140,BR-17,"completed 2026-02-08, no post-course assessment of SKL-000367 by 2026-02-22"
+GAP_NOT_REASSESSED,CMP-2026-000185,BR-17,"completed 2026-02-15, no post-course assessment of SKL-000023 by 2026-03-01"
+GAP_NOT_REASSESSED,CMP-2026-000558,BR-17,"completed 2026-03-01, no post-course assessment of SKL-000002 by 2026-03-15"
+GAP_NOT_REASSESSED,CMP-2026-000688,BR-17,"completed 2026-03-01, no post-course assessment of SKL-000019 by 2026-03-15"
+GAP_NOT_REASSESSED,CMP-2026-001158,BR-17,"completed 2026-03-08, no post-course assessment of SKL-000252 by 2026-03-22"
+GAP_NOT_REASSESSED,CMP-2026-001479,BR-17,"completed 2026-03-15, no post-course assessment of SKL-000287 by 2026-03-29"
+GAP_NOT_REASSESSED,CMP-2026-001562,BR-17,"completed 2026-03-22, no post-course assessment of SKL-000193 by 2026-04-05"
+GAP_NOT_REASSESSED,CMP-2026-001854,BR-17,"completed 2026-03-29, no post-course assessment of SKL-000269 by 2026-04-12"
+GAP_NOT_REASSESSED,CMP-2026-002336,BR-17,"completed 2026-04-19, no post-course assessment of SKL-000332 by 2026-05-03"
+GAP_NOT_REASSESSED,CMP-2026-002603,BR-17,"completed 2026-05-03, no post-course assessment of SKL-000161 by 2026-05-17"
+GAP_NOT_REASSESSED,CMP-2026-002693,BR-17,"completed 2026-05-03, no post-course assessment of SKL-000288 by 2026-05-17"
+GAP_NOT_REASSESSED,CMP-2026-002755,BR-17,"completed 2026-05-10, no post-course assessment of SKL-000043 by 2026-05-24"
+GAP_NOT_REASSESSED,CMP-2026-003006,BR-17,"completed 2026-05-17, no post-course assessment of SKL-000269 by 2026-05-31"
+GAP_NOT_REASSESSED,CMP-2026-003025,BR-17,"completed 2026-05-17, no post-course assessment of SKL-000269 by 2026-05-31"
+GAP_NOT_REASSESSED,CMP-2026-003151,BR-17,"completed 2026-05-24, no post-course assessment of SKL-000219 by 2026-06-07"
+GAP_NOT_REASSESSED,CMP-2026-003288,BR-17,"completed 2026-05-31, no post-course assessment of SKL-000161 by 2026-06-14"
+GAP_NOT_REASSESSED,CMP-2026-003360,BR-17,"completed 2026-05-31, no post-course assessment of SKL-000287 by 2026-06-14"
+GAP_NOT_REASSESSED,CMP-2026-003408,BR-17,"completed 2026-06-07, no post-course assessment of SKL-000033 by 2026-06-21"
+GAP_NOT_REASSESSED,CMP-2026-003452,BR-17,"completed 2026-06-07, no post-course assessment of SKL-000120 by 2026-06-21"
+GAP_NOT_REASSESSED,CMP-2026-004038,BR-17,"completed 2026-07-05, no post-course assessment of SKL-000018 by 2026-07-19"
+GAP_NOT_REASSESSED,CMP-2026-004132,BR-17,"completed 2026-07-05, no post-course assessment of SKL-000194 by 2026-07-19"
+GAP_NOT_REASSESSED,CMP-2026-004220,BR-17,"completed 2026-07-05, no post-course assessment of SKL-000161 by 2026-07-19"
+GAP_NOT_REASSESSED,CMP-2026-004980,BR-17,"completed 2026-08-02, no post-course assessment of SKL-000288 by 2026-08-16"
+GAP_NOT_REASSESSED,CMP-2026-005063,BR-17,"completed 2026-08-09, no post-course assessment of SKL-000185 by 2026-08-23"
+GAP_NOT_REASSESSED,CMP-2026-005117,BR-17,"completed 2026-08-09, no post-course assessment of SKL-000185 by 2026-08-23"
+GAP_NOT_REASSESSED,CMP-2026-005323,BR-17,"completed 2026-08-23, no post-course assessment of SKL-000067 by 2026-09-06"
+GAP_NOT_REASSESSED,CMP-2026-005339,BR-17,"completed 2026-08-23, no post-course assessment of SKL-000080 by 2026-09-06"
+GAP_NOT_REASSESSED,CMP-2026-005365,BR-17,"completed 2026-08-23, no post-course assessment of SKL-000067 by 2026-09-06"
+GAP_NOT_REASSESSED,CMP-2026-005591,BR-17,"completed 2026-08-23, no post-course assessment of SKL-000287 by 2026-09-06"
+GAP_NOT_REASSESSED,CMP-2026-005608,BR-17,"completed 2026-08-23, no post-course assessment of SKL-000287 by 2026-09-06"
+GAP_NOT_REASSESSED,CMP-2026-005628,BR-17,"completed 2026-08-30, no post-course assessment of SKL-000094 by 2026-09-13"
+GAP_NOT_REASSESSED,CMP-2026-005691,BR-17,"completed 2026-08-30, no post-course assessment of SKL-000198 by 2026-09-13"
+GAP_NOT_REASSESSED,CMP-2026-005837,BR-17,"completed 2026-09-06, no post-course assessment of SKL-000082 by 2026-09-20"
+GAP_NOT_REASSESSED,CMP-2026-005877,BR-17,"completed 2026-09-06, no post-course assessment of SKL-000082 by 2026-09-20"
+GAP_NOT_REASSESSED,CMP-2026-006190,BR-17,"completed 2026-09-20, no post-course assessment of SKL-000444 by 2026-10-04"
+GAP_NOT_REASSESSED,CMP-2026-006325,BR-17,"completed 2026-09-27, no post-course assessment of SKL-000002 by 2026-10-11"
+GAP_NOT_REASSESSED,CMP-2026-006855,BR-17,"completed 2026-10-11, no post-course assessment of SKL-000278 by 2026-10-25"
+GAP_NOT_REASSESSED,CMP-2026-006894,BR-17,"completed 2026-10-11, no post-course assessment of SKL-000278 by 2026-10-25"
+GAP_NOT_REASSESSED,CMP-2026-006895,BR-17,"completed 2026-10-11, no post-course assessment of SKL-000278 by 2026-10-25"
+GAP_NOT_REASSESSED,CMP-2026-006898,BR-17,"completed 2026-10-11, no post-course assessment of SKL-000288 by 2026-10-25"
+GAP_NOT_REASSESSED,CMP-2026-007004,BR-17,"completed 2026-10-11, no post-course assessment of SKL-000383 by 2026-10-25"
+GAP_NOT_REASSESSED,CMP-2026-007156,BR-17,"completed 2026-10-25, no post-course assessment of SKL-000033 by 2026-11-08"
+GAP_NOT_REASSESSED,CMP-2026-007175,BR-17,"completed 2026-10-25, no post-course assessment of SKL-000033 by 2026-11-08"
+GAP_NOT_REASSESSED,CMP-2026-007299,BR-17,"completed 2026-10-25, no post-course assessment of SKL-000198 by 2026-11-08"
+GAP_NOT_REASSESSED,CMP-2026-007579,BR-17,"completed 2026-11-01, no post-course assessment of SKL-000043 by 2026-11-15"
+GAP_NOT_REASSESSED,CMP-2026-007821,BR-17,"completed 2026-11-08, no post-course assessment of SKL-000218 by 2026-11-22"
+GAP_NOT_REASSESSED,CMP-2026-008001,BR-17,"completed 2026-11-15, no post-course assessment of SKL-000419 by 2026-11-29"
+GAP_NOT_REASSESSED,CMP-2026-008052,BR-17,"completed 2026-11-15, no post-course assessment of SKL-000376 by 2026-11-29"
+GAP_NOT_REASSESSED,CMP-2026-008122,BR-17,"completed 2026-11-22, no post-course assessment of SKL-000019 by 2026-12-06"
+GAP_NOT_REASSESSED,CMP-2026-008395,BR-17,"completed 2026-12-06, no post-course assessment of SKL-000269 by 2026-12-20"
+PREREQUISITE_VIOLATION,REC-EMP-000088-CRS-000085,BR-05,"CRS-000085 is planned without CRS-000010, CRS-000068 passed or planned at least 14 days earlier in the path"
+PREREQUISITE_VIOLATION,REC-EMP-000285-CRS-000075,BR-05,"CRS-000075 is planned without CRS-000020, CRS-000060 passed or planned at least 14 days earlier in the path"
+PREREQUISITE_VIOLATION,REC-EMP-000293-CRS-000075,BR-05,"CRS-000075 is planned without CRS-000020, CRS-000060 passed or planned at least 14 days earlier in the path"
+PREREQUISITE_VIOLATION,REC-EMP-000422-CRS-000075,BR-05,"CRS-000075 is planned without CRS-000020, CRS-000060 passed or planned at least 14 days earlier in the path"
+PREREQUISITE_VIOLATION,REC-EMP-000533-CRS-000075,BR-05,"CRS-000075 is planned without CRS-000020, CRS-000060 passed or planned at least 14 days earlier in the path"
+PREREQUISITE_VIOLATION,REC-EMP-000655-CRS-000085,BR-05,"CRS-000085 is planned without CRS-000010, CRS-000068 passed or planned at least 14 days earlier in the path"
+PREREQUISITE_VIOLATION,REC-EMP-000680-CRS-000075,BR-05,"CRS-000075 is planned without CRS-000020, CRS-000060 passed or planned at least 14 days earlier in the path"
+PREREQUISITE_VIOLATION,REC-EMP-000682-CRS-000075,BR-05,"CRS-000075 is planned without CRS-000020, CRS-000060 passed or planned at least 14 days earlier in the path"
+PREREQUISITE_VIOLATION,REC-EMP-000699-CRS-000075,BR-05,"CRS-000075 is planned without CRS-000020, CRS-000060 passed or planned at least 14 days earlier in the path"
+PREREQUISITE_VIOLATION,REC-EMP-000704-CRS-000085,BR-05,"CRS-000085 is planned without CRS-000010, CRS-000068 passed or planned at least 14 days earlier in the path"
+PREREQUISITE_VIOLATION,REC-EMP-000706-CRS-000075,BR-05,"CRS-000075 is planned without CRS-000020, CRS-000060 passed or planned at least 14 days earlier in the path"
+PREREQUISITE_VIOLATION,REC-EMP-000721-CRS-000087,BR-05,"CRS-000087 is planned without CRS-000011, CRS-000051 passed or planned at least 14 days earlier in the path"
+PREREQUISITE_VIOLATION,REC-EMP-000729-CRS-000087,BR-05,"CRS-000087 is planned without CRS-000011, CRS-000051 passed or planned at least 14 days earlier in the path"
+PREREQUISITE_VIOLATION,REC-EMP-000774-CRS-000085,BR-05,"CRS-000085 is planned without CRS-000010, CRS-000068 passed or planned at least 14 days earlier in the path"
+PREREQUISITE_VIOLATION,REC-EMP-000814-CRS-000075,BR-05,"CRS-000075 is planned without CRS-000020, CRS-000060 passed or planned at least 14 days earlier in the path"
+PREREQUISITE_VIOLATION,REC-EMP-000855-CRS-000075,BR-05,"CRS-000075 is planned without CRS-000020, CRS-000060 passed or planned at least 14 days earlier in the path"
+PREREQUISITE_VIOLATION,REC-EMP-000965-CRS-000087,BR-05,"CRS-000087 is planned without CRS-000011, CRS-000051 passed or planned at least 14 days earlier in the path"
+PREREQUISITE_VIOLATION,REC-EMP-001060-CRS-000087,BR-05,"CRS-000087 is planned without CRS-000011, CRS-000051 passed or planned at least 14 days earlier in the path"
+PREREQUISITE_VIOLATION,REC-EMP-001090-CRS-000085,BR-05,"CRS-000085 is planned without CRS-000010, CRS-000068 passed or planned at least 14 days earlier in the path"
+PREREQUISITE_VIOLATION,REC-EMP-001093-CRS-000087,BR-05,"CRS-000087 is planned without CRS-000011, CRS-000051 passed or planned at least 14 days earlier in the path"
+PREREQUISITE_VIOLATION,REC-EMP-001343-CRS-000161,BR-05,CRS-000161 is planned without CRS-000110 passed or planned at least 14 days earlier in the path
+PREREQUISITE_VIOLATION,REC-EMP-001362-CRS-000161,BR-05,CRS-000161 is planned without CRS-000110 passed or planned at least 14 days earlier in the path
+PREREQUISITE_VIOLATION,REC-EMP-001363-CRS-000161,BR-05,CRS-000161 is planned without CRS-000110 passed or planned at least 14 days earlier in the path
+PREREQUISITE_VIOLATION,REC-EMP-001460-CRS-000989,BR-05,"CRS-000989 is planned without CRS-000906, CRS-000950 passed or planned at least 14 days earlier in the path"
+PREREQUISITE_VIOLATION,REC-EMP-001540-CRS-000161,BR-05,CRS-000161 is planned without CRS-000110 passed or planned at least 14 days earlier in the path
+PREREQUISITE_VIOLATION,REC-EMP-001579-CRS-000192,BR-05,CRS-000192 is planned without CRS-000141 passed or planned at least 14 days earlier in the path
+PREREQUISITE_VIOLATION,REC-EMP-001581-CRS-000161,BR-05,CRS-000161 is planned without CRS-000110 passed or planned at least 14 days earlier in the path
+PREREQUISITE_VIOLATION,REC-EMP-001708-CRS-000280,BR-05,"CRS-000280 is planned without CRS-000204, CRS-000261 passed or planned at least 14 days earlier in the path"
+PREREQUISITE_VIOLATION,REC-EMP-001735-CRS-000280,BR-05,"CRS-000280 is planned without CRS-000204, CRS-000261 passed or planned at least 14 days earlier in the path"
+PREREQUISITE_VIOLATION,REC-EMP-002038-CRS-000277,BR-05,CRS-000277 is planned without CRS-000230 passed or planned at least 14 days earlier in the path
+PREREQUISITE_VIOLATION,REC-EMP-002056-CRS-000271,BR-05,"CRS-000271 is planned without CRS-000203, CRS-000247 passed or planned at least 14 days earlier in the path"
+PREREQUISITE_VIOLATION,REC-EMP-002070-CRS-000280,BR-05,"CRS-000280 is planned without CRS-000204, CRS-000261 passed or planned at least 14 days earlier in the path"
+PREREQUISITE_VIOLATION,REC-EMP-002215-CRS-000280,BR-05,"CRS-000280 is planned without CRS-000204, CRS-000261 passed or planned at least 14 days earlier in the path"
+PREREQUISITE_VIOLATION,REC-EMP-002840-CRS-000361,BR-05,CRS-000361 is planned without CRS-000317 passed or planned at least 14 days earlier in the path
+PREREQUISITE_VIOLATION,REC-EMP-002919-CRS-000361,BR-05,CRS-000361 is planned without CRS-000317 passed or planned at least 14 days earlier in the path
+PREREQUISITE_VIOLATION,REC-EMP-003583-CRS-000552,BR-05,CRS-000552 is planned without CRS-000524 passed or planned at least 14 days earlier in the path
+PREREQUISITE_VIOLATION,REC-EMP-003729-CRS-000526,BR-05,CRS-000526 is planned without CRS-000513 passed or planned at least 14 days earlier in the path
+PREREQUISITE_VIOLATION,REC-EMP-003813-CRS-000526,BR-05,CRS-000526 is planned without CRS-000513 passed or planned at least 14 days earlier in the path
+PREREQUISITE_VIOLATION,REC-EMP-003925-CRS-000944,BR-05,CRS-000944 is planned without CRS-000907 passed or planned at least 14 days earlier in the path
+PREREQUISITE_VIOLATION,REC-EMP-004238-CRS-000792,BR-05,"CRS-000792 is planned without CRS-000702, CRS-000771 passed or planned at least 14 days earlier in the path"
+PREREQUISITE_VIOLATION,REC-EMP-004513-CRS-000724,BR-05,CRS-000724 is planned without CRS-000702 passed or planned at least 14 days earlier in the path
+PREREQUISITE_VIOLATION,REC-EMP-004516-CRS-000792,BR-05,"CRS-000792 is planned without CRS-000702, CRS-000771 passed or planned at least 14 days earlier in the path"
+PREREQUISITE_VIOLATION,REC-EMP-004552-CRS-000792,BR-05,"CRS-000792 is planned without CRS-000702, CRS-000771 passed or planned at least 14 days earlier in the path"
+PREREQUISITE_VIOLATION,REC-EMP-004627-CRS-000792,BR-05,"CRS-000792 is planned without CRS-000702, CRS-000771 passed or planned at least 14 days earlier in the path"
+PREREQUISITE_VIOLATION,REC-EMP-004666-CRS-000724,BR-05,CRS-000724 is planned without CRS-000702 passed or planned at least 14 days earlier in the path
+PREREQUISITE_VIOLATION,REC-EMP-004746-CRS-000792,BR-05,"CRS-000792 is planned without CRS-000702, CRS-000771 passed or planned at least 14 days earlier in the path"
+PREREQUISITE_VIOLATION,REC-EMP-004843-CRS-000793,BR-05,"CRS-000793 is planned without CRS-000713, CRS-000744 passed or planned at least 14 days earlier in the path"
+PREREQUISITE_VIOLATION,REC-EMP-004877-CRS-000724,BR-05,CRS-000724 is planned without CRS-000702 passed or planned at least 14 days earlier in the path
+PREREQUISITE_VIOLATION,REC-EMP-004925-CRS-000799,BR-05,CRS-000799 is planned without CRS-000772 passed or planned at least 14 days earlier in the path
+PREREQUISITE_VIOLATION,REC-EMP-004962-CRS-000724,BR-05,CRS-000724 is planned without CRS-000702 passed or planned at least 14 days earlier in the path
