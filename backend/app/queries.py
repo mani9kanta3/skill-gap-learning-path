@@ -45,6 +45,7 @@ def summary():
           (SELECT count(*) FROM skill_gap WHERE gap_status = 'CLOSED')           AS closed_gaps,
           (SELECT count(*) FROM skill_gap WHERE gap_status = 'OPEN')             AS open_gaps,
           (SELECT count(*) FROM recommendation WHERE decision = 'RECOMMENDED')   AS recommended,
+          (SELECT count(*) FROM recommendation WHERE funding_status = 'FUNDED')  AS funded_steps,
           (SELECT count(*) FROM recommendation WHERE decision = 'NOT_RECOMMENDED') AS not_recommended,
           (SELECT count(*) FROM enrollment)                                      AS enrollments,
           (SELECT count(*) FROM completion)                                      AS completion_rows,
@@ -216,6 +217,9 @@ PREVIEW_TABLES = (
     "completion",
     "enrollment",
     "enrollment_event",
+    # For the money already allocated to other people's open funded steps.
+    "recommendation",
+    "employee",
 )
 
 
@@ -238,7 +242,9 @@ def preview_path(employee_id, planning_date, period_start, period_end):
         return None
 
     tables = _all_tables()
-    catalog = snapshot.build_catalog(tables)
+    # The schema already refuses periods outside the budget year; the
+    # budget is still picked by the period's year, never assumed.
+    catalog = snapshot.build_catalog(tables, fiscal_year=period_start.year)
     settings = recommend.Settings(planning_date, period_start, period_end)
     planner = recommend.Planner(catalog, settings)
     snap = snapshot.build_snapshot(tables, catalog, planning_date, period_start, period_end)
@@ -258,6 +264,8 @@ def preview_path(employee_id, planning_date, period_start, period_end):
     spent = snap.spent.get(employee_id, 0.0)
     department = employee["department_code"]
     limit = catalog.department_limit[department]
+    committed = snap.committed.get(department, 0.0)
+    reserved_for_others = snap.reserved.get(department, 0.0) - snap.reserved_by_employee.get(employee_id, 0.0)
     return {
         "employee_id": employee_id,
         "planning_date": planning_date,
@@ -270,7 +278,15 @@ def preview_path(employee_id, planning_date, period_start, period_end):
         "allowance": pipeline_config.LEARNING_ALLOWANCE_PER_EMPLOYEE,
         "already_spent": spent,
         "department_code": department,
-        "department_remaining": limit - snap.committed.get(department, 0.0),
+        "fiscal_year": period_start.year,
+        "department_limit": limit,
+        "department_committed": committed,
+        "department_reserved_for_others": reserved_for_others,
+        # BR-09(b): what the whole path was checked against.
+        "department_free": snap.department_free(catalog, employee),
+        # A preview is a proposal: it is not funded until the budget is
+        # allocated to it, so nothing here is marked FUNDED.
+        "funding_note": "Proposed only. Funding is decided when the department budget is allocated.",
     }
 
 

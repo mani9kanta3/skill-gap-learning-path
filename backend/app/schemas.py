@@ -1,12 +1,14 @@
 """
 Request models. The preview is the only endpoint that takes a body, and
 its dates are checked here so a bad request gets a 422 that names the
-field, before any query runs.
+problem, before any query runs.
 """
 
 from datetime import date
 
 from pydantic import BaseModel, Field, model_validator
+
+from pipeline import config
 
 
 class PreviewRequest(BaseModel):
@@ -17,6 +19,14 @@ class PreviewRequest(BaseModel):
 
     @model_validator(mode="after")
     def dates_make_sense(self):
+        # Budgets exist for one fiscal year only. A period outside it would
+        # be checked against the wrong year's money, so it is refused.
+        first, last = config.PERIOD_START, config.PERIOD_END
+        if not (first <= self.period_start and self.period_end <= last):
+            raise ValueError(
+                f"The period must fall inside the {config.FISCAL_YEAR} budget year "
+                f"({first.isoformat()} to {last.isoformat()})."
+            )
         if self.period_end <= self.period_start:
             raise ValueError("period_end must be after period_start.")
         if not self.period_start <= self.planning_date <= self.period_end:
