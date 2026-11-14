@@ -179,8 +179,9 @@ backend/pipeline/      generator: config, dictionary, rules/, stages/, checks/, 
 backend/app/           FastAPI: config, db, queries (raw SQL), schemas, main
 backend/scripts/       create_tables, load_data, check_reproducibility
 backend/tests/         258 tests: rules on hand-made data, the whole pipeline, leakage, reproducibility, API request rules
-frontend/src/          React pages: Home, Employees, Employee detail + path preview,
-                       Courses, Course detail, Budgets, Exceptions, Evaluation
+frontend/src/          React dashboard: sidebar + top bar shell; pages Dashboard, Employees,
+                       Employee profile (tabs + re-plan), Courses, Course detail, Budgets,
+                       Exceptions, Validation
 output/starter/        csv/, json/, sql/ (schema + seed), ground_truth/, reports/, manifest.json
 output/full/           the same at full scale
 output/reproducibility/  two-run comparison reports (row counts + SHA-256 per file)

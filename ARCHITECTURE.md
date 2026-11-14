@@ -876,33 +876,53 @@ frontend's `errorMessage.js` already handles both.
 
 ---
 
-## 10. Frontend (same style as the Scholarship RAG Project)
+## 10. Frontend
 
-Conventions taken from that project:
-- Plain JavaScript JSX, one component per file, flat `src/`.
-- Bootstrap 5, with Font Awesome 6.7.2 from the cdnjs CDN.
-- `api.js` (one axios instance, `VITE_API_URL`, the "reply is HTML" guard) and
-  `errorMessage.js`.
-- `PageHeader.jsx`, plus `Layout.jsx` + `Navbar.jsx` with `NavLink` and `<Outlet />`.
-- Pages use `useState` for `load`, `error` and data, an async function with
-  try/catch/finally, and `{error && <div className="alert alert-danger">}`.
-- Colours are CSS variables at the top of `App.css`, named by meaning.
-- A short "why this exists" comment at the top of every component.
-- oxlint. No state library, no TypeScript, no auth.
+**Coding style** follows the Scholarship RAG Project: plain JavaScript JSX, one
+component per file, a flat `src/`, `api.js` (one axios instance and the "reply is
+HTML" guard), `errorMessage.js`, `useState` for `load` and `error` with
+try/catch/finally, a short "why this exists" comment on top of every file,
+Bootstrap 5 plus Font Awesome, and oxlint. There is no state library, no
+TypeScript and no auth.
+
+**Structure** is built for what this project is: an internal analytics tool that
+HR partners and managers keep open while they work. It is not a public site, so
+it uses a dashboard layout:
+
+- `Layout.jsx` sets up the app shell.
+- `Sidebar.jsx` is a fixed dark navigation sidebar, grouped by section:
+  Overview, People, Learning, Budget and Data quality. Each group matches an
+  actor from the brief.
+- `Topbar.jsx` shows the planning date, the as-of date and the budget year,
+  because every number depends on them. It also shows an API status dot.
+- On a phone the sidebar slides in from a menu button.
+- Pages are built from `PageHeader.jsx`, `Card.jsx` (titled white sections),
+  `StatCard.jsx` (KPI tiles) and `BarList.jsx` (horizontal bar charts made of
+  plain divs, so there is no chart library).
+- The employee page is a profile card plus **tabs** (Skill gaps, Learning path,
+  Enrollments and results, Re-plan from a date) instead of one long scroll.
+
+**Colours** (all variables at the top of `App.css`):
+- Navy sidebar and a light grey canvas with white cards, so the data stands out.
+- **One** accent colour, blue `#2557d6`, used only for actions, selection and
+  chart bars. It stays distinct from the status colours, including for most
+  colour-blind users.
+- Green, amber, red and info-blue are reserved for meaning: done, waiting,
+  rejected or over budget, and in progress.
 
 | Route | Page | Actor |
 |---|---|---|
-| `/` | `Home.jsx`: summary tiles and the workflow in 5 steps | everyone |
-| `/employees` | `Employees.jsx`: search and filters | manager, HR |
-| `/employees/:id` | `EmployeeDetail.jsx`: gaps, January path, enrollment timeline, outcomes. A **Preview path** form with planning date and period inputs (default: today's date inside 2026, period 2026-01-01 to 2026-12-31) | employee, manager |
-| `/courses`, `/courses/:id` | `Courses.jsx`, `CourseDetail.jsx` | everyone |
-| `/budgets` | `Budgets.jsx`: limit vs planned vs committed bars, EXCEEDED badge | HR partner |
-| `/exceptions` | `Exceptions.jsx` | HR, IT/ops |
-| `/evaluation` | `Evaluation.jsx`: validation table, per-ID detection match, metrics, reproducibility | IT/ops, admin |
-| `*` | `NotFound.jsx` | |
+| `/` | `Dashboard.jsx`: KPI row, learning funnel, gap status, budget use per department, labelled exceptions, workflow | everyone |
+| `/employees` | `Employees.jsx`: filter toolbar and paged table; `?manager_id=` gives a team view | manager, HR |
+| `/employees/:id` | `EmployeeDetail.jsx`: profile, KPIs, tabs for gaps, proposed and funded path, enrollments and results, and re-plan (`PathPreview.jsx`, budget year only, reset per employee) | employee, manager |
+| `/courses`, `/courses/:id` | `Courses.jsx`, `CourseDetail.jsx`: catalog, then skills, prerequisite chain both ways, and a seat chart per run | everyone |
+| `/budgets` | `Budgets.jsx`: totals, a usage chart against each limit, and a proposed / limit / funded / committed table | HR partner |
+| `/exceptions` | `Exceptions.jsx`: filter by rule, evidence per record | HR, IT/ops |
+| `/evaluation` | `Evaluation.jsx`: checks, per-ID detection, plan quality, reproducibility | IT/ops, admin |
+| `*` | `NotFound.jsx` (inside the shell) | |
 
-Shared helpers: `StatusBadge.jsx`, `money.js` (INR, `en-IN` grouping, from the
-reference project), `options.js` (enum labels).
+Shared helpers: `StatusBadge.jsx`, `money.js` (INR with `en-IN` grouping),
+`options.js` (labels and dataset dates), `useDebounce.js`.
 
 ---
 
@@ -1000,8 +1020,9 @@ C:\CandidateWorkspace\
 │   └── src/
 │       ├── main.jsx  App.jsx  App.css
 │       ├── api.js  errorMessage.js  money.js  options.js
-│       ├── Layout.jsx  Navbar.jsx  PageHeader.jsx  StatusBadge.jsx
-│       ├── Home.jsx
+│       ├── Layout.jsx  Sidebar.jsx  Topbar.jsx
+│       ├── PageHeader.jsx  Card.jsx  StatCard.jsx  BarList.jsx  StatusBadge.jsx
+│       ├── Dashboard.jsx
 │       ├── useDebounce.js
 │       ├── Employees.jsx  EmployeeDetail.jsx  PathPreview.jsx
 │       ├── Courses.jsx  CourseDetail.jsx
