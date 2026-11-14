@@ -9,12 +9,13 @@ import StatusBadge from "./StatusBadge";
 /*
   Department budgets, for the HR partner.
 
-  Three numbers per department, and the gap between them is the story:
-  what people planned, what the department funded, and what was actually
-  committed. Departments fund less than they plan on purpose, and
-  requests are approved first come, first served, so late requests are
-  rejected when the money runs out. An EXCEEDED badge means an approval
-  went through anyway.
+  The numbers per department tell the story in order: what people
+  proposed in January, what the limit is, which proposed steps the limit
+  was allocated to (the funded plan), and what was actually committed.
+  Departments fund less than they propose on purpose. Only funded steps
+  can be approved, so a request for an unfunded step is rejected. An
+  EXCEEDED badge means something was approved outside the funded plan,
+  so the department now owes more than its limit.
 */
 function Budgets() {
   const [rows, setRows] = useState([]);
@@ -31,7 +32,7 @@ function Budgets() {
 
   return (
     <div>
-      <PageHeader icon="fa-wallet" title="Budgets" subtitle="Planned demand, funded limit and committed spend per department, 2026." />
+      <PageHeader icon="fa-wallet" title="Budgets" subtitle="Proposed, funded and committed spend per department, 2026." />
 
       {error && <div className="alert alert-danger">{error}</div>}
       {load && <p className="info-text">Loading ...</p>}
@@ -61,14 +62,19 @@ function Budgets() {
                 <table className="table table-sm data-table mt-2">
                   <tbody>
                     <tr>
-                      <td>Planned by employees</td>
+                      <td>Proposed in January</td>
                       <td className="text-end">{money(b.planned_amount)}</td>
                       <td className="text-end info-text">{inWords(b.planned_amount)}</td>
                     </tr>
                     <tr>
-                      <td>Funded limit</td>
+                      <td>Limit</td>
                       <td className="text-end">{money(b.limit_amount)}</td>
                       <td className="text-end info-text">{inWords(b.limit_amount)}</td>
+                    </tr>
+                    <tr>
+                      <td>Funded plan</td>
+                      <td className="text-end">{money(b.funded_amount)}</td>
+                      <td className="text-end info-text">{inWords(b.funded_amount)}</td>
                     </tr>
                     <tr>
                       <td>Committed</td>

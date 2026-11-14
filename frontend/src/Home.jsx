@@ -23,8 +23,8 @@ const STEPS = [
   },
   {
     icon: "fa-clipboard-check",
-    title: "Approve within budget",
-    text: "Requests are funded first come, first served. When a department's budget runs out, requests are rejected and the reason is recorded.",
+    title: "Fund, then approve",
+    text: "Each department's budget is shared out over the proposed steps, everyone's first course first. Only funded steps are approved; asking for an unfunded one is rejected, and the reason is recorded.",
   },
   {
     icon: "fa-graduation-cap",
@@ -52,7 +52,8 @@ function Home() {
   const tiles = summary
     ? [
         { label: "Employees", value: summary.employees.toLocaleString("en-IN"), note: `${summary.active_employees.toLocaleString("en-IN")} active` },
-        { label: "Skill gaps at planning", value: summary.planning_gaps.toLocaleString("en-IN"), note: `${summary.planned_gaps.toLocaleString("en-IN")} covered by a plan` },
+        { label: "Skill gaps at planning", value: summary.planning_gaps.toLocaleString("en-IN"), note: `${summary.planned_gaps.toLocaleString("en-IN")} covered by a proposal` },
+        { label: "Funded steps", value: summary.funded_steps.toLocaleString("en-IN"), note: `of ${summary.recommended.toLocaleString("en-IN")} proposed` },
         { label: "Gaps closed", value: summary.closed_gaps.toLocaleString("en-IN"), note: "confirmed by a post-course test" },
         { label: "Enrollments", value: summary.enrollments.toLocaleString("en-IN"), note: `${(summary.enrollments_by_status.COMPLETED || 0).toLocaleString("en-IN")} completed` },
         { label: "Budget committed", value: inWords(summary.budget_committed), note: `of ${money(summary.budget_limit)}` },
@@ -86,7 +87,7 @@ function Home() {
       {summary && (
         <section className="row g-3 mt-1">
           {tiles.map((tile) => (
-            <div className="col-6 col-md-4 col-lg-2" key={tile.label}>
+            <div className="col-6 col-md-3" key={tile.label}>
               <div className="tile">
                 <div className="tile-label">{tile.label}</div>
                 <div className="tile-value">{tile.value}</div>

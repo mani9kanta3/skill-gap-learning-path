@@ -168,8 +168,12 @@ function Evaluation() {
                   <td className="text-end">{percent(metric(metrics, "outcomes", "reassessment_coverage_of_due"))}</td>
                 </tr>
                 <tr>
-                  <td>Recommended rows that are feasible</td>
-                  <td className="text-end">{percent(metric(metrics, "feasibility", "share_feasible"))}</td>
+                  <td>Proposed steps passing every planning check</td>
+                  <td className="text-end">{percent(metric(metrics, "feasibility", "share_feasible_all_checks"))}</td>
+                </tr>
+                <tr>
+                  <td>Proposed steps funded by the budget</td>
+                  <td className="text-end">{percent(metric(metrics, "funding", "share_funded"))}</td>
                 </tr>
               </tbody>
             </table>

@@ -24,6 +24,10 @@ const TONE = {
   // recommendation
   RECOMMENDED: "good",
   NOT_RECOMMENDED: "stop",
+  // funding
+  FUNDED: "good",
+  NOT_FUNDED_BUDGET: "stop",
+  NOT_FUNDED_PREREQUISITE: "muted",
   // budget and checks
   WITHIN_LIMIT: "good",
   EXCEEDED: "stop",

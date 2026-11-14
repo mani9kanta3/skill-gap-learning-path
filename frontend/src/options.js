@@ -51,8 +51,14 @@ export const REASONS = {
   COURSE_UNAVAILABLE: "Not running in the period",
   PREREQUISITE_UNAVAILABLE: "A prerequisite is not available",
   PATH_LIMIT: "Path already has 4 courses",
-  OVER_BUDGET: "Over the learning allowance",
+  OVER_BUDGET: "Over the allowance or the department budget",
   NO_SCHEDULE: "No run with a free seat fits the timeline",
+};
+
+export const FUNDING = {
+  FUNDED: "Funded",
+  NOT_FUNDED_BUDGET: "Not funded: budget used up",
+  NOT_FUNDED_PREREQUISITE: "Not funded: its prerequisite was not funded",
 };
 
 export const PLAN_STATUS = {
@@ -63,7 +69,7 @@ export const PLAN_STATUS = {
   COURSE_UNAVAILABLE: "Course not running",
   PREREQUISITE_UNAVAILABLE: "Prerequisite not available",
   PATH_LIMIT: "Path full",
-  OVER_BUDGET: "Over allowance",
+  OVER_BUDGET: "Over budget",
   NO_SCHEDULE: "No date or seat fits",
 };
 
