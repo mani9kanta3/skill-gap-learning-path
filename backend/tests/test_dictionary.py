@@ -74,10 +74,10 @@ def test_plan_status_includes_every_rejection_reason():
         assert reason in dictionary.PLAN_STATUS
 
 
-def test_rule_codes_run_from_br01_to_br20():
+def test_rule_codes_run_from_br01_to_br21():
     assert dictionary.RULE_CODES[0] == "BR-01"
-    assert dictionary.RULE_CODES[-1] == "BR-20"
-    assert len(dictionary.RULE_CODES) == 20
+    assert dictionary.RULE_CODES[-1] == "BR-21"
+    assert len(dictionary.RULE_CODES) == 21
 
 
 def test_unknown_table_is_an_error():

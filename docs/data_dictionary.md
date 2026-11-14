@@ -132,16 +132,17 @@ Unique: `department_code, fiscal_year`.
 | department_code | CHAR(3) | yes | ENG, DAT, ITS, SAL, MKT, FIN, HRM, OPS | department.department_code |  |
 | fiscal_year | SMALLINT | yes | range 2026..2026 |  |  |
 | limit_amount | NUMERIC(12,2) | yes | range 0.. |  |  |
-| planned_amount | NUMERIC(12,2) | yes | range 0.. |  | yes |
-| committed_amount | NUMERIC(12,2) | yes | range 0.. |  | yes |
+| planned_amount | NUMERIC(12,2) | yes | range 0..; Proposed demand: cost of every RECOMMENDED step. |  | yes |
+| funded_amount | NUMERIC(12,2) | yes | range 0..; Cost of the FUNDED steps. Never above the limit. |  | yes |
+| committed_amount | NUMERIC(12,2) | yes | range 0..; Cost of enrollments that reached APPROVED. |  | yes |
 | remaining_amount | NUMERIC(12,2) | yes | Can be negative. |  | yes |
 | utilization_pct | NUMERIC(6,2) | yes | range 0.. |  | yes |
-| budget_status | VARCHAR(12) | yes | WITHIN_LIMIT, EXCEEDED |  | yes |
+| budget_status | VARCHAR(12) | yes | WITHIN_LIMIT, EXCEEDED; EXCEEDED when funded steps plus approvals outside the funded plan cost more than the limit. |  | yes |
 | currency | CHAR(3) | yes | INR |  |  |
 
 ## public.recommendation
 
-The January planning run: the learning path and every rejected candidate, with reasons. Kind: transaction. Primary key: `recommendation_id`.
+The January planning run: the proposed learning path, every rejected candidate with its reason, and which proposed steps the budget funded. Kind: transaction. Primary key: `recommendation_id`.
 Unique: `employee_id, course_id`.
 
 | Column | Type | Req | Allowed values / rule | References | Derived |
@@ -159,6 +160,7 @@ Unique: `employee_id, course_id`.
 | planned_end_date | DATE | no |  |  | yes |
 | estimated_cost | NUMERIC(12,2) | yes | range 0.. |  | yes |
 | cumulative_cost | NUMERIC(12,2) | no | range 0.. |  | yes |
+| funding_status | VARCHAR(24) | no | FUNDED, NOT_FUNDED_BUDGET, NOT_FUNDED_PREREQUISITE; Set on RECOMMENDED rows when the department budget is allocated (BR-21). |  |  |
 | planning_date | DATE | yes |  |  |  |
 | period_start | DATE | yes |  |  |  |
 | period_end | DATE | yes |  |  |  |
@@ -269,7 +271,7 @@ Unique: `issue_type, record_id`.
 | record_id | VARCHAR(30) | yes |  |  |  |
 | employee_id | VARCHAR(10) | yes | `^EMP-[0-9]{6}$` |  |  |
 | related_ids | TEXT | no | Semicolon-separated. |  |  |
-| rule_code | VARCHAR(6) | yes | BR-01, BR-02, BR-03, BR-04, BR-05, BR-06, BR-07, BR-08, BR-09, BR-10, BR-11, BR-12, BR-13, BR-14, BR-15, BR-16, BR-17, BR-18, BR-19, BR-20 |  |  |
+| rule_code | VARCHAR(6) | yes | BR-01, BR-02, BR-03, BR-04, BR-05, BR-06, BR-07, BR-08, BR-09, BR-10, BR-11, BR-12, BR-13, BR-14, BR-15, BR-16, BR-17, BR-18, BR-19, BR-20, BR-21 |  |  |
 | expected_decision | VARCHAR(60) | yes |  |  |  |
 | description | TEXT | yes |  |  |  |
 
@@ -281,7 +283,7 @@ What the detector found, using input tables only. Kind: evaluation. Primary key:
 |---|---|---|---|---|---|
 | issue_type | VARCHAR(30) | yes | PREREQUISITE_VIOLATION, COURSE_UNAVAILABLE, BUDGET_EXCEEDED, DUPLICATE_COMPLETION, GAP_NOT_REASSESSED |  |  |
 | record_id | VARCHAR(30) | yes |  |  |  |
-| rule_code | VARCHAR(6) | yes | BR-01, BR-02, BR-03, BR-04, BR-05, BR-06, BR-07, BR-08, BR-09, BR-10, BR-11, BR-12, BR-13, BR-14, BR-15, BR-16, BR-17, BR-18, BR-19, BR-20 |  |  |
+| rule_code | VARCHAR(6) | yes | BR-01, BR-02, BR-03, BR-04, BR-05, BR-06, BR-07, BR-08, BR-09, BR-10, BR-11, BR-12, BR-13, BR-14, BR-15, BR-16, BR-17, BR-18, BR-19, BR-20, BR-21 |  |  |
 | evidence | TEXT | yes |  |  |  |
 
 ## eval.validation_result
@@ -291,7 +293,7 @@ One row per validator check. Kind: evaluation. Primary key: `check_id`.
 | Column | Type | Req | Allowed values / rule | References | Derived |
 |---|---|---|---|---|---|
 | check_id | VARCHAR(60) | yes |  |  |  |
-| rule_code | VARCHAR(6) | no | BR-01, BR-02, BR-03, BR-04, BR-05, BR-06, BR-07, BR-08, BR-09, BR-10, BR-11, BR-12, BR-13, BR-14, BR-15, BR-16, BR-17, BR-18, BR-19, BR-20 |  |  |
+| rule_code | VARCHAR(6) | no | BR-01, BR-02, BR-03, BR-04, BR-05, BR-06, BR-07, BR-08, BR-09, BR-10, BR-11, BR-12, BR-13, BR-14, BR-15, BR-16, BR-17, BR-18, BR-19, BR-20, BR-21 |  |  |
 | table_name | VARCHAR(40) | yes |  |  |  |
 | kind | VARCHAR(12) | yes | STRUCTURAL, RULE |  |  |
 | failing_count | INTEGER | yes | range 0.. |  |  |

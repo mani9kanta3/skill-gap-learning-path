@@ -46,6 +46,9 @@ NOT_RECOMMENDED_REASONS = (
     "NO_SCHEDULE",
 )
 RECOMMENDATION_REASON = RECOMMENDED_REASONS + NOT_RECOMMENDED_REASONS
+# Funding of a RECOMMENDED (proposed) step, decided when the department
+# budget is allocated (BR-21). Null on NOT_RECOMMENDED rows.
+FUNDING_STATUS = ("FUNDED", "NOT_FUNDED_BUDGET", "NOT_FUNDED_PREREQUISITE")
 ENROLLMENT_STATUS = (
     "REQUESTED",
     "APPROVED",
@@ -70,7 +73,7 @@ GAP_STATUS = ("NO_GAP", "CLOSED", "OPEN")
 ISSUE_TYPE = config.EDGE_CASE_TYPES
 CHECK_KIND = ("STRUCTURAL", "RULE")
 CHECK_STATUS = ("PASS", "FAIL")
-RULE_CODES = tuple(f"BR-{n:02d}" for n in range(1, 21))
+RULE_CODES = tuple(f"BR-{n:02d}" for n in range(1, 22))
 
 # ---------------------------------------------------------------------------
 # Building blocks
@@ -430,11 +433,18 @@ BUDGET_TABLE = Table(
         ),
         _level("fiscal_year", config.FISCAL_YEAR, config.FISCAL_YEAR),
         _money("limit_amount"),
-        _money("planned_amount", derived=True),
-        _money("committed_amount", derived=True),
+        _money("planned_amount", derived=True, description="Proposed demand: cost of every RECOMMENDED step."),
+        _money("funded_amount", derived=True, description="Cost of the FUNDED steps. Never above the limit."),
+        _money("committed_amount", derived=True, description="Cost of enrollments that reached APPROVED."),
         _money("remaining_amount", minimum=None, derived=True, description="Can be negative."),
         Column("utilization_pct", "NUMERIC(6,2)", minimum=0, derived=True),
-        _enum("budget_status", BUDGET_STATUS, 12, derived=True),
+        _enum(
+            "budget_status",
+            BUDGET_STATUS,
+            12,
+            derived=True,
+            description="EXCEEDED when funded steps plus approvals outside the funded plan cost more than the limit.",
+        ),
         Column("currency", "CHAR(3)", enum=(config.CURRENCY,)),
     ),
     unique=(("department_code", "fiscal_year"),),
@@ -444,7 +454,7 @@ RECOMMENDATION_TABLE = Table(
     "recommendation",
     PUBLIC,
     TRANSACTION,
-    "The January planning run: the learning path and every rejected candidate, with reasons.",
+    "The January planning run: the proposed learning path, every rejected candidate with its reason, and which proposed steps the budget funded.",
     ("recommendation_id",),
     (
         _id("recommendation_id", *RECOMMENDATION),
@@ -472,6 +482,13 @@ RECOMMENDATION_TABLE = Table(
         _date("planned_end_date", required=False, derived=True),
         _money("estimated_cost", derived=True),
         _money("cumulative_cost", required=False, derived=True),
+        _enum(
+            "funding_status",
+            FUNDING_STATUS,
+            24,
+            required=False,
+            description="Set on RECOMMENDED rows when the department budget is allocated (BR-21).",
+        ),
         _date("planning_date"),
         _date("period_start"),
         _date("period_end"),
