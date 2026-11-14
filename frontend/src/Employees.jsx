@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 
 import api from "./api";
+import Card from "./Card";
 import getErrorMessage from "./errorMessage";
 import { DEPARTMENTS } from "./options";
 import PageHeader from "./PageHeader";
@@ -11,11 +12,11 @@ import useDebounce from "./useDebounce";
 const PAGE = 50;
 
 /*
-  The employee list, for managers and HR.
+  The employee directory, for managers and HR.
 
-  A manager filters by their own ID to see their team. The filters live
-  in the URL (?manager_id=EMP-000553), so a manager's team view is a link
-  they can bookmark or send.
+  A manager puts their own ID in the manager filter to see their team.
+  The filters live in the URL (?manager_id=EMP-000553), so a team view is
+  a link that can be bookmarked or sent.
 */
 function Employees() {
   const [params, setParams] = useSearchParams();
@@ -76,15 +77,15 @@ function Employees() {
   return (
     <div>
       <PageHeader
-        icon="fa-users"
+        eyebrow="People"
         title="Employees"
-        subtitle={`${data.total.toLocaleString("en-IN")} employees match. Open one to see their gaps, path and results.`}
+        subtitle="Open someone to see their skill gaps, learning path, enrollments and results."
       />
 
-      <div className="panel corners p-3 mb-3">
-        <div className="row g-3">
-          <div className="col-md-4">
-            <label className="field-label form-label">Search</label>
+      <Card>
+        <div className="toolbar">
+          <div className="field" style={{ flexGrow: 2 }}>
+            <label className="field-label">Search</label>
             <input
               className="form-control"
               placeholder="Name or EMP-000001"
@@ -95,8 +96,8 @@ function Employees() {
               }}
             />
           </div>
-          <div className="col-md-3">
-            <label className="field-label form-label">Department</label>
+          <div className="field">
+            <label className="field-label">Department</label>
             <select className="form-select" value={department} onChange={(e) => update("department", e.target.value)}>
               <option value="">All departments</option>
               {DEPARTMENTS.map((d) => (
@@ -106,8 +107,8 @@ function Employees() {
               ))}
             </select>
           </div>
-          <div className="col-md-3">
-            <label className="field-label form-label">Manager ID</label>
+          <div className="field">
+            <label className="field-label">Manager ID (team view)</label>
             <input
               className="form-control"
               placeholder="EMP-000553"
@@ -115,8 +116,8 @@ function Employees() {
               onChange={(e) => update("manager_id", e.target.value.trim().toUpperCase())}
             />
           </div>
-          <div className="col-md-2">
-            <label className="field-label form-label">Status</label>
+          <div className="field">
+            <label className="field-label">Status</label>
             <select className="form-select" value={status} onChange={(e) => update("status", e.target.value)}>
               <option value="">Any</option>
               <option value="ACTIVE">Active</option>
@@ -124,69 +125,68 @@ function Employees() {
             </select>
           </div>
         </div>
-      </div>
+      </Card>
 
       {error && <div className="alert alert-danger">{error}</div>}
 
-      <div className="panel corners table-wrap">
-        <table className="table data-table">
-          <thead>
-            <tr>
-              <th>Employee</th>
-              <th>Department</th>
-              <th>Role</th>
-              <th>Working towards</th>
-              <th className="text-end">Open gaps</th>
-              <th className="text-end">Path courses</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.results.map((e) => (
-              <tr key={e.employee_id}>
-                <td>
-                  <Link to={`/employees/${e.employee_id}`}>
-                    {e.first_name} {e.last_name}
-                  </Link>
-                  <div className="mono text-muted">{e.employee_id}</div>
-                </td>
-                <td>{e.department_code}</td>
-                <td>{e.role_title}</td>
-                <td>
-                  {e.target_role_title}
-                  {e.on_career_path && <span className="chip ms-2">promotion</span>}
-                </td>
-                <td className="text-end">{e.open_gaps}</td>
-                <td className="text-end">{e.path_courses}</td>
-                <td>
-                  <StatusBadge status={e.employment_status} />
-                </td>
-              </tr>
-            ))}
-            {!load && data.results.length === 0 && (
+      <Card title={`${data.total.toLocaleString("en-IN")} employees`} flush>
+        <div className="table-wrap">
+          <table className="data-table">
+            <thead>
               <tr>
-                <td colSpan="7" className="info-text text-center py-4">
-                  No employee matches these filters.
-                </td>
+                <th>Employee</th>
+                <th>Department</th>
+                <th>Current role</th>
+                <th>Working towards</th>
+                <th className="text-end">Open gaps</th>
+                <th className="text-end">Path courses</th>
+                <th>Status</th>
               </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
-
-      <div className="d-flex align-items-center justify-content-between mt-3">
-        <span className="info-text">
-          {load ? "Loading ..." : `Page ${page + 1} of ${pages}`}
-        </span>
-        <div className="d-flex gap-2">
-          <button className="btn btn-light" disabled={page === 0 || load} onClick={() => update("page", String(page - 1))}>
-            Previous
-          </button>
-          <button className="btn btn-light" disabled={page + 1 >= pages || load} onClick={() => update("page", String(page + 1))}>
-            Next
-          </button>
+            </thead>
+            <tbody>
+              {data.results.map((e) => (
+                <tr key={e.employee_id}>
+                  <td>
+                    <Link className="cell-main" to={`/employees/${e.employee_id}`}>
+                      {e.first_name} {e.last_name}
+                    </Link>
+                    <div className="mono">{e.employee_id}</div>
+                  </td>
+                  <td>{e.department_code}</td>
+                  <td>{e.role_title}</td>
+                  <td>
+                    {e.target_role_title}
+                    {e.on_career_path && <span className="chip ms-2">promotion</span>}
+                  </td>
+                  <td className="text-end">{e.open_gaps}</td>
+                  <td className="text-end">{e.path_courses}</td>
+                  <td>
+                    <StatusBadge status={e.employment_status} />
+                  </td>
+                </tr>
+              ))}
+              {!load && data.results.length === 0 && (
+                <tr>
+                  <td colSpan="7" className="empty-row">
+                    No employee matches these filters.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
         </div>
-      </div>
+        <div className="pager">
+          <span>{load ? "Loading ..." : `Page ${page + 1} of ${pages}`}</span>
+          <div className="d-flex gap-2">
+            <button className="btn-quiet" disabled={page === 0 || load} onClick={() => update("page", String(page - 1))}>
+              Previous
+            </button>
+            <button className="btn-quiet" disabled={page + 1 >= pages || load} onClick={() => update("page", String(page + 1))}>
+              Next
+            </button>
+          </div>
+        </div>
+      </Card>
     </div>
   );
 }

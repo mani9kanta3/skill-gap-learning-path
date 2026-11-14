@@ -1,21 +1,27 @@
 import React, { useEffect, useState } from "react";
 
 import api from "./api";
+import BarList from "./BarList";
+import Card from "./Card";
 import getErrorMessage from "./errorMessage";
 import money, { inWords } from "./money";
 import PageHeader from "./PageHeader";
+import StatCard from "./StatCard";
 import StatusBadge from "./StatusBadge";
 
 /*
   Department budgets, for the HR partner.
 
-  The numbers per department tell the story in order: what people
-  proposed in January, what the limit is, which proposed steps the limit
-  was allocated to (the funded plan), and what was actually committed.
-  Departments fund less than they propose on purpose. Only funded steps
-  can be approved, so a request for an unfunded step is rejected. An
-  EXCEEDED badge means something was approved outside the funded plan,
-  so the department now owes more than its limit.
+  The numbers tell the story in order: what people proposed in January,
+  the limit, the part of the proposals the limit was allocated to (the
+  funded plan), and what was actually committed. Departments fund less
+  than they propose on purpose. Only funded steps can be approved, so a
+  request for an unfunded one is rejected. EXCEEDED means something was
+  approved outside the funded plan, so the department now owes more than
+  its limit.
+
+  One table for comparing departments side by side, one chart for seeing
+  at a glance how much of each budget has been used.
 */
 function Budgets() {
   const [rows, setRows] = useState([]);
@@ -30,69 +36,91 @@ function Budgets() {
       .finally(() => setLoad(false));
   }, []);
 
+  const total = (key) => rows.reduce((sum, b) => sum + Number(b[key]), 0);
+  const rejections = rows.reduce((sum, b) => sum + b.budget_rejections, 0);
+
   return (
     <div>
-      <PageHeader icon="fa-wallet" title="Budgets" subtitle="Proposed, funded and committed spend per department, 2026." />
+      <PageHeader
+        eyebrow="Budget"
+        title="Department budgets"
+        subtitle="Proposed, funded and committed spend per department for 2026."
+      />
 
       {error && <div className="alert alert-danger">{error}</div>}
-      {load && <p className="info-text">Loading ...</p>}
+      {load && <p className="loading">Loading ...</p>}
 
-      <div className="row g-3">
-        {rows.map((b) => {
-          const used = Math.min(100, b.utilization_pct);
-          return (
-            <div className="col-md-6" key={b.budget_id}>
-              <div className="panel corners p-3 h-100">
-                <div className="d-flex justify-content-between align-items-start">
-                  <div>
-                    <div className="fw-bold">{b.department_name}</div>
-                    <div className="mono text-muted">{b.budget_id}</div>
-                  </div>
-                  <StatusBadge status={b.budget_status} />
-                </div>
-
-                <div className="bar mt-3" title={`${b.utilization_pct}% of the limit`}>
-                  <div className={`bar-fill ${b.utilization_pct > 100 ? "over" : ""}`} style={{ width: `${used}%` }}></div>
-                </div>
-                <div className="d-flex justify-content-between info-text mt-1">
-                  <span>{b.utilization_pct.toFixed(2)}% used</span>
-                  <span>{money(b.remaining_amount)} left</span>
-                </div>
-
-                <table className="table table-sm data-table mt-2">
-                  <tbody>
-                    <tr>
-                      <td>Proposed in January</td>
-                      <td className="text-end">{money(b.planned_amount)}</td>
-                      <td className="text-end info-text">{inWords(b.planned_amount)}</td>
-                    </tr>
-                    <tr>
-                      <td>Limit</td>
-                      <td className="text-end">{money(b.limit_amount)}</td>
-                      <td className="text-end info-text">{inWords(b.limit_amount)}</td>
-                    </tr>
-                    <tr>
-                      <td>Funded plan</td>
-                      <td className="text-end">{money(b.funded_amount)}</td>
-                      <td className="text-end info-text">{inWords(b.funded_amount)}</td>
-                    </tr>
-                    <tr>
-                      <td>Committed</td>
-                      <td className="text-end">{money(b.committed_amount)}</td>
-                      <td className="text-end info-text">{inWords(b.committed_amount)}</td>
-                    </tr>
-                    <tr>
-                      <td>Rejected for budget</td>
-                      <td className="text-end">{b.budget_rejections}</td>
-                      <td className="text-end info-text">of {b.enrollments} requests</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+      {rows.length > 0 && (
+        <>
+          <div className="row g-3 mb-4">
+            <div className="col-6 col-lg-3">
+              <StatCard label="Proposed in January" value={inWords(total("planned_amount"))} note="what people asked for" />
             </div>
-          );
-        })}
-      </div>
+            <div className="col-6 col-lg-3">
+              <StatCard label="Total limit" value={inWords(total("limit_amount"))} note="85% of proposed" tone="primary" />
+            </div>
+            <div className="col-6 col-lg-3">
+              <StatCard label="Committed" value={inWords(total("committed_amount"))} note="approved enrollments" />
+            </div>
+            <div className="col-6 col-lg-3">
+              <StatCard label="Rejected for budget" value={rejections} note="requests for unfunded steps" tone="wait" />
+            </div>
+          </div>
+
+          <Card title="Budget used" subtitle="Bar = committed spend. Black line = the department's limit.">
+            <BarList
+              items={rows.map((b) => ({
+                label: b.department_name,
+                value: b.committed_amount,
+                marker: b.limit_amount,
+                display: `${b.utilization_pct.toFixed(1)}%`,
+              }))}
+            />
+          </Card>
+
+          <Card title="By department" flush>
+            <div className="table-wrap">
+              <table className="data-table">
+                <thead>
+                  <tr>
+                    <th>Department</th>
+                    <th className="text-end">Proposed</th>
+                    <th className="text-end">Limit</th>
+                    <th className="text-end">Funded plan</th>
+                    <th className="text-end">Committed</th>
+                    <th className="text-end">Left</th>
+                    <th className="text-end">Used</th>
+                    <th className="text-end">Rejected for budget</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {rows.map((b) => (
+                    <tr key={b.budget_id}>
+                      <td>
+                        <span className="cell-main">{b.department_name}</span>
+                        <div className="mono">{b.budget_id}</div>
+                      </td>
+                      <td className="text-end">{money(b.planned_amount)}</td>
+                      <td className="text-end">{money(b.limit_amount)}</td>
+                      <td className="text-end">{money(b.funded_amount)}</td>
+                      <td className="text-end">{money(b.committed_amount)}</td>
+                      <td className="text-end">{money(b.remaining_amount)}</td>
+                      <td className="text-end">{b.utilization_pct.toFixed(1)}%</td>
+                      <td className="text-end">
+                        {b.budget_rejections} <span className="muted small-text">/ {b.enrollments}</span>
+                      </td>
+                      <td>
+                        <StatusBadge status={b.budget_status} />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </Card>
+        </>
+      )}
     </div>
   );
 }

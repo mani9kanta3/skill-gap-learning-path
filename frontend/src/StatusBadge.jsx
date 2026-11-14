@@ -43,7 +43,7 @@ function StatusBadge({ status, text }) {
     return null;
   }
   const tone = TONE[status] || "wait";
-  return <span className={`status-badge tone-${tone}`}>{text || status.replaceAll("_", " ")}</span>;
+  return <span className={`badge-status tone-${tone}`}>{text || status.replaceAll("_", " ")}</span>;
 }
 
 export default StatusBadge;

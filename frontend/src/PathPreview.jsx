@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import api from "./api";
+import Card from "./Card";
 import getErrorMessage from "./errorMessage";
 import money from "./money";
 import { PLAN_STATUS, REASONS, label } from "./options";
+import StatCard from "./StatCard";
 
 /*
   Re-plan one employee from any date.
@@ -21,11 +23,12 @@ import { PLAN_STATUS, REASONS, label } from "./options";
 */
 const YEAR_START = "2026-01-01";
 const YEAR_END = "2026-12-31";
+
 function PathPreview({ employeeId }) {
   const [form, setForm] = useState({
     planning_date: "2026-07-01",
-    period_start: "2026-01-01",
-    period_end: "2026-12-31",
+    period_start: YEAR_START,
+    period_end: YEAR_END,
   });
   const [result, setResult] = useState(null);
   const [load, setLoad] = useState(false);
@@ -33,7 +36,6 @@ function PathPreview({ employeeId }) {
 
   // A result belongs to one employee. Moving to another employee clears it,
   // so one person's path is never shown under someone else's name.
-  // (EmployeeDetail also keys this component by employee ID.)
   useEffect(() => {
     setResult(null);
     setError("");
@@ -55,8 +57,8 @@ function PathPreview({ employeeId }) {
   }
 
   const field = (name, text) => (
-    <div className="col-md-3">
-      <label className="field-label form-label">{text}</label>
+    <div className="field">
+      <label className="field-label">{text}</label>
       <input
         type="date"
         className="form-control"
@@ -71,62 +73,51 @@ function PathPreview({ employeeId }) {
   );
 
   return (
-    <div className="panel corners p-4">
-      <h2 className="section-title mb-1">
-        <i className="fa-solid fa-wand-magic-sparkles me-2 text-brand"></i>
-        Preview a path from another date
-      </h2>
-      <p className="info-text">
-        Uses only what was known on the planning date, within the 2026 budget
-        year. The result is a proposal, not a funded plan. Nothing is saved.
-      </p>
-
-      <form onSubmit={preview} className="row g-3 align-items-end">
-        {field("planning_date", "Planning date")}
-        {field("period_start", "Period start")}
-        {field("period_end", "Period end")}
-        <div className="col-md-3">
-          <button type="submit" className="btn btn-brand w-100" disabled={load}>
-            {load ? "Planning ..." : "Preview path"}
-          </button>
-        </div>
-      </form>
-
-      {error && <div className="alert alert-danger mt-3 mb-0">{error}</div>}
+    <>
+      <Card
+        title="Re-plan from another date"
+        subtitle="Uses only what was known on the planning date, inside the 2026 budget year. The result is a proposal, not a funded plan. Nothing is saved."
+      >
+        <form onSubmit={preview} className="toolbar">
+          {field("planning_date", "Planning date")}
+          {field("period_start", "Period start")}
+          {field("period_end", "Period end")}
+          <div className="field" style={{ flexGrow: 0 }}>
+            <button type="submit" className="btn-primary-app" disabled={load}>
+              {load ? "Planning ..." : "Build proposal"}
+            </button>
+          </div>
+        </form>
+        {error && <div className="alert alert-danger mt-3 mb-0">{error}</div>}
+      </Card>
 
       {result && (
-        <div className="mt-4">
-          <div className="row g-3 mb-3">
+        <>
+          <div className="row g-3 mb-4">
             <div className="col-md-4">
-              <div className="tile">
-                <div className="tile-label">Path cost</div>
-                <div className="tile-value">{money(result.path_cost)}</div>
-              </div>
+              <StatCard label="Proposed path cost" value={money(result.path_cost)} tone="primary" />
             </div>
             <div className="col-md-4">
-              <div className="tile">
-                <div className="tile-label">Allowance left</div>
-                <div className="tile-value">{money(result.allowance - result.already_spent)}</div>
-                <div className="tile-note">of {money(result.allowance)}, {money(result.already_spent)} already spent</div>
-              </div>
+              <StatCard
+                label="Allowance left"
+                value={money(result.allowance - result.already_spent)}
+                note={`of ${money(result.allowance)}; ${money(result.already_spent)} already spent`}
+              />
             </div>
             <div className="col-md-4">
-              <div className="tile">
-                <div className="tile-label">{result.department_code} budget free</div>
-                <div className="tile-value">{money(result.department_free)}</div>
-                <div className="tile-note">
-                  {money(result.department_limit)} limit, {money(result.department_committed)} committed,{" "}
-                  {money(result.department_reserved_for_others)} held for other funded steps, as of {result.planning_date}
-                </div>
-              </div>
+              <StatCard
+                label={`${result.department_code} budget free`}
+                value={money(result.department_free)}
+                note={`${money(result.department_limit)} limit − ${money(result.department_committed)} committed − ${money(
+                  result.department_reserved_for_others
+                )} held for other funded steps`}
+              />
             </div>
           </div>
 
-          {result.path.length === 0 ? (
-            <div className="note note-warn">No feasible course could be planned from this date.</div>
-          ) : (
+          <Card title={`Proposed path as of ${result.planning_date}`} flush>
             <div className="table-wrap">
-              <table className="table data-table">
+              <table className="data-table">
                 <thead>
                   <tr>
                     <th>#</th>
@@ -142,11 +133,13 @@ function PathPreview({ employeeId }) {
                     <tr key={r.recommendation_id}>
                       <td>{r.path_sequence}</td>
                       <td>
-                        <Link to={`/courses/${r.course_id}`}>{r.course_title}</Link>
+                        <Link className="cell-main" to={`/courses/${r.course_id}`}>
+                          {r.course_title}
+                        </Link>
                       </td>
                       <td>
                         {label(REASONS, r.reason_code)}
-                        {r.required_for_title && <div className="info-text">before {r.required_for_title}</div>}
+                        {r.required_for_title && <div className="muted small-text">before {r.required_for_title}</div>}
                       </td>
                       <td>{r.target_skill_name}</td>
                       <td className="text-nowrap">
@@ -155,35 +148,49 @@ function PathPreview({ employeeId }) {
                       <td className="text-end">{money(r.estimated_cost)}</td>
                     </tr>
                   ))}
+                  {result.path.length === 0 && (
+                    <tr>
+                      <td colSpan="6" className="empty-row">
+                        No feasible course could be planned from this date.
+                      </td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
             </div>
-          )}
+          </Card>
 
-          {result.not_recommended.length > 0 && (
-            <>
-              <p className="field-label mt-3 mb-1">Turned down</p>
-              <ul className="info-text mb-0">
-                {result.not_recommended.map((r) => (
-                  <li key={r.recommendation_id}>
-                    {r.course_title} for {r.target_skill_name}: <strong>{label(REASONS, r.reason_code)}</strong>
-                  </li>
-                ))}
-              </ul>
-            </>
-          )}
-
-          <p className="field-label mt-3 mb-1">Every gap on that date</p>
-          <div className="d-flex flex-wrap gap-2">
-            {result.gaps.map((g) => (
-              <span className="chip" key={g.skill_id} title={`level ${g.planning_level} of target ${g.target_level}`}>
-                {g.skill_name}: {label(PLAN_STATUS, g.plan_status)}
-              </span>
-            ))}
+          <div className="row g-3">
+            <div className="col-lg-6">
+              <Card title="Turned down">
+                {result.not_recommended.length === 0 ? (
+                  <span className="muted">Nothing was turned down.</span>
+                ) : (
+                  <ul className="mb-0 small-text">
+                    {result.not_recommended.map((r) => (
+                      <li key={r.recommendation_id}>
+                        {r.course_title} for {r.target_skill_name}: <strong>{label(REASONS, r.reason_code)}</strong>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </Card>
+            </div>
+            <div className="col-lg-6">
+              <Card title="Every gap on that date">
+                <div className="d-flex flex-wrap gap-2">
+                  {result.gaps.map((g) => (
+                    <span className="chip" key={g.skill_id} title={`level ${g.planning_level} of target ${g.target_level}`}>
+                      {g.skill_name}: {label(PLAN_STATUS, g.plan_status)}
+                    </span>
+                  ))}
+                </div>
+              </Card>
+            </div>
           </div>
-        </div>
+        </>
       )}
-    </div>
+    </>
   );
 }
 

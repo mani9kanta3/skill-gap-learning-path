@@ -1,26 +1,29 @@
 import React, { useEffect, useState } from "react";
 
 import api from "./api";
+import BarList from "./BarList";
+import Card from "./Card";
 import getErrorMessage from "./errorMessage";
 import { percent } from "./money";
 import { ISSUE_TYPES } from "./options";
 import PageHeader from "./PageHeader";
+import StatCard from "./StatCard";
 import StatusBadge from "./StatusBadge";
 
 /*
-  How well the data and the system hold up, straight from the last run.
+  Can the data be trusted? Straight from the last generator run.
 
   Three questions, in order:
   1. Is the data valid? Every check, with how many records failed it.
   2. Were the planted exceptions found, and nothing else? Precision and
      recall per type, matched record by record.
   3. Does the same seed give the same data? The reproducibility result.
-  Below that: the outcome numbers, where attending, passing and actually
-  closing a gap are kept apart.
+  Then the plan quality: how many proposed steps pass every planning
+  check, and how many were funded.
 */
 function metric(metrics, group, name, dimension = "ALL") {
   const found = metrics.find((m) => m.metric_group === group && m.metric_name === name && m.dimension === dimension);
-  return found ? found.value : null;
+  return found ? Number(found.value) : null;
 }
 
 function Evaluation() {
@@ -39,187 +42,150 @@ function Evaluation() {
     return <div className="alert alert-danger">{error}</div>;
   }
   if (!data) {
-    return <p className="info-text">Loading ...</p>;
+    return <p className="loading">Loading ...</p>;
   }
 
   const { checks, metrics, reproducibility } = data;
   const passed = checks.filter((c) => c.status === "PASS").length;
   const ruleChecks = checks.filter((c) => c.kind === "RULE");
   const shown = showAll ? checks : checks.filter((c) => c.kind === "RULE" || c.status === "FAIL");
-  const funnel = ["recommended", "requested", "approved", "rejected", "started", "withdrawn", "completed", "passed", "reassessed"];
+  const labelled = Object.values(data.labelled).reduce((a, b) => a + b, 0);
+
+  const planBars = [
+    { label: "Pass every planning check", value: 100 * metric(metrics, "feasibility", "share_feasible_all_checks") },
+    { label: "Funded by the budget", value: 100 * metric(metrics, "funding", "share_funded") },
+    { label: "Feasible and funded", value: 100 * metric(metrics, "funding", "share_feasible_and_funded") },
+  ].map((item) => ({ ...item, display: `${item.value.toFixed(1)}%` }));
 
   return (
     <div>
-      <PageHeader icon="fa-chart-simple" title="Evaluation" subtitle={`Results of the last generator run on the ${data.scale} dataset.`} />
+      <PageHeader
+        eyebrow="Data quality"
+        title="Validation"
+        subtitle={`Results of the last generator run on the ${data.scale} dataset.`}
+      />
 
       <div className="row g-3 mb-4">
         <div className="col-md-4">
-          <div className="tile">
-            <div className="tile-label">Validation checks</div>
-            <div className="tile-value">
-              {passed} / {checks.length}
-            </div>
-            <div className="tile-note">passed, {ruleChecks.length} of them matched to ground truth by ID</div>
-          </div>
+          <StatCard
+            label="Validation checks passed"
+            value={`${passed} / ${checks.length}`}
+            note={`${ruleChecks.length} of them matched to ground truth by record ID`}
+            tone={passed === checks.length ? "good" : "stop"}
+          />
         </div>
         <div className="col-md-4">
-          <div className="tile">
-            <div className="tile-label">Detector</div>
-            <div className="tile-value">
-              {metric(metrics, "detection", "precision")?.toFixed(3)} / {metric(metrics, "detection", "recall")?.toFixed(3)}
-            </div>
-            <div className="tile-note">precision / recall over {Object.values(data.labelled).reduce((a, b) => a + b, 0)} labelled records</div>
-          </div>
+          <StatCard
+            label="Detector precision / recall"
+            value={`${metric(metrics, "detection", "precision")?.toFixed(3)} / ${metric(metrics, "detection", "recall")?.toFixed(3)}`}
+            note={`over ${labelled} labelled records`}
+            tone="primary"
+          />
         </div>
         <div className="col-md-4">
-          <div className="tile">
-            <div className="tile-label">Reproducibility</div>
-            {reproducibility ? (
-              <>
-                <div className="tile-value">
-                  {reproducibility.matching} / {reproducibility.files}
-                </div>
-                <div className="tile-note">
-                  files byte-identical across two runs with seed {reproducibility.seed}
-                </div>
-              </>
-            ) : (
-              <div className="tile-note">Run scripts/check_reproducibility.py to fill this in.</div>
-            )}
-          </div>
+          {reproducibility ? (
+            <StatCard
+              label="Reproducibility"
+              value={`${reproducibility.matching} / ${reproducibility.files} files`}
+              note={`byte-identical across two runs, seed ${reproducibility.seed}`}
+              tone={reproducibility.identical ? "good" : "stop"}
+            />
+          ) : (
+            <StatCard label="Reproducibility" value="not run" note="run scripts/check_reproducibility.py" />
+          )}
         </div>
       </div>
 
-      <h2 className="section-title mb-2">Detection by type</h2>
-      <div className="panel corners table-wrap mb-4">
-        <table className="table data-table">
-          <thead>
-            <tr>
-              <th>Exception</th>
-              <th>Rule</th>
-              <th className="text-end">Labelled</th>
-              <th className="text-end">Found (TP)</th>
-              <th className="text-end">False alarms</th>
-              <th className="text-end">Missed</th>
-              <th className="text-end">Precision</th>
-              <th className="text-end">Recall</th>
-            </tr>
-          </thead>
-          <tbody>
-            {Object.entries(ISSUE_TYPES).map(([code, info]) => (
-              <tr key={code}>
-                <td>{info.label}</td>
-                <td>{info.rule}</td>
-                <td className="text-end">{data.labelled[code] || 0}</td>
-                <td className="text-end">{metric(metrics, "detection", "tp", code)}</td>
-                <td className="text-end">{metric(metrics, "detection", "fp", code)}</td>
-                <td className="text-end">{metric(metrics, "detection", "fn", code)}</td>
-                <td className="text-end">{metric(metrics, "detection", "precision", code)?.toFixed(3)}</td>
-                <td className="text-end">{metric(metrics, "detection", "recall", code)?.toFixed(3)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      <div className="row g-3 mb-4">
-        <div className="col-md-6">
-          <h2 className="section-title mb-2">Funnel</h2>
-          <div className="panel corners table-wrap">
-            <table className="table data-table">
-              <tbody>
-                {funnel.map((name) => (
-                  <tr key={name}>
-                    <td className="text-capitalize">{name}</td>
-                    <td className="text-end">{Number(metric(metrics, "funnel", name)).toLocaleString("en-IN")}</td>
+      <div className="row g-3">
+        <div className="col-lg-7">
+          <Card title="Detection by exception type" subtitle="Matched by record ID, not by count." flush>
+            <div className="table-wrap">
+              <table className="data-table">
+                <thead>
+                  <tr>
+                    <th>Exception</th>
+                    <th>Rule</th>
+                    <th className="text-end">Labelled</th>
+                    <th className="text-end">Found</th>
+                    <th className="text-end">False alarms</th>
+                    <th className="text-end">Missed</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {Object.entries(ISSUE_TYPES).map(([code, info]) => (
+                    <tr key={code}>
+                      <td>{info.label}</td>
+                      <td className="mono">{info.rule}</td>
+                      <td className="text-end">{data.labelled[code] || 0}</td>
+                      <td className="text-end">{metric(metrics, "detection", "tp", code)}</td>
+                      <td className="text-end">{metric(metrics, "detection", "fp", code)}</td>
+                      <td className="text-end">{metric(metrics, "detection", "fn", code)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </Card>
         </div>
-        <div className="col-md-6">
-          <h2 className="section-title mb-2">Attending, passing and learning</h2>
-          <div className="panel corners table-wrap">
-            <table className="table data-table">
-              <tbody>
-                <tr>
-                  <td>Completed, of started</td>
-                  <td className="text-end">{percent(metric(metrics, "outcomes", "completion_rate_of_started"))}</td>
-                </tr>
-                <tr>
-                  <td>Passed, of completed</td>
-                  <td className="text-end">{percent(metric(metrics, "outcomes", "pass_rate_of_completed"))}</td>
-                </tr>
-                <tr>
-                  <td>Gap actually closed, of reassessed</td>
-                  <td className="text-end">{percent(metric(metrics, "outcomes", "gap_closed_rate_of_reassessed"))}</td>
-                </tr>
-                <tr>
-                  <td>Level gained after passing</td>
-                  <td className="text-end">{metric(metrics, "outcomes", "average_level_uplift", "PASSED")?.toFixed(2)}</td>
-                </tr>
-                <tr>
-                  <td>Level gained after failing</td>
-                  <td className="text-end">{metric(metrics, "outcomes", "average_level_uplift", "FAILED")?.toFixed(2)}</td>
-                </tr>
-                <tr>
-                  <td>Due reassessments that happened</td>
-                  <td className="text-end">{percent(metric(metrics, "outcomes", "reassessment_coverage_of_due"))}</td>
-                </tr>
-                <tr>
-                  <td>Proposed steps passing every planning check</td>
-                  <td className="text-end">{percent(metric(metrics, "feasibility", "share_feasible_all_checks"))}</td>
-                </tr>
-                <tr>
-                  <td>Proposed steps funded by the budget</td>
-                  <td className="text-end">{percent(metric(metrics, "funding", "share_funded"))}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+        <div className="col-lg-5">
+          <Card title="Plan quality" subtitle="Share of proposed course steps">
+            <BarList items={planBars} max={100} />
+            <hr />
+            <div className="row g-3 small-text">
+              <div className="col-6">
+                <div className="fact-label">Due reassessments done</div>
+                <div className="fact-value">{percent(metric(metrics, "outcomes", "reassessment_coverage_of_due"))}</div>
+              </div>
+              <div className="col-6">
+                <div className="fact-label">Gap closed, of reassessed</div>
+                <div className="fact-value">{percent(metric(metrics, "outcomes", "gap_closed_rate_of_reassessed"))}</div>
+              </div>
+            </div>
+          </Card>
         </div>
       </div>
 
-      <div className="d-flex align-items-center justify-content-between mb-2">
-        <h2 className="section-title mb-0">Validation checks</h2>
-        <button type="button" className="btn btn-sm btn-outline-brand" onClick={() => setShowAll(!showAll)}>
-          {showAll ? "Show rule checks only" : `Show all ${checks.length}`}
-        </button>
-      </div>
-      <div className="panel corners table-wrap">
-        <table className="table data-table">
-          <thead>
-            <tr>
-              <th>Check</th>
-              <th>Rule</th>
-              <th>Table</th>
-              <th>Kind</th>
-              <th className="text-end">Failing</th>
-              <th className="text-end">Expected</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {shown.map((c) => (
-              <tr key={c.check_id}>
-                <td className="mono">{c.check_id}</td>
-                <td>{c.rule_code || ""}</td>
-                <td>{c.table_name}</td>
-                <td>{c.kind.toLowerCase()}</td>
-                <td className="text-end">{c.failing_count}</td>
-                <td className="text-end">{c.expected_count}</td>
-                <td>
-                  <StatusBadge status={c.status} />
-                </td>
+      <Card
+        title="Validation checks"
+        subtitle="Structural checks must fail on nothing. Rule checks must fail on exactly the labelled records of their type."
+        actions={
+          <button type="button" className="btn-quiet" onClick={() => setShowAll(!showAll)}>
+            {showAll ? "Rule checks only" : `Show all ${checks.length}`}
+          </button>
+        }
+        flush
+      >
+        <div className="table-wrap">
+          <table className="data-table">
+            <thead>
+              <tr>
+                <th>Check</th>
+                <th>Rule</th>
+                <th>Table</th>
+                <th>Kind</th>
+                <th className="text-end">Failing</th>
+                <th className="text-end">Expected</th>
+                <th>Status</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <p className="info-text mt-2">
-        Structural checks must fail on nothing. Rule checks must fail on exactly the labelled records of their type.
-      </p>
+            </thead>
+            <tbody>
+              {shown.map((c) => (
+                <tr key={c.check_id}>
+                  <td className="mono">{c.check_id}</td>
+                  <td className="mono">{c.rule_code || ""}</td>
+                  <td>{c.table_name}</td>
+                  <td>{c.kind.toLowerCase()}</td>
+                  <td className="text-end">{c.failing_count}</td>
+                  <td className="text-end">{c.expected_count}</td>
+                  <td>
+                    <StatusBadge status={c.status} />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </Card>
     </div>
   );
 }

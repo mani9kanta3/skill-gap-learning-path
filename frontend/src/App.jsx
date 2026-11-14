@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import "./App.css";
 import Layout from "./Layout";
-import Home from "./Home";
+import Dashboard from "./Dashboard";
 import Employees from "./Employees";
 import EmployeeDetail from "./EmployeeDetail";
 import Courses from "./Courses";
@@ -16,17 +16,16 @@ import NotFound from "./NotFound";
 /*
   All the routes.
 
-  There is no login. The actors in the brief (employee, manager, HR
-  partner, IT/operations, administrator) are served by pages instead:
-  employees and managers use the employee pages, HR uses budgets and
-  exceptions, IT and admins use the evaluation page.
+  There is no login. The actors in the brief are served by sections of
+  the sidebar instead: employees and managers use People, HR partners use
+  Learning and Budget, IT and operations use Data quality.
 */
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Dashboard />} />
           <Route path="/employees" element={<Employees />} />
           <Route path="/employees/:id" element={<EmployeeDetail />} />
           <Route path="/courses" element={<Courses />} />
@@ -34,9 +33,8 @@ function App() {
           <Route path="/budgets" element={<Budgets />} />
           <Route path="/exceptions" element={<Exceptions />} />
           <Route path="/evaluation" element={<Evaluation />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
-
-        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

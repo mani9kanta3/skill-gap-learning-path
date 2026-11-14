@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import api from "./api";
+import Card from "./Card";
 import getErrorMessage from "./errorMessage";
 import money from "./money";
 import { COURSE_LEVELS } from "./options";
@@ -13,7 +14,7 @@ const PAGE = 50;
 
 /*
   The course catalog, with the two facts a planner needs at a glance:
-  is it running in the planning period, and does it have prerequisites.
+  is it running in the planning period, and does it need prerequisites.
 */
 function Courses() {
   const [search, setSearch] = useState("");
@@ -28,7 +29,10 @@ function Courses() {
   const settledSearch = useDebounce(search);
 
   useEffect(() => {
-    api.get("/skills/categories").then((response) => setCategories(response.data)).catch(() => {});
+    api
+      .get("/skills/categories")
+      .then((response) => setCategories(response.data))
+      .catch(() => {});
   }, []);
 
   useEffect(() => {
@@ -66,16 +70,20 @@ function Courses() {
 
   return (
     <div>
-      <PageHeader icon="fa-book-open" title="Courses" subtitle={`${data.total.toLocaleString("en-IN")} courses match.`} />
+      <PageHeader
+        eyebrow="Learning"
+        title="Course catalog"
+        subtitle="Every course, the level it teaches to, its cost, and whether it runs in 2026."
+      />
 
-      <div className="panel corners p-3 mb-3">
-        <div className="row g-3">
-          <div className="col-md-4">
-            <label className="field-label form-label">Search</label>
+      <Card>
+        <div className="toolbar">
+          <div className="field" style={{ flexGrow: 2 }}>
+            <label className="field-label">Search</label>
             <input className="form-control" placeholder="Title or CRS-000001" value={search} onChange={change(setSearch)} />
           </div>
-          <div className="col-md-3">
-            <label className="field-label form-label">Category</label>
+          <div className="field">
+            <label className="field-label">Category</label>
             <select className="form-select" value={category} onChange={change(setCategory)}>
               <option value="">All categories</option>
               {categories.map((c) => (
@@ -85,8 +93,8 @@ function Courses() {
               ))}
             </select>
           </div>
-          <div className="col-md-2">
-            <label className="field-label form-label">Level</label>
+          <div className="field">
+            <label className="field-label">Level</label>
             <select className="form-select" value={level} onChange={change(setLevel)}>
               <option value="">Any</option>
               {COURSE_LEVELS.map((l) => (
@@ -96,8 +104,8 @@ function Courses() {
               ))}
             </select>
           </div>
-          <div className="col-md-3">
-            <label className="field-label form-label">Running in 2026</label>
+          <div className="field">
+            <label className="field-label">Runs in 2026</label>
             <select className="form-select" value={available} onChange={change(setAvailable)}>
               <option value="">Either</option>
               <option value="true">Yes</option>
@@ -105,61 +113,71 @@ function Courses() {
             </select>
           </div>
         </div>
-      </div>
+      </Card>
 
       {error && <div className="alert alert-danger">{error}</div>}
 
-      <div className="panel corners table-wrap">
-        <table className="table data-table">
-          <thead>
-            <tr>
-              <th>Course</th>
-              <th>Category</th>
-              <th>Level</th>
-              <th>Mode</th>
-              <th className="text-end">Hours</th>
-              <th className="text-end">Cost</th>
-              <th className="text-end">Prereqs</th>
-              <th>2026</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.results.map((c) => (
-              <tr key={c.course_id}>
-                <td>
-                  <Link to={`/courses/${c.course_id}`}>{c.course_title}</Link>
-                  <div className="mono text-muted">{c.course_id}</div>
-                </td>
-                <td>{c.skill_category}</td>
-                <td>{c.course_level.toLowerCase()}</td>
-                <td>{c.delivery_mode.toLowerCase()}</td>
-                <td className="text-end">{c.duration_hours}</td>
-                <td className="text-end">{money(c.cost_amount)}</td>
-                <td className="text-end">{c.prerequisites}</td>
-                <td>
-                  {c.course_status === "RETIRED" ? (
-                    <StatusBadge status="RETIRED" />
-                  ) : (
-                    <StatusBadge status={c.available ? "PASS" : "FAIL"} text={c.available ? "running" : "not running"} />
-                  )}
-                </td>
+      <Card title={`${data.total.toLocaleString("en-IN")} courses`} flush>
+        <div className="table-wrap">
+          <table className="data-table">
+            <thead>
+              <tr>
+                <th>Course</th>
+                <th>Category</th>
+                <th>Level</th>
+                <th>Mode</th>
+                <th className="text-end">Hours</th>
+                <th className="text-end">Cost</th>
+                <th className="text-end">Prerequisites</th>
+                <th>2026</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      <div className="d-flex align-items-center justify-content-between mt-3">
-        <span className="info-text">{load ? "Loading ..." : `Page ${page + 1} of ${pages}`}</span>
-        <div className="d-flex gap-2">
-          <button className="btn btn-light" disabled={page === 0 || load} onClick={() => setPage(page - 1)}>
-            Previous
-          </button>
-          <button className="btn btn-light" disabled={page + 1 >= pages || load} onClick={() => setPage(page + 1)}>
-            Next
-          </button>
+            </thead>
+            <tbody>
+              {data.results.map((c) => (
+                <tr key={c.course_id}>
+                  <td>
+                    <Link className="cell-main" to={`/courses/${c.course_id}`}>
+                      {c.course_title}
+                    </Link>
+                    <div className="mono">{c.course_id}</div>
+                  </td>
+                  <td>{c.skill_category}</td>
+                  <td>{c.course_level.toLowerCase()}</td>
+                  <td>{c.delivery_mode.toLowerCase()}</td>
+                  <td className="text-end">{c.duration_hours}</td>
+                  <td className="text-end">{money(c.cost_amount)}</td>
+                  <td className="text-end">{c.prerequisites}</td>
+                  <td>
+                    {c.course_status === "RETIRED" ? (
+                      <StatusBadge status="RETIRED" />
+                    ) : (
+                      <StatusBadge status={c.available ? "PASS" : "FAIL"} text={c.available ? "running" : "not running"} />
+                    )}
+                  </td>
+                </tr>
+              ))}
+              {!load && data.results.length === 0 && (
+                <tr>
+                  <td colSpan="8" className="empty-row">
+                    No course matches these filters.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
         </div>
-      </div>
+        <div className="pager">
+          <span>{load ? "Loading ..." : `Page ${page + 1} of ${pages}`}</span>
+          <div className="d-flex gap-2">
+            <button className="btn-quiet" disabled={page === 0 || load} onClick={() => setPage(page - 1)}>
+              Previous
+            </button>
+            <button className="btn-quiet" disabled={page + 1 >= pages || load} onClick={() => setPage(page + 1)}>
+              Next
+            </button>
+          </div>
+        </div>
+      </Card>
     </div>
   );
 }

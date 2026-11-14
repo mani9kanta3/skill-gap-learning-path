@@ -2,33 +2,37 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import api from "./api";
+import BarList from "./BarList";
+import Card from "./Card";
 import getErrorMessage from "./errorMessage";
 import money from "./money";
 import PageHeader from "./PageHeader";
+import StatCard from "./StatCard";
 import StatusBadge from "./StatusBadge";
 
 /*
   One course: what it teaches and up to which level, its prerequisite
-  chain in both directions, and every run with planned and approved seats.
+  chain in both directions, and every run with its seats. The seat chart
+  shows how full each run is from plans (booked in January) and from
+  approvals (what actually happened).
 */
-function CourseList({ title, courses }) {
+function CourseList({ title, subtitle, courses }) {
   return (
-    <div className="panel corners p-3 h-100">
-      <p className="field-label mb-2">{title}</p>
+    <Card title={title} subtitle={subtitle}>
       {courses.length === 0 ? (
-        <p className="info-text mb-0">None.</p>
+        <span className="muted">None.</span>
       ) : (
         <ul className="mb-0">
           {courses.map((c) => (
             <li key={c.course_id}>
               <Link to={`/courses/${c.course_id}`}>{c.course_title}</Link>{" "}
-              <span className="info-text">({c.course_level.toLowerCase()})</span>{" "}
+              <span className="muted small-text">({c.course_level.toLowerCase()})</span>{" "}
               {c.course_status === "RETIRED" && <StatusBadge status="RETIRED" />}
             </li>
           ))}
         </ul>
       )}
-    </div>
+    </Card>
   );
 }
 
@@ -52,92 +56,79 @@ function CourseDetail() {
     return <div className="alert alert-danger">{error}</div>;
   }
   if (!course) {
-    return <p className="info-text">Loading ...</p>;
+    return <p className="loading">Loading ...</p>;
   }
+
+  const seatBars = course.offerings.map((o) => ({
+    label: `${o.start_date}${o.in_period ? "" : " (2027)"}`,
+    value: o.seats_approved,
+    marker: o.seats_planned,
+    display: `${o.seats_approved} / ${o.capacity}`,
+  }));
+  const capacity = Math.max(1, ...course.offerings.map((o) => o.capacity));
 
   return (
     <div>
-      <PageHeader
-        icon="fa-book"
-        title={course.course_title}
-        subtitle={`${course.course_id} · ${course.skill_category} · ${course.course_level.toLowerCase()} · ${course.delivery_mode.toLowerCase()} · ${course.duration_hours} hours · ${money(course.cost_amount)}`}
-      >
-        {course.course_status === "RETIRED" ? (
-          <StatusBadge status="RETIRED" />
-        ) : (
-          <StatusBadge status={course.available ? "PASS" : "FAIL"} text={course.available ? "running in 2026" : "not running in 2026"} />
-        )}
+      <PageHeader eyebrow="Learning" title={course.course_title} subtitle={`${course.course_id} · ${course.skill_category}`}>
+        <Link className="btn-quiet" to="/courses">
+          <i className="fa-solid fa-arrow-left me-2"></i>Catalog
+        </Link>
       </PageHeader>
 
-      <h2 className="section-title mb-2">Skills taught</h2>
-      <div className="panel corners table-wrap mb-4">
-        <table className="table data-table">
-          <thead>
-            <tr>
-              <th>Skill</th>
-              <th>Role</th>
-              <th className="text-end">Brings a learner up to level</th>
-            </tr>
-          </thead>
-          <tbody>
-            {course.skills.map((s) => (
-              <tr key={s.skill_id}>
-                <td>
-                  {s.skill_name} <span className="mono text-muted">{s.skill_id}</span>
-                </td>
-                <td>{s.skill_role.toLowerCase()}</td>
-                <td className="text-end">{s.target_level}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
       <div className="row g-3 mb-4">
-        <div className="col-md-6">
-          <CourseList title="Needs these first" courses={course.prerequisites} />
+        <div className="col-6 col-lg-3">
+          <StatCard label="Level" value={course.course_level.toLowerCase()} note={course.delivery_mode.toLowerCase()} />
         </div>
-        <div className="col-md-6">
-          <CourseList title="Is a prerequisite for" courses={course.required_by} />
+        <div className="col-6 col-lg-3">
+          <StatCard label="Length" value={`${course.duration_hours} h`} note="4 hours a week" />
+        </div>
+        <div className="col-6 col-lg-3">
+          <StatCard label="Cost" value={money(course.cost_amount)} tone="primary" />
+        </div>
+        <div className="col-6 col-lg-3">
+          <StatCard
+            label="In the 2026 period"
+            value={course.course_status === "RETIRED" ? "Retired" : course.available ? "Running" : "Not running"}
+            tone={course.available ? "good" : "stop"}
+          />
         </div>
       </div>
 
-      <h2 className="section-title mb-2">Runs</h2>
-      <div className="panel corners table-wrap">
-        <table className="table data-table">
-          <thead>
-            <tr>
-              <th>Run</th>
-              <th>Dates</th>
-              <th className="text-end">Capacity</th>
-              <th className="text-end">Booked by plans</th>
-              <th className="text-end">Approved</th>
-              <th>Period</th>
-            </tr>
-          </thead>
-          <tbody>
-            {course.offerings.map((o) => (
-              <tr key={o.offering_id}>
-                <td className="mono">{o.offering_id}</td>
-                <td className="text-nowrap">
-                  {o.start_date} → {o.end_date}
-                </td>
-                <td className="text-end">{o.capacity}</td>
-                <td className="text-end">{o.seats_planned}</td>
-                <td className="text-end">{o.seats_approved}</td>
-                <td>{o.in_period ? <span className="chip">2026</span> : <span className="chip">next year</span>}</td>
-              </tr>
-            ))}
-            {course.offerings.length === 0 && (
-              <tr>
-                <td colSpan="6" className="info-text text-center py-3">
-                  This course has no runs.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+      <div className="row g-3">
+        <div className="col-lg-6">
+          <Card title="Skills taught" flush>
+            <table className="data-table">
+              <thead>
+                <tr>
+                  <th>Skill</th>
+                  <th>Role</th>
+                  <th className="text-end">Up to level</th>
+                </tr>
+              </thead>
+              <tbody>
+                {course.skills.map((s) => (
+                  <tr key={s.skill_id}>
+                    <td>
+                      <span className="cell-main">{s.skill_name}</span>
+                      <div className="mono">{s.skill_id}</div>
+                    </td>
+                    <td>{s.skill_role.toLowerCase()}</td>
+                    <td className="text-end">{s.target_level}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </Card>
+        </div>
+        <div className="col-lg-6">
+          <CourseList title="Needs these first" subtitle="Prerequisites" courses={course.prerequisites} />
+          <CourseList title="Unlocks" subtitle="Courses that list this one as a prerequisite" courses={course.required_by} />
+        </div>
       </div>
+
+      <Card title="Runs and seats" subtitle="Bar = seats approved. Black line = seats booked by January plans. Right = approved / capacity.">
+        {course.offerings.length === 0 ? <span className="muted">This course has no runs.</span> : <BarList items={seatBars} max={capacity} />}
+      </Card>
     </div>
   );
 }

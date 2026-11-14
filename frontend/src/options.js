@@ -4,6 +4,13 @@
   these words.
 */
 
+// The dates every number depends on. They match backend/pipeline/config.py.
+export const DATASET = {
+  planningDate: "5 Jan 2026",
+  asOfDate: "31 Dec 2026",
+  fiscalYear: 2026,
+};
+
 export const DEPARTMENTS = [
   { code: "ENG", name: "Engineering" },
   { code: "DAT", name: "Data & Analytics" },

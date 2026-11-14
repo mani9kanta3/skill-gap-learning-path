@@ -1,25 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 
-import Navbar from "./Navbar";
+import Sidebar from "./Sidebar";
+import Topbar from "./Topbar";
 
 /*
-  The shell every page sits inside: the nav bar on top, the page below.
-  Outlet is where React Router puts the page.
+  The shell every page sits inside.
+
+  This is a tool people work in, not a site they visit once, so it uses
+  the usual dashboard layout: navigation fixed down the left, a thin bar
+  across the top with the dataset's dates, and the page in the rest of
+  the space. On a phone the sidebar hides and slides in from the menu
+  button, with a dark backdrop that closes it again.
 */
 function Layout() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
-    <div className="app-shell">
-      <Navbar />
-      <div className="app-content">
-        <Outlet />
+    <div className="shell">
+      <Sidebar open={menuOpen} onNavigate={() => setMenuOpen(false)} />
+      <div className={`backdrop ${menuOpen ? "open" : ""}`} onClick={() => setMenuOpen(false)}></div>
+
+      <div className="main">
+        <Topbar onMenu={() => setMenuOpen(!menuOpen)} />
+        <main className="content">
+          <Outlet />
+        </main>
       </div>
-      <footer className="app-footer text-center">
-        <p className="mb-0">
-          Every employee, course and number here is synthetic, generated with a
-          fixed seed. No real person or company data is used.
-        </p>
-      </footer>
     </div>
   );
 }

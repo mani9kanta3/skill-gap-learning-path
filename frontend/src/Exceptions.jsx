@@ -2,22 +2,23 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import api from "./api";
+import Card from "./Card";
 import getErrorMessage from "./errorMessage";
 import { ISSUE_TYPES } from "./options";
 import PageHeader from "./PageHeader";
 
 /*
-  Every exception the detector found, by type.
+  Every record that breaks a business rule, found by re-checking every
+  rule on the final data.
 
-  The detector only reads the input tables. The "labelled" column comes
+  The detector only reads the input tables. The "Labelled" column comes
   from ground truth afterwards, so you can see each finding was expected
-  (and the Evaluation page shows none were missed).
+  (the Validation page shows that none were missed).
 */
 function recordLink(row) {
   const id = row.record_id;
   if (id.startsWith("REC-") || id.startsWith("ENR-")) {
-    const employee = id.slice(4, 14);
-    return <Link to={`/employees/${employee}`}>{id}</Link>;
+    return <Link to={`/employees/${id.slice(4, 14)}`}>{id}</Link>;
   }
   if (row.employee_id) {
     return (
@@ -47,65 +48,78 @@ function Exceptions() {
       .finally(() => setLoad(false));
   }, [issueType]);
 
+  const all = Object.values(data.by_type).reduce((a, b) => a + b, 0);
+
   return (
     <div>
       <PageHeader
-        icon="fa-triangle-exclamation"
+        eyebrow="Data quality"
         title="Exceptions"
-        subtitle="Records that break a business rule, found by re-checking every rule on the final data."
+        subtitle="Records that break a business rule. Each one names the rule and the evidence."
       />
 
-      <div className="row g-3 mb-3">
-        {Object.entries(ISSUE_TYPES).map(([code, info]) => (
-          <div className="col-md" key={code}>
+      <Card>
+        <div className="segments">
+          <button type="button" className={`segment ${issueType === "" ? "active" : ""}`} onClick={() => setIssueType("")}>
+            All ({all})
+          </button>
+          {Object.entries(ISSUE_TYPES).map(([code, info]) => (
             <button
+              key={code}
               type="button"
-              className={`tile text-start w-100 ${issueType === code ? "border-2 border-success" : ""}`}
-              onClick={() => setIssueType(issueType === code ? "" : code)}
+              className={`segment ${issueType === code ? "active" : ""}`}
+              onClick={() => setIssueType(code)}
             >
-              <div className="tile-label">{info.rule}</div>
-              <div className="tile-value">{data.by_type[code] || 0}</div>
-              <div className="tile-note">{info.label}</div>
+              {info.rule} · {info.label} ({data.by_type[code] || 0})
             </button>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+        {issueType && <div className="note mt-3">{ISSUE_TYPES[issueType].help}</div>}
+      </Card>
 
-      {issueType && <div className="note mb-3">{ISSUE_TYPES[issueType].help}</div>}
       {error && <div className="alert alert-danger">{error}</div>}
 
-      <div className="panel corners table-wrap">
-        <table className="table data-table">
-          <thead>
-            <tr>
-              <th>Type</th>
-              <th>Record</th>
-              <th>Evidence</th>
-              <th>Expected decision</th>
-              <th>Labelled</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.results.map((row) => (
-              <tr key={`${row.issue_type}-${row.record_id}`}>
-                <td className="text-nowrap">{ISSUE_TYPES[row.issue_type].label}</td>
-                <td className="text-nowrap">{recordLink(row)}</td>
-                <td className="info-text">{row.evidence}</td>
-                <td className="mono">{row.expected_decision || "-"}</td>
-                <td>{row.labelled ? <span className="status-badge tone-good">yes</span> : <span className="status-badge tone-stop">no</span>}</td>
-              </tr>
-            ))}
-            {!load && data.results.length === 0 && (
+      <Card title={load ? "Loading ..." : `${data.total} exceptions`} flush>
+        <div className="table-wrap">
+          <table className="data-table">
+            <thead>
               <tr>
-                <td colSpan="5" className="info-text text-center py-4">
-                  No exceptions found.
-                </td>
+                <th>Rule</th>
+                <th>Exception</th>
+                <th>Record</th>
+                <th>Evidence</th>
+                <th>Should have been</th>
+                <th>Labelled</th>
               </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
-      <p className="info-text mt-2">{load ? "Loading ..." : `${data.total} shown.`}</p>
+            </thead>
+            <tbody>
+              {data.results.map((row) => (
+                <tr key={`${row.issue_type}-${row.record_id}`}>
+                  <td className="mono">{row.rule_code}</td>
+                  <td className="text-nowrap">{ISSUE_TYPES[row.issue_type].label}</td>
+                  <td className="text-nowrap">{recordLink(row)}</td>
+                  <td className="muted small-text">{row.evidence}</td>
+                  <td className="mono">{row.expected_decision || "-"}</td>
+                  <td>
+                    {row.labelled ? (
+                      <span className="badge-status tone-good">yes</span>
+                    ) : (
+                      <span className="badge-status tone-stop">no</span>
+                    )}
+                  </td>
+                </tr>
+              ))}
+              {!load && data.results.length === 0 && (
+                <tr>
+                  <td colSpan="6" className="empty-row">
+                    No exceptions found.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </Card>
     </div>
   );
 }

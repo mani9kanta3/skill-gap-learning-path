@@ -1,19 +1,19 @@
 import React from "react";
 
 /*
-  The title strip at the top of every page.
+  The title row at the top of every page: a small label for the section,
+  the page title, one line saying what the page is for, and room on the
+  right for buttons.
 */
-function PageHeader({ icon, title, subtitle, children }) {
+function PageHeader({ eyebrow, title, subtitle, children }) {
   return (
-    <div className="page-header d-flex align-items-center flex-wrap gap-3 p-4">
-      <div className="page-icon">
-        <i className={`fa-solid ${icon}`}></i>
-      </div>
+    <div className="page-head">
       <div>
-        <h1 className="page-title mb-1">{title}</h1>
-        <p className="page-subtitle mb-0">{subtitle}</p>
+        {eyebrow && <div className="eyebrow">{eyebrow}</div>}
+        <h1 className="page-title">{title}</h1>
+        {subtitle && <p className="page-subtitle">{subtitle}</p>}
       </div>
-      <div className="ms-auto">{children}</div>
+      {children && <div className="d-flex gap-2">{children}</div>}
     </div>
   );
 }
