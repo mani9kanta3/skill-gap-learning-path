@@ -20,7 +20,7 @@ from datetime import date
 from .. import config, ids, rng
 from ..rules import schedule
 from . import s06_plan
-from .common import days, random_date
+from .common import days
 
 STREAM = {name: i for i, name in enumerate(config.EDGE_CASE_TYPES)}
 FAR_FUTURE = date(2099, 12, 31)
@@ -76,26 +76,39 @@ def _truth(issue_type, entity, record_id, employee_id, related, rule, expected, 
 
 
 # ---------------------------------------------------------------------------
-# BUDGET_EXCEEDED: late requests approved over the department limit.
+# BUDGET_EXCEEDED: a step the budget never funded, approved anyway.
 # ---------------------------------------------------------------------------
 
 
 def _budget_exceeded(tables, simulation, count, used_enrollments):
+    """
+    Approve a NOT_FUNDED_BUDGET step that nobody requested.
+
+    The department's limit is already fully shared out over its funded
+    steps, and a step is only left unfunded when it costs more than what
+    was left, so approving it always pushes the department's obligations
+    (funded steps + approvals outside the funded plan) past its limit.
+    Funded approvals are judged on their own funding, not on a running
+    total, so an injected approval never changes how a normal row is
+    judged, whatever its date.
+    """
     issue = "BUDGET_EXCEEDED"
     random = rng.stage_rng(rng.INJECT, STREAM[issue])
     catalog = simulation.catalog
     enrolled = {(e["employee_id"], e["course_id"]) for e in simulation.enrollments}
-    last_decision = max(
-        e["event_on"] for e in simulation.events if e["to_status"] in ("APPROVED", "REJECTED")
-    )
-    request_from = last_decision + days(1)
-    request_to = request_from + days(config.BUDGET_INJECTION_WINDOW_DAYS - 1)
-    earliest_start = request_from + days(config.MIN_REQUEST_LEAD_DAYS)
 
-    remaining = {
-        code: catalog.department_limit[code] - simulation.committed[code]
-        for code in config.DEPARTMENT_CODES
-    }
+    funded = defaultdict(float)
+    for path in simulation.paths.values():
+        for rec in path:
+            if rec["funding_status"] == "FUNDED":
+                funded[simulation.employees[rec["employee_id"]]["department_code"]] += rec["estimated_cost"]
+    unallocated = {code: catalog.department_limit[code] - funded[code] for code in config.DEPARTMENT_CODES}
+
+    passed_on = defaultdict(dict)
+    for completion in simulation.completions:
+        if completion["result"] == "PASSED":
+            state = simulation.state[completion["enrollment_id"]]
+            passed_on[state["enrollment"]["employee_id"]][state["enrollment"]["course_id"]] = completion["completed_on"]
 
     by_department = defaultdict(list)
     for employee_id in sorted(simulation.paths):
@@ -108,12 +121,12 @@ def _budget_exceeded(tables, simulation, count, used_enrollments):
             earlier.add(course)
             offering = catalog.offerings[rec["planned_offering_id"]]
             if (
-                (employee_id, course) not in enrolled
-                and rec["planned_start_date"] >= earliest_start
-                and all(p in simulation.passed[employee_id] for p in needed)
+                rec["funding_status"] == "NOT_FUNDED_BUDGET"
+                and (employee_id, course) not in enrolled
+                # In-path prerequisites passed before this run starts (BR-05).
+                and all(passed_on[employee_id].get(p, rec["planned_start_date"]) < rec["planned_start_date"] for p in needed)
                 and simulation.seats[offering["offering_id"]] < offering["capacity"]
-                # Over the limit no matter which injected approval lands first.
-                and catalog.courses[course]["cost_amount"] > remaining[department]
+                and rec["estimated_cost"] > unallocated[department]
             ):
                 by_department[department].append(rec)
 
@@ -121,9 +134,11 @@ def _budget_exceeded(tables, simulation, count, used_enrollments):
         order = random.permutation(len(by_department[department]))
         by_department[department] = [by_department[department][i] for i in order]
 
+    # Round-robin over departments, so the cases are spread out.
     chosen = []
-    departments = sorted(by_department, key=lambda d: (remaining[d], d))
+    employees_used = set()
     taken_seats = defaultdict(int)
+    departments = sorted(by_department)
     while len(chosen) < count and any(by_department[d] for d in departments):
         for department in departments:
             if len(chosen) == count:
@@ -131,20 +146,21 @@ def _budget_exceeded(tables, simulation, count, used_enrollments):
             while by_department[department]:
                 rec = by_department[department].pop(0)
                 offering = catalog.offerings[rec["planned_offering_id"]]
-                # Each employee at most once, and never past an offering's capacity.
-                if any(r["employee_id"] == rec["employee_id"] for r in chosen):
+                if rec["employee_id"] in employees_used:
                     continue
                 if simulation.seats[offering["offering_id"]] + taken_seats[offering["offering_id"]] >= offering["capacity"]:
                     continue
                 taken_seats[offering["offering_id"]] += 1
+                employees_used.add(rec["employee_id"])
                 chosen.append(rec)
                 break
     _need(len(chosen), count, issue)
 
     simulation.random = random
     for rec in chosen:
-        latest = min(request_to, rec["planned_start_date"] - days(config.MIN_REQUEST_LEAD_DAYS))
-        simulation.inject_request(rec, random_date(random, request_from, latest))
+        lead = int(random.integers(config.REQUEST_LEAD_DAYS[0], config.REQUEST_LEAD_DAYS[1] + 1))
+        requested_on = max(rec["planned_start_date"] - days(lead), config.PLANNING_DATE + days(1))
+        simulation.inject_request(rec, requested_on)
     simulation.run_queue()
 
     truth = []
@@ -152,22 +168,20 @@ def _budget_exceeded(tables, simulation, count, used_enrollments):
         enrollment_id = ids.enrollment_id(rec["employee_id"], rec["course_id"])
         used_enrollments.add(enrollment_id)
         department = simulation.employees[rec["employee_id"]]["department_code"]
-        cost = catalog.courses[rec["course_id"]]["cost_amount"]
         truth.append(
             _truth(
                 issue,
                 "enrollment",
                 enrollment_id,
                 rec["employee_id"],
-                [ids.budget_id(department), rec["planned_offering_id"]],
+                [ids.budget_id(department), rec["recommendation_id"]],
                 "BR-11",
                 "REJECTED:BUDGET_EXHAUSTED",
-                f"Approved for {cost:,.0f} when {department} had {remaining[department]:,.0f} "
-                "left after every normal approval.",
+                f"Approved {rec['estimated_cost']:,.0f} for a step the {department} budget did not fund; "
+                f"only {unallocated[department]:,.0f} of the limit was unallocated.",
             )
         )
     return truth
-
 
 # ---------------------------------------------------------------------------
 # PREREQUISITE_VIOLATION and COURSE_UNAVAILABLE: extra RECOMMENDED rows.
@@ -220,10 +234,18 @@ def _recommendations(tables, issue, count, used_employees):
         )
 
         made = None
+        # Any skill the employee really has a gap in. Gaps the plan left open
+        # come first (the most believable place for a bad recommendation);
+        # gaps already planned are a fallback, so the pool stays large.
+        open_gaps = []
         for target in planner.targets(employee):
             level = snap.levels.get((employee_id, target["skill_id"]), 0)
-            if planner.plan_status(employee, target, level, rows) in ("PLANNED", "NO_GAP"):
-                continue
+            status = planner.plan_status(employee, target, level, rows)
+            if status != "NO_GAP":
+                open_gaps.append((status == "PLANNED", target["skill_id"], target))
+        open_gaps.sort(key=lambda g: g[:2])
+
+        for _, _, target in open_gaps:
             for course_id in planner.covering_courses(target["skill_id"], target["target_level"]):
                 if course_id in rowed:
                     continue
@@ -232,7 +254,9 @@ def _recommendations(tables, issue, count, used_employees):
                     fits = course_id in planner.available and any(p not in in_path for p in prerequisites)
                     period_end = config.PERIOD_END
                 else:
-                    fits = course_id not in planner.available and not prerequisites
+                    # No prerequisites, or all of them already earlier in the
+                    # path, so the only rule broken is availability (BR-04).
+                    fits = course_id not in planner.available and all(p in in_path for p in prerequisites)
                     period_end = FAR_FUTURE  # its only offerings are next year
                 if not fits:
                     continue
@@ -249,6 +273,8 @@ def _recommendations(tables, issue, count, used_employees):
                 )
                 made["path_sequence"] = len(path) + 1
                 made["cumulative_cost"] = path_cost + cost
+                # Added after the budget was allocated, so it holds no money.
+                made["funding_status"] = "NOT_FUNDED_BUDGET"
                 break
             if made:
                 break

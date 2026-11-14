@@ -10,7 +10,7 @@ brief). The validator then recomputes them again independently.
 from collections import defaultdict
 
 from .. import config, ids
-from ..rules import gaps, lifecycle, schedule
+from ..rules import budget, gaps, lifecycle, schedule
 from . import s06_plan
 
 
@@ -78,6 +78,7 @@ def _recommendations(tables):
             by_employee[row["employee_id"]].append(row)
         else:
             row["planned_start_date"] = row["planned_end_date"] = row["cumulative_cost"] = None
+            row["funding_status"] = None
     for path in by_employee.values():
         running = 0
         for row in sorted(path, key=lambda r: r["path_sequence"]):
@@ -100,25 +101,36 @@ def _enrollments(tables):
 
 def _budgets(tables):
     employees = {e["employee_id"]: e for e in tables["employee"]}
+    recommendations = {r["recommendation_id"]: r for r in tables["recommendation"]}
     planned = defaultdict(float)
+    funded = defaultdict(float)
     for row in tables["recommendation"]:
         if row["decision"] == "RECOMMENDED":
-            planned[employees[row["employee_id"]]["department_code"]] += row["estimated_cost"]
+            code = employees[row["employee_id"]]["department_code"]
+            planned[code] += row["estimated_cost"]
+            if row["funding_status"] == "FUNDED":
+                funded[code] += row["estimated_cost"]
 
     approved = {e["enrollment_id"] for e in tables["enrollment_event"] if e["to_status"] == "APPROVED"}
     committed = defaultdict(float)
+    outside_plan = defaultdict(float)
     budget_department = {b["budget_id"]: b["department_code"] for b in tables["budget"]}
     for enrollment in tables["enrollment"]:
         if enrollment["enrollment_id"] in approved:
-            committed[budget_department[enrollment["budget_id"]]] += enrollment["cost_amount"]
+            code = budget_department[enrollment["budget_id"]]
+            committed[code] += enrollment["cost_amount"]
+            if recommendations[enrollment["recommendation_id"]]["funding_status"] != "FUNDED":
+                outside_plan[code] += enrollment["cost_amount"]
 
     for row in tables["budget"]:
         code = row["department_code"]
         row["planned_amount"] = planned[code]
+        row["funded_amount"] = funded[code]
         row["committed_amount"] = committed[code]
         row["remaining_amount"] = row["limit_amount"] - committed[code]
         row["utilization_pct"] = round(100 * committed[code] / row["limit_amount"], 2)
-        row["budget_status"] = "EXCEEDED" if committed[code] > row["limit_amount"] else "WITHIN_LIMIT"
+        owed = budget.obligations(funded[code], outside_plan[code])
+        row["budget_status"] = "EXCEEDED" if owed > row["limit_amount"] else "WITHIN_LIMIT"
 
 
 def _latest_by_pair(assessments, on_or_before):
