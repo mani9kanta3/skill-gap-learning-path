@@ -45,10 +45,7 @@ function Sidebar({ open, onNavigate }) {
         </span>
         <span>
           Skill Gap
-          <br />
-          <small className="fw-normal" style={{ color: "var(--sidebar-text)" }}>
-            to Learning Path
-          </small>
+          <span className="brand-subtitle">to Learning Path</span>
         </span>
       </Link>
 

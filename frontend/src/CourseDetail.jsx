@@ -75,7 +75,7 @@ function CourseDetail() {
         </Link>
       </PageHeader>
 
-      <div className="row g-3 mb-4">
+      <div className="row g-0 mb-4 kpi-strip">
         <div className="col-6 col-lg-3">
           <StatCard label="Level" value={course.course_level.toLowerCase()} note={course.delivery_mode.toLowerCase()} />
         </div>

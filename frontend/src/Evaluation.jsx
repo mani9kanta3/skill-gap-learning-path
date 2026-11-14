@@ -65,7 +65,7 @@ function Evaluation() {
         subtitle={`Results of the last generator run on the ${data.scale} dataset.`}
       />
 
-      <div className="row g-3 mb-4">
+      <div className="row g-0 mb-4 kpi-strip">
         <div className="col-md-4">
           <StatCard
             label="Validation checks passed"

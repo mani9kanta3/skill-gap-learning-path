@@ -139,7 +139,7 @@ function EmployeeDetail() {
         </div>
       </Card>
 
-      <div className="row g-3 mb-4">
+      <div className="row g-0 mb-4 kpi-strip">
         <div className="col-6 col-lg-3">
           <StatCard label="Gaps still open" value={openGaps} tone={openGaps ? "wait" : ""} />
         </div>

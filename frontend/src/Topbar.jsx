@@ -32,12 +32,15 @@ function Topbar({ onMenu }) {
       </button>
 
       <div className="topbar-context">
-        <span className="context-pill">
-          <i className="fa-regular fa-calendar me-1"></i>
-          Plan made {DATASET.planningDate}
+        <span className="context-item">
+          Plan made <strong>{DATASET.planningDate}</strong>
         </span>
-        <span className="context-pill">Data as of {DATASET.asOfDate}</span>
-        <span className="context-pill">Budget year {DATASET.fiscalYear}</span>
+        <span className="context-item">
+          Data as of <strong>{DATASET.asOfDate}</strong>
+        </span>
+        <span className="context-item">
+          Budget year <strong>{DATASET.fiscalYear}</strong>
+        </span>
       </div>
 
       <div className="api-status">

@@ -902,13 +902,28 @@ it uses a dashboard layout:
 - The employee page is a profile card plus **tabs** (Skill gaps, Learning path,
   Enrollments and results, Re-plan from a date) instead of one long scroll.
 
-**Colours** (all variables at the top of `App.css`):
-- Navy sidebar and a light grey canvas with white cards, so the data stands out.
-- **One** accent colour, blue `#2557d6`, used only for actions, selection and
-  chart bars. It stays distinct from the status colours, including for most
-  colour-blind users.
-- Green, amber, red and info-blue are reserved for meaning: done, waiting,
-  rejected or over budget, and in progress.
+**Look** (all variables at the top of `App.css`). The design deliberately avoids
+the defaults that make generated interfaces look alike: a blue, indigo or purple
+accent, friendly default sans fonts, the same large rounded corners everywhere,
+bento grids of KPI cards with coloured tops, uppercase eyebrow labels and pill
+badges.
+
+- **One main hue: deep pine green `#1f5c45`.** Green stands for progress and
+  growth, which is what a learning plan tracks. It is also uncommon in generated
+  UIs. It is used only for actions, the current selection and chart bars.
+- **Warm paper-grey neutrals** (`#f5f4f0` canvas, white surfaces, `#e4e1d9`
+  hairlines), so the data carries the page. Dashboard guidance recommends white
+  or a very light neutral background and a single restrained accent.
+- **Status colours by meaning.** Cool for fine (green done, steel blue in
+  progress), warm for attention (ochre waiting, rust rejected or over-committed).
+  There are no bright traffic lights, and red is used only where something is
+  wrong.
+- **Shape.** 4px corners, hairline borders, no shadows. KPI figures sit in one
+  ruled strip. Statuses are square-cornered tags with a dot.
+- **Type.** IBM Plex Sans for text, IBM Plex Mono for IDs and figures, so
+  columns of numbers line up.
+- **Layout.** A light sidebar beside the work, and breadcrumbs ("People / Employee
+  profile") instead of uppercase labels.
 
 | Route | Page | Actor |
 |---|---|---|

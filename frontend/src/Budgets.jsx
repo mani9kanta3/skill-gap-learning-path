@@ -58,7 +58,7 @@ function Budgets() {
 
       {rows.length > 0 && (
         <>
-          <div className="row g-3 mb-4">
+          <div className="row g-0 mb-4 kpi-strip">
             <div className="col-6 col-lg-3">
               <StatCard label="Total limit" value={inWords(total("limit_amount"))} note="85% of what was proposed" tone="primary" />
             </div>

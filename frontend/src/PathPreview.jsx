@@ -93,7 +93,7 @@ function PathPreview({ employeeId }) {
 
       {result && (
         <>
-          <div className="row g-3 mb-4">
+          <div className="row g-0 mb-4 kpi-strip">
             <div className="col-md-4">
               <StatCard label="Proposed path cost" value={money(result.path_cost)} tone="primary" />
             </div>

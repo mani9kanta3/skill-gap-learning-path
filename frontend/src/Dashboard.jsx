@@ -100,7 +100,7 @@ function Dashboard() {
         subtitle="Skill gaps, the learning paths planned to close them, what was funded, and what actually happened in 2026."
       />
 
-      <div className="row g-3 mb-4">
+      <div className="row g-0 mb-4 kpi-strip">
         <div className="col-6 col-xl-2">
           <StatCard label="Employees" value={n(summary.employees)} note={`${n(summary.active_employees)} active`} />
         </div>
@@ -222,7 +222,7 @@ function Dashboard() {
           {STEPS.map(([title, text], index) => (
             <div className="workflow-step" key={title}>
               <div className="fw-bold mb-1">
-                <span className="step-number">{index + 1}</span>
+                <span className="step-number">{String(index + 1).padStart(2, "0")}</span>
                 {title}
               </div>
               <div className="muted small-text">{text}</div>

@@ -1,61 +1,61 @@
 /*
   All the styling for the app.
 
-  This is an internal tool that HR partners and managers keep open while
-  they work, so the look follows from that:
+  The look is meant to read like a well-kept HR ledger, not a template.
+  Each choice below avoids one of the "generated interface" defaults:
 
-  - A dark navy sidebar holds the navigation, so the working area stays
-    plain and the eye goes to the data, not the menu.
-  - A light grey canvas with white cards. Long tables read better on
-    white, and the grey keeps cards visibly separate.
-  - ONE accent colour, blue, used only for things you can click or that
-    are selected, and for chart bars. Blue reads as calm and trustworthy,
-    and it stays clearly different from the red, amber and green status
-    colours, including for most colour-blind people.
-  - Red, amber, green and info blue are kept ONLY for meaning (rejected,
-    waiting, done...). They never decorate.
+  - Colour. One main hue, a deep pine green, instead of the usual blue,
+    indigo or purple. Green is the colour of progress and growth, which
+    is what a learning plan is about, and it is rare among generated UIs.
+    Everything else is warm paper-grey neutrals, so the data carries the
+    page. Colour appears only where it means something.
+  - Status. Warm colours for problems (rust for rejected or over budget,
+    ochre for waiting), cool colours for things that are fine (green for
+    done, steel blue for in progress). No bright traffic lights.
+  - Shape. Small 4px corners and hairline borders, no shadows, no
+    coloured card tops, no pill badges. Edges like a printed report.
+  - Type. IBM Plex Sans for text and IBM Plex Mono for IDs and figures,
+    so numbers line up and codes read as codes.
+  - Layout. A light sidebar that sits quietly beside the work, and KPI
+    figures set as one ruled strip rather than a grid of floating cards.
 
-  Every colour is a variable in the block below, so the theme changes in
-  one place.
+  Every colour is a variable in the block below.
 */
 
 :root {
-  /* structure */
-  --sidebar-bg: #0b1b33;
-  --sidebar-text: #b9c4d6;
-  --sidebar-muted: #6f7f99;
-  --sidebar-active: #ffffff;
-  --sidebar-hover: rgba(255, 255, 255, 0.06);
-  --canvas: #f4f6fa;
+  /* the one main hue */
+  --brand: #1f5c45;
+  --brand-dark: #164434;
+  --brand-soft: #e7efe9;
+  --brand-mid: #9fbfb0;
+
+  /* warm paper neutrals */
+  --canvas: #f5f4f0;
   --surface: #ffffff;
-  --line: #e3e8ef;
-  --line-strong: #cfd7e3;
+  --sidebar-bg: #fbfaf7;
+  --line: #e4e1d9;
+  --line-strong: #cdc8bb;
+  --heading: #1b1f1c;
+  --ink: #2b302c;
+  --muted: #6b6f68;
 
-  /* text */
-  --heading: #0f172a;
-  --ink: #1f2a3d;
-  --muted: #64748b;
+  /* meaning only: cool = fine, warm = needs attention */
+  --good: #2e7d4f;
+  --good-bg: #eaf3ed;
+  --info: #2f6690;
+  --info-bg: #e9f0f6;
+  --wait: #946600;
+  --wait-bg: #f8f0dc;
+  --stop: #b4471f;
+  --stop-bg: #f9ebe5;
+  --neutral: #5f6660;
+  --neutral-bg: #f0efea;
 
-  /* the one accent */
-  --primary: #2557d6;
-  --primary-dark: #1d46b0;
-  --primary-soft: #edf2ff;
-  --primary-mid: #8fa9ec;
+  --sidebar-width: 232px;
+  --radius: 4px;
 
-  /* meaning only */
-  --good: #157f3b;
-  --good-bg: #e9f7ef;
-  --wait: #a85a07;
-  --wait-bg: #fff4e5;
-  --stop: #c0392b;
-  --stop-bg: #fdecea;
-  --info: #0e6ba8;
-  --info-bg: #e8f3fb;
-  --neutral: #475569;
-  --neutral-bg: #f1f4f8;
-
-  --sidebar-width: 236px;
-  --radius: 10px;
+  --font: "IBM Plex Sans", "Segoe UI", Arial, sans-serif;
+  --mono: "IBM Plex Mono", Consolas, "Courier New", monospace;
 }
 
 * {
@@ -66,29 +66,32 @@ body {
   margin: 0;
   background: var(--canvas);
   color: var(--ink);
-  font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+  font-family: var(--font);
   font-size: 14px;
+  line-height: 1.5;
 }
 
 a {
-  color: var(--primary);
+  color: var(--brand);
   text-decoration: none;
 }
 
 a:hover {
   text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
-/* Numbers line up in columns. */
 .num,
 .data-table td.text-end,
-.kpi-value {
+.kpi-value,
+.bar-value {
+  font-family: var(--mono);
   font-variant-numeric: tabular-nums;
 }
 
 .mono {
-  font-family: Consolas, "Courier New", monospace;
-  font-size: 12px;
+  font-family: var(--mono);
+  font-size: 11.5px;
   color: var(--muted);
 }
 
@@ -111,7 +114,7 @@ a:hover {
   width: var(--sidebar-width);
   flex-shrink: 0;
   background: var(--sidebar-bg);
-  color: var(--sidebar-text);
+  border-right: 1px solid var(--line);
   display: flex;
   flex-direction: column;
   position: sticky;
@@ -123,77 +126,98 @@ a:hover {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 18px 18px 16px;
-  color: #fff;
+  padding: 18px 18px 18px;
+  color: var(--heading);
   font-weight: 700;
-  font-size: 15px;
+  font-size: 14.5px;
   line-height: 1.2;
-  text-decoration: none;
+  border-bottom: 1px solid var(--line);
 }
 
 .sidebar-brand:hover {
   text-decoration: none;
 }
 
+.brand-subtitle {
+  display: block;
+  font-weight: 400;
+  font-size: 12px;
+  color: var(--muted);
+}
+
 .brand-mark {
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  background: var(--primary);
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius);
+  background: var(--brand);
+  color: #fff;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  font-size: 13px;
 }
 
 .nav-group {
-  padding: 8px 10px;
+  padding: 10px 10px 2px;
 }
 
 .nav-group-title {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--sidebar-muted);
-  padding: 8px 10px 6px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--muted);
+  padding: 6px 10px;
 }
 
 .nav-item {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 8px 10px;
-  border-radius: 7px;
-  color: var(--sidebar-text);
+  padding: 7px 10px;
+  border-radius: var(--radius);
+  color: var(--ink);
   font-weight: 500;
-  border-left: 3px solid transparent;
+  position: relative;
 }
 
 .nav-item i {
-  width: 18px;
+  width: 16px;
   text-align: center;
-  opacity: 0.85;
+  color: var(--muted);
+  font-size: 13px;
 }
 
 .nav-item:hover {
-  background: var(--sidebar-hover);
-  color: #fff;
+  background: var(--neutral-bg);
   text-decoration: none;
 }
 
 .nav-item.active {
-  background: rgba(37, 87, 214, 0.22);
-  color: var(--sidebar-active);
-  border-left-color: var(--primary-mid);
+  background: var(--brand-soft);
+  color: var(--brand-dark);
+  font-weight: 600;
+}
+
+.nav-item.active i {
+  color: var(--brand);
+}
+
+.nav-item.active::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: 6px;
+  bottom: 6px;
+  width: 3px;
+  background: var(--brand);
 }
 
 .sidebar-footer {
   margin-top: auto;
   padding: 14px 18px;
-  font-size: 12px;
-  color: var(--sidebar-muted);
-  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  font-size: 11.5px;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
 }
 
 .main {
@@ -204,13 +228,13 @@ a:hover {
 }
 
 .topbar {
-  height: 56px;
+  height: 52px;
   background: var(--surface);
   border-bottom: 1px solid var(--line);
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 0 24px;
+  gap: 18px;
+  padding: 0 28px;
   position: sticky;
   top: 0;
   z-index: 10;
@@ -219,17 +243,14 @@ a:hover {
 .topbar-context {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 18px;
+  font-size: 12.5px;
+  color: var(--muted);
 }
 
-.context-pill {
-  font-size: 12px;
-  color: var(--neutral);
-  background: var(--neutral-bg);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 3px 10px;
-  white-space: nowrap;
+.context-item strong {
+  color: var(--ink);
+  font-weight: 600;
 }
 
 .api-status {
@@ -243,8 +264,8 @@ a:hover {
 }
 
 .dot {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   display: inline-block;
 }
@@ -263,16 +284,16 @@ a:hover {
 
 .menu-button {
   display: none;
-  border: 1px solid var(--line);
+  border: 1px solid var(--line-strong);
   background: var(--surface);
-  border-radius: 7px;
-  width: 36px;
-  height: 36px;
+  border-radius: var(--radius);
+  width: 34px;
+  height: 34px;
   color: var(--ink);
 }
 
 .content {
-  padding: 24px;
+  padding: 28px;
   max-width: 1320px;
   width: 100%;
 }
@@ -281,7 +302,6 @@ a:hover {
   display: none;
 }
 
-/* On a phone the sidebar slides in over the page. */
 @media (max-width: 991px) {
   .sidebar {
     position: fixed;
@@ -300,7 +320,7 @@ a:hover {
     display: block;
     position: fixed;
     inset: 0;
-    background: rgba(15, 23, 42, 0.4);
+    background: rgba(27, 31, 28, 0.35);
     z-index: 20;
   }
 
@@ -331,12 +351,21 @@ a:hover {
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 12px;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.crumb {
+  font-size: 12.5px;
+  color: var(--muted);
+  margin-bottom: 4px;
 }
 
 .page-title {
-  font-size: 22px;
-  font-weight: 700;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
   color: var(--heading);
   margin: 0 0 4px;
 }
@@ -344,15 +373,7 @@ a:hover {
 .page-subtitle {
   color: var(--muted);
   margin: 0;
-}
-
-.eyebrow {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--primary);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin-bottom: 4px;
+  max-width: 760px;
 }
 
 /* ---------- cards ---------- */
@@ -369,13 +390,13 @@ a:hover {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 14px 18px;
+  padding: 12px 16px;
   border-bottom: 1px solid var(--line);
 }
 
 .card-title {
-  font-size: 15px;
-  font-weight: 700;
+  font-size: 14.5px;
+  font-weight: 600;
   color: var(--heading);
   margin: 0;
 }
@@ -387,58 +408,74 @@ a:hover {
 }
 
 .card-body {
-  padding: 16px 18px;
+  padding: 16px;
 }
 
 .card-body.flush {
   padding: 0;
 }
 
-/* ---------- KPI cards ---------- */
+/* ---------- KPI figures ---------- */
 
+/*
+  A KPI is a figure in a ruled cell, not a floating card. A small square
+  before the label carries the tone, only when the figure means something.
+*/
 .kpi {
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: 14px 16px;
+  padding: 12px 16px;
   height: 100%;
-  border-top: 3px solid var(--line-strong);
-}
-
-.kpi.tone-primary {
-  border-top-color: var(--primary);
-}
-
-.kpi.tone-good {
-  border-top-color: var(--good);
-}
-
-.kpi.tone-wait {
-  border-top-color: var(--wait);
-}
-
-.kpi.tone-stop {
-  border-top-color: var(--stop);
 }
 
 .kpi-label {
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 12.5px;
   color: var(--muted);
-  margin-bottom: 6px;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.kpi.tone-primary .kpi-label::before,
+.kpi.tone-good .kpi-label::before,
+.kpi.tone-wait .kpi-label::before,
+.kpi.tone-stop .kpi-label::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+}
+
+.kpi.tone-primary .kpi-label::before {
+  background: var(--brand);
+}
+
+.kpi.tone-good .kpi-label::before {
+  background: var(--good);
+}
+
+.kpi.tone-wait .kpi-label::before {
+  background: var(--wait);
+}
+
+.kpi.tone-stop .kpi-label::before {
+  background: var(--stop);
 }
 
 .kpi-value {
-  font-size: 24px;
-  font-weight: 700;
+  font-size: 22px;
+  font-weight: 500;
   color: var(--heading);
-  line-height: 1.15;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
 }
 
 .kpi-note {
   font-size: 12px;
   color: var(--muted);
-  margin-top: 4px;
+  margin-top: 3px;
 }
 
 /* ---------- tables ---------- */
@@ -456,26 +493,24 @@ a:hover {
 .data-table th {
   position: sticky;
   top: 0;
-  background: #f8fafc;
+  background: var(--surface);
   color: var(--muted);
-  font-size: 11.5px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  font-size: 12px;
+  font-weight: 600;
   text-align: left;
-  padding: 10px 14px;
-  border-bottom: 1px solid var(--line);
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--line-strong);
   white-space: nowrap;
 }
 
 .data-table td {
-  padding: 10px 14px;
+  padding: 9px 14px;
   border-bottom: 1px solid var(--line);
   vertical-align: middle;
 }
 
 .data-table tbody tr:hover {
-  background: #f8fafd;
+  background: #faf9f5;
 }
 
 .data-table tbody tr:last-child td {
@@ -484,6 +519,10 @@ a:hover {
 
 .data-table .text-end {
   text-align: right;
+}
+
+.data-table td.text-end {
+  font-size: 13px;
 }
 
 .empty-row {
@@ -495,6 +534,10 @@ a:hover {
 .cell-main {
   font-weight: 600;
   color: var(--heading);
+}
+
+a.cell-main {
+  color: var(--brand-dark);
 }
 
 /* ---------- filters and buttons ---------- */
@@ -522,29 +565,32 @@ a:hover {
 
 .form-control,
 .form-select {
+  font-family: var(--font);
   font-size: 13.5px;
   border-color: var(--line-strong);
+  border-radius: var(--radius);
 }
 
 .form-control:focus,
 .form-select:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px var(--primary-soft);
+  border-color: var(--brand);
+  box-shadow: 0 0 0 2px var(--brand-soft);
 }
 
 .btn-primary-app {
-  background: var(--primary);
-  border: 1px solid var(--primary);
+  background: var(--brand);
+  border: 1px solid var(--brand);
   color: #fff;
   font-weight: 600;
-  border-radius: 7px;
+  border-radius: var(--radius);
   padding: 7px 14px;
 }
 
 .btn-primary-app:hover {
-  background: var(--primary-dark);
-  border-color: var(--primary-dark);
+  background: var(--brand-dark);
+  border-color: var(--brand-dark);
   color: #fff;
+  text-decoration: none;
 }
 
 .btn-primary-app:disabled {
@@ -552,17 +598,20 @@ a:hover {
 }
 
 .btn-quiet {
+  display: inline-block;
   background: var(--surface);
   border: 1px solid var(--line-strong);
   color: var(--ink);
-  font-weight: 600;
-  border-radius: 7px;
-  padding: 6px 12px;
+  font-weight: 500;
+  border-radius: var(--radius);
+  padding: 5px 11px;
+  font-size: 13px;
 }
 
 .btn-quiet:hover {
-  border-color: var(--primary);
-  color: var(--primary);
+  border-color: var(--brand);
+  color: var(--brand-dark);
+  text-decoration: none;
 }
 
 .btn-quiet:disabled {
@@ -573,7 +622,7 @@ a:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 14px;
+  padding: 9px 14px;
   border-top: 1px solid var(--line);
   color: var(--muted);
   font-size: 12.5px;
@@ -583,19 +632,21 @@ a:hover {
 
 .tabs {
   display: flex;
-  gap: 4px;
-  border-bottom: 1px solid var(--line);
+  gap: 2px;
+  border-bottom: 1px solid var(--line-strong);
   margin-bottom: 20px;
   overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .tab {
   background: none;
   border: none;
   border-bottom: 2px solid transparent;
-  padding: 10px 14px;
+  margin-bottom: -1px;
+  padding: 9px 14px;
   color: var(--muted);
-  font-weight: 600;
+  font-weight: 500;
   white-space: nowrap;
 }
 
@@ -604,50 +655,64 @@ a:hover {
 }
 
 .tab.active {
-  color: var(--primary);
-  border-bottom-color: var(--primary);
+  color: var(--heading);
+  font-weight: 600;
+  border-bottom-color: var(--brand);
 }
 
 .tab-count {
+  font-family: var(--mono);
   font-size: 11px;
-  background: var(--neutral-bg);
-  color: var(--neutral);
-  border-radius: 999px;
-  padding: 1px 7px;
+  color: var(--muted);
   margin-left: 6px;
 }
 
 .segments {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
 }
 
 .segment {
   border: 1px solid var(--line-strong);
   background: var(--surface);
-  border-radius: 999px;
-  padding: 5px 12px;
+  border-radius: var(--radius);
+  padding: 5px 11px;
   font-size: 12.5px;
-  font-weight: 600;
-  color: var(--neutral);
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.segment:hover {
+  border-color: var(--brand);
 }
 
 .segment.active {
-  background: var(--primary);
-  border-color: var(--primary);
+  background: var(--brand);
+  border-color: var(--brand);
   color: #fff;
 }
 
-/* ---------- badges ---------- */
+/* ---------- status tags ---------- */
 
+/* A status is a small square-cornered tag with a dot, read as a label. */
 .badge-status {
-  display: inline-block;
-  border-radius: 999px;
-  padding: 2px 9px;
-  font-size: 11.5px;
-  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 3px;
+  padding: 1px 7px;
+  font-size: 12px;
+  font-weight: 500;
   white-space: nowrap;
+}
+
+.badge-status::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
 }
 
 .badge-status.tone-good {
@@ -680,8 +745,8 @@ a:hover {
   font-size: 12px;
   background: var(--neutral-bg);
   color: var(--neutral);
-  border-radius: 6px;
-  padding: 2px 8px;
+  border-radius: 3px;
+  padding: 1px 7px;
 }
 
 /* ---------- bars (charts without a chart library) ---------- */
@@ -689,12 +754,12 @@ a:hover {
 .bar-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 9px;
 }
 
 .bar-row {
   display: grid;
-  grid-template-columns: minmax(110px, 160px) 1fr minmax(70px, auto);
+  grid-template-columns: minmax(110px, 170px) 1fr minmax(70px, auto);
   align-items: center;
   gap: 12px;
 }
@@ -708,25 +773,21 @@ a:hover {
 }
 
 .bar-value {
-  font-size: 12.5px;
+  font-size: 12px;
   color: var(--muted);
   text-align: right;
-  font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
 
 .bar-track {
-  height: 10px;
-  background: #edf1f7;
-  border-radius: 999px;
-  overflow: hidden;
+  height: 8px;
+  background: var(--neutral-bg);
   position: relative;
 }
 
 .bar-fill {
   height: 100%;
-  background: var(--primary);
-  border-radius: 999px;
+  background: var(--brand);
 }
 
 .bar-fill.tone-good {
@@ -742,10 +803,9 @@ a:hover {
 }
 
 .bar-fill.tone-muted {
-  background: var(--primary-mid);
+  background: var(--brand-mid);
 }
 
-/* A thin marker for "the limit" on budget bars. */
 .bar-marker {
   position: absolute;
   top: -3px;
@@ -754,13 +814,11 @@ a:hover {
   background: var(--heading);
 }
 
-/* Stacked bar: one row split into coloured parts. */
 .stack {
   display: flex;
-  height: 14px;
-  border-radius: 999px;
+  height: 12px;
   overflow: hidden;
-  background: #edf1f7;
+  background: var(--neutral-bg);
 }
 
 .stack > span {
@@ -770,7 +828,7 @@ a:hover {
 .legend {
   display: flex;
   flex-wrap: wrap;
-  gap: 14px;
+  gap: 16px;
   margin-top: 10px;
   font-size: 12px;
   color: var(--muted);
@@ -778,9 +836,8 @@ a:hover {
 
 .legend i {
   display: inline-block;
-  width: 10px;
-  height: 10px;
-  border-radius: 3px;
+  width: 9px;
+  height: 9px;
   margin-right: 6px;
   vertical-align: -1px;
 }
@@ -790,21 +847,21 @@ a:hover {
 .profile {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
   flex-wrap: wrap;
 }
 
 .avatar {
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  background: var(--primary-soft);
-  color: var(--primary);
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius);
+  background: var(--brand-soft);
+  color: var(--brand-dark);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-weight: 700;
-  font-size: 18px;
+  font-weight: 600;
+  font-size: 15px;
   flex-shrink: 0;
 }
 
@@ -813,20 +870,19 @@ a:hover {
   grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
   gap: 14px 24px;
   margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
 }
 
 .fact-label {
-  font-size: 11.5px;
-  font-weight: 600;
+  font-size: 12px;
   color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
 }
 
 .fact-value {
   color: var(--heading);
   font-weight: 600;
-  margin-top: 2px;
+  margin-top: 1px;
 }
 
 .level-dots {
@@ -836,18 +892,17 @@ a:hover {
 }
 
 .level-dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: #dfe5ee;
+  width: 8px;
+  height: 8px;
+  background: #e2dfd6;
 }
 
 .level-dot.on {
-  background: var(--primary);
+  background: var(--brand);
 }
 
 .level-dot.target {
-  outline: 2px solid var(--wait);
+  outline: 1.5px solid var(--wait);
   outline-offset: 1px;
 }
 
@@ -856,45 +911,46 @@ a:hover {
   padding: 0;
   margin: 0;
   font-size: 12.5px;
+  border-left: 1px solid var(--line-strong);
+  margin-left: 3px;
 }
 
 .timeline li {
   position: relative;
-  padding-left: 16px;
+  padding-left: 14px;
   margin-bottom: 3px;
 }
 
 .timeline li::before {
   content: "";
   position: absolute;
-  left: 3px;
-  top: 6px;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--primary-mid);
+  left: -3px;
+  top: 7px;
+  width: 5px;
+  height: 5px;
+  background: var(--brand);
 }
 
 .outcome {
-  background: var(--neutral-bg);
-  border-radius: 8px;
-  padding: 10px 12px;
+  background: var(--canvas);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 9px 12px;
   margin-top: 10px;
   font-size: 12.5px;
 }
 
 .note {
-  border-left: 3px solid var(--primary);
-  background: var(--primary-soft);
+  border-left: 3px solid var(--brand);
+  background: var(--brand-soft);
   padding: 10px 14px;
-  border-radius: 6px;
   font-size: 13px;
   color: var(--ink);
 }
 
 .note-warn {
-  border-left-color: var(--wait);
-  background: var(--wait-bg);
+  border-left-color: var(--stop);
+  background: var(--stop-bg);
 }
 
 /* ---------- misc ---------- */
@@ -902,27 +958,19 @@ a:hover {
 .workflow {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 12px;
+  gap: 0;
+  border-top: 1px solid var(--line);
 }
 
 .workflow-step {
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: 12px;
-  background: #fbfcfe;
+  padding: 12px 14px 4px 0;
+  margin-right: 14px;
 }
 
 .step-number {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: var(--primary);
-  color: #fff;
+  font-family: var(--mono);
   font-size: 12px;
-  font-weight: 700;
+  color: var(--brand);
   margin-right: 8px;
 }
 
@@ -934,4 +982,27 @@ a:hover {
 .not-found {
   padding: 80px 16px;
   text-align: center;
+}
+
+/*
+  KPI figures set as one ruled strip, like the summary line of a report:
+  one outer border, hairline dividers between figures, no gaps or
+  floating boxes.
+*/
+.kpi-strip {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.kpi-strip > [class*="col"] {
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: -1px;
+}
+
+.kpi-strip .kpi {
+  border: none;
+  border-radius: 0;
 }
