@@ -9,7 +9,7 @@ a later stage broke exactly that.
 
 Event and completion IDs are handed out at the moment each row is written,
 so their numbers follow the processing order. The budget order used by
-BR-11, (event_on, event_id), is therefore exactly the order the
+events, (event_on, event_id), is therefore exactly the order the
 simulation decided in.
 
 s09 reuses the same Simulation object to push its injected requests
@@ -135,7 +135,14 @@ class Simulation:
             if any(p not in self.passed[employee_id] for p in needed):
                 index += 1  # BR-05: an in-path prerequisite was not PASSED
                 continue
-            if self.random.random() >= config.REQUEST_PROBABILITY:
+            # Funded steps are usually requested. Some employees also ask for
+            # a step the budget did not fund; HR will reject it (BR-11).
+            chance = (
+                config.REQUEST_PROBABILITY
+                if step["funding_status"] == "FUNDED"
+                else config.UNFUNDED_REQUEST_PROBABILITY
+            )
+            if self.random.random() >= chance:
                 index += 1  # the employee chose not to take this one
                 continue
             lead = uniform_int(self.random, *config.REQUEST_LEAD_DAYS)
@@ -213,9 +220,10 @@ class Simulation:
             self.write_event(state, "REJECTED", on, "NO_SEATS")
             self.after_terminal(state, on)
             return
-        # BR-11. Injected BUDGET_EXCEEDED cases are approved regardless;
-        # that is the one rule they break.
-        if not state["injected"] and not budget.can_approve(self.committed[department], cost, limit):
+        # BR-11: only a FUNDED step may be approved. Injected BUDGET_EXCEEDED
+        # cases are approved regardless; that is the one rule they break.
+        funding = state["rec"]["funding_status"]
+        if not state["injected"] and not budget.can_approve(funding, self.committed[department], cost, limit):
             self.write_event(state, "REJECTED", on, "BUDGET_EXHAUSTED")
             self.after_terminal(state, on)
             return
